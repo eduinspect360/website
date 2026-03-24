@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EDUINSPECT360 — Platform Demo</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --edu-teal:#2D6987;--edu-teal-dark:#1A4F66;--edu-teal-mid:#3D7F9E;--edu-teal-light:#EDF4F8;
+  --edu-green:#87A55A;--edu-green-dk:#5C7A2E;--edu-green-light:#F2F7ED;
+  --edu-danger:#8B2020;--edu-danger-bg:#FDF0F0;--edu-warning:#A06010;--edu-warning-bg:#FDF5E6;
+  --edu-success:#2E6B3A;--edu-success-bg:#EFF7F1;--edu-info:#185FA5;--edu-info-bg:#EBF3FC;
+  --bg-primary:#ffffff;--bg-secondary:#f7f8fa;--bg-tertiary:#f0f2f5;
+  --text-primary:#1a1a1a;--text-secondary:#5a6a7a;--text-tertiary:#8a9aaa;
+  --border-light:rgba(0,0,0,0.08);--border-med:rgba(0,0,0,0.14);
+  --radius-sm:6px;--radius-md:8px;--radius-lg:12px;--radius-xl:16px;
+}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif;font-size:13px;color:var(--text-primary);background:#e8ecf0;min-height:100vh}
+.suite-wrap{max-width:1100px;margin:0 auto;padding:20px}
+.suite-header{display:flex;align-items:center;gap:14px;margin-bottom:16px}
+.suite-logo{width:38px;height:38px;border-radius:50%;overflow:hidden;flex-shrink:0;background:#fff;display:flex;align-items:center;justify-content:center;}
+.suite-logo img{width:38px;height:38px;object-fit:contain;}
+.suite-title{font-size:20px;font-weight:600;color:var(--edu-teal-dark)}
+.suite-sub{font-size:12px;color:var(--text-secondary);margin-top:2px}
+.suite-tag{font-size:10px;background:var(--edu-green-light);color:var(--edu-green-dk);padding:2px 8px;border-radius:10px;border:0.5px solid var(--edu-green);margin-left:8px;font-weight:500}
+.switcher{display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap}
+.sw-btn{padding:6px 12px;border-radius:20px;border:0.5px solid var(--border-med);font-size:11px;cursor:pointer;background:var(--bg-primary);color:var(--text-secondary);transition:all 0.15s;font-family:inherit}
+.sw-btn:hover{border-color:var(--edu-teal);color:var(--edu-teal)}
+.sw-btn.active{background:var(--edu-teal);color:#fff;border-color:var(--edu-teal);font-weight:500}
+.screen-container{background:var(--bg-primary);border-radius:var(--radius-xl);border:0.5px solid var(--border-med);overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,0.08)}
+.screen{display:none;flex-direction:column;min-height:680px}
+.screen.active{display:flex}
+.screen-label{background:var(--edu-teal-dark);color:rgba(255,255,255,0.6);font-size:10px;padding:5px 16px;letter-spacing:0.5px;text-transform:uppercase;font-weight:500;display:flex;justify-content:space-between;align-items:center}
+.screen-label span{color:rgba(255,255,255,0.9)}
+.nav-bar{background:var(--edu-teal-dark);display:flex;align-items:center;flex-shrink:0}
+.nav-logo{display:flex;align-items:center;gap:8px;padding:10px 16px;border-right:1px solid rgba(255,255,255,0.12)}
+.nav-logo-mark{width:24px;height:24px;border-radius:50%;overflow:hidden;background:#fff;display:flex;align-items:center;justify-content:center;}
+.nav-logo-mark img{width:24px;height:24px;object-fit:contain;}
+.nav-logo-text{font-size:13px;font-weight:500;color:#fff;letter-spacing:0.3px}
+.nav-items{display:flex;align-items:center;flex:1;padding:0 6px}
+.nav-item{padding:11px 12px;color:rgba(255,255,255,0.7);font-size:12px;cursor:pointer;display:flex;align-items:center;gap:5px;white-space:nowrap;border-bottom:2px solid transparent;transition:all 0.15s}
+.nav-item:hover,.nav-item.active{color:#fff;border-bottom-color:var(--edu-green)}
+.nav-badge{background:var(--edu-danger);color:#fff;font-size:9px;padding:1px 5px;border-radius:10px;font-weight:600}
+.nav-right{display:flex;align-items:center;gap:8px;padding:0 14px;margin-left:auto}
+.nav-pill{background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.85);font-size:10px;padding:3px 9px;border-radius:12px;font-weight:500}
+.nav-pill.role{background:rgba(135,165,90,0.28);color:#C8DE78}
+.nav-icon{width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,0.12);display:flex;align-items:center;justify-content:center;color:#fff;font-size:11px;font-weight:500;cursor:pointer}
+.session-timer{font-size:10px;color:rgba(255,255,255,0.55);display:flex;align-items:center;gap:4px}
+.timer-dot{width:6px;height:6px;border-radius:50%;background:#87A55A}
+.breadcrumb{background:var(--bg-secondary);border-bottom:0.5px solid var(--border-light);padding:7px 16px;font-size:11px;color:var(--text-tertiary);display:flex;align-items:center;gap:6px}
+.bc-sep{color:var(--border-med)}
+.bc-current{color:var(--text-primary)}
+.page-body{flex:1;padding:18px;background:var(--bg-tertiary);overflow:auto}
+.page-title-row{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:16px;gap:12px}
+.page-title{font-size:18px;font-weight:600;color:var(--text-primary)}
+.page-sub{font-size:12px;color:var(--text-secondary);margin-top:3px}
+.stats-row{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-bottom:16px}
+.stat-card{background:var(--bg-primary);border:0.5px solid var(--border-light);border-radius:var(--radius-md);padding:12px 14px}
+.stat-label{font-size:11px;color:var(--text-secondary);margin-bottom:5px}
+.stat-value{font-size:24px;font-weight:600;color:var(--text-primary);line-height:1}
+.stat-sub{font-size:10px;color:var(--text-tertiary);margin-top:4px}
+.stat-card.danger .stat-value{color:var(--edu-danger)}
+.stat-card.warning .stat-value{color:var(--edu-warning)}
+.stat-card.success .stat-value{color:var(--edu-success)}
+.card{background:var(--bg-primary);border:0.5px solid var(--border-light);border-radius:var(--radius-lg);margin-bottom:12px;overflow:hidden}
+.card-header{padding:10px 14px;display:flex;align-items:center;justify-content:space-between;border-bottom:0.5px solid var(--border-light);background:var(--bg-secondary)}
+.card-title{font-size:12px;font-weight:500;display:flex;align-items:center;gap:8px}
+.chip{font-size:9px;padding:2px 7px;border-radius:10px;font-weight:600}
+.chip-danger{background:var(--edu-danger);color:#fff}
+.chip-warn{background:var(--edu-warning);color:#fff}
+.chip-teal{background:var(--edu-teal);color:#fff}
+.pill{font-size:10px;padding:2px 8px;border-radius:10px;font-weight:500;white-space:nowrap}
+.pill-danger{background:var(--edu-danger-bg);color:var(--edu-danger)}
+.pill-warn{background:var(--edu-warning-bg);color:var(--edu-warning)}
+.pill-info{background:var(--edu-info-bg);color:var(--edu-info)}
+.pill-ok{background:var(--edu-success-bg);color:var(--edu-success)}
+.todo-row{display:grid;align-items:center;padding:10px 14px;border-bottom:0.5px solid var(--border-light);gap:8px;cursor:pointer;transition:background 0.1s}
+.todo-row:last-child{border-bottom:none}
+.todo-row:hover{background:var(--bg-secondary)}
+.pbar{width:3px;border-radius:2px;align-self:stretch;min-height:30px}
+.pbar-danger{background:var(--edu-danger)}
+.pbar-warn{background:var(--edu-warning)}
+.pbar-info{background:var(--edu-teal)}
+.row-meta{font-size:10px;color:var(--text-tertiary);display:flex;align-items:center;gap:5px;margin-top:2px}
+.meta-dot{width:4px;height:4px;border-radius:50%;background:var(--border-med)}
+.ai-badge{font-size:9px;background:var(--edu-teal-light);color:var(--edu-teal);border:0.5px solid var(--edu-teal-mid);padding:1px 5px;border-radius:4px}
+.btn{padding:6px 12px;border-radius:var(--radius-sm);font-size:11px;cursor:pointer;font-family:inherit;font-weight:500;transition:all 0.15s;border:0.5px solid transparent}
+.btn-primary{background:var(--edu-teal);color:#fff;border-color:var(--edu-teal)}
+.btn-primary:hover{background:var(--edu-teal-dark)}
+.btn-secondary{background:transparent;color:var(--edu-teal);border-color:var(--edu-teal)}
+.btn-secondary:hover{background:var(--edu-teal-light)}
+.btn-sm{padding:3px 9px;font-size:10px}
+.audit-note{font-size:9px;color:var(--text-tertiary);display:flex;align-items:center;gap:4px}
+.login-wrap{display:flex;align-items:center;justify-content:center;min-height:680px;background:linear-gradient(135deg,var(--edu-teal-dark) 0%,#0d3a52 100%)}
+.login-card{background:var(--bg-primary);border-radius:var(--radius-xl);padding:36px;width:360px;border:0.5px solid var(--border-light)}
+.login-logo{display:flex;align-items:center;gap:12px;margin-bottom:28px;justify-content:center}
+.login-logo-img{width:40px;height:40px;border-radius:50%;overflow:hidden;background:#fff;display:flex;align-items:center;justify-content:center;}
+.login-logo-img img{width:40px;height:40px;object-fit:contain;}
+.login-brand{font-size:16px;font-weight:600;color:var(--text-primary)}
+.login-brand-sub{font-size:10px;color:var(--text-secondary);margin-top:1px}
+.login-title{font-size:18px;font-weight:600;text-align:center;margin-bottom:5px}
+.login-subtitle{font-size:12px;color:var(--text-secondary);text-align:center;margin-bottom:24px}
+.login-field{margin-bottom:14px}
+.login-label{font-size:11px;color:var(--text-secondary);margin-bottom:5px;display:flex;justify-content:space-between}
+.login-label a{color:var(--edu-teal);cursor:pointer}
+.login-input{width:100%;padding:10px 12px;border:0.5px solid var(--border-med);border-radius:var(--radius-md);font-size:13px;font-family:inherit;background:var(--bg-primary);color:var(--text-primary);outline:none;transition:border 0.15s}
+.login-input:focus{border-color:var(--edu-teal);box-shadow:0 0 0 3px rgba(45,105,135,0.1)}
+.pw-strength-row{display:flex;gap:3px;margin-top:6px}
+.pw-seg{height:3px;flex:1;border-radius:2px;background:var(--border-light)}
+.pw-seg.strong{background:var(--edu-success)}
+.pw-hint{font-size:10px;margin-top:4px}
+.login-btn{width:100%;padding:11px;background:var(--edu-teal);color:#fff;border:none;border-radius:var(--radius-md);font-size:13px;font-weight:500;cursor:pointer;font-family:inherit;transition:background 0.15s}
+.login-btn:hover{background:var(--edu-teal-dark)}
+.login-divider{text-align:center;font-size:10px;color:var(--text-tertiary);margin:14px 0;position:relative}
+.login-divider::before,.login-divider::after{content:"";position:absolute;top:50%;width:38%;height:0.5px;background:var(--border-light)}
+.login-divider::before{left:0}.login-divider::after{right:0}
+.magic-box{background:var(--edu-teal-light);border:0.5px solid var(--edu-teal-mid);border-radius:var(--radius-md);padding:10px 14px;font-size:11px;color:var(--edu-teal-dark);text-align:center;line-height:1.5}
+.lang-row-login{display:flex;gap:8px;justify-content:center;margin-top:16px}
+.lang-btn-login{padding:4px 10px;border:0.5px solid var(--border-med);border-radius:var(--radius-sm);font-size:11px;cursor:pointer;color:var(--text-secondary);background:transparent;font-family:inherit;transition:all 0.15s}
+.lang-btn-login.active{border-color:var(--edu-teal);color:var(--edu-teal);background:var(--edu-teal-light)}
+.lang-btn-login:hover{border-color:var(--edu-teal-mid)}
+.dash-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-bottom:12px}
+.dash-widget{background:var(--bg-primary);border:0.5px solid var(--border-light);border-radius:var(--radius-lg);overflow:hidden}
+.dw-head{padding:9px 12px;border-bottom:0.5px solid var(--border-light);font-size:11px;font-weight:500;background:var(--bg-secondary);display:flex;align-items:center;justify-content:space-between}
+.dw-body{padding:12px}
+.bar-row{display:flex;align-items:center;gap:8px;margin-bottom:7px}
+.bar-label{font-size:10px;color:var(--text-secondary);width:72px;text-align:right;flex-shrink:0}
+.bar-track{flex:1;background:var(--border-light);border-radius:3px;height:8px;overflow:hidden}
+.bar-fill{border-radius:3px;height:8px;transition:width 0.6s ease}
+.bar-val{font-size:10px;font-weight:500;width:26px;flex-shrink:0}
+.donut-wrap{display:flex;align-items:center;gap:14px}
+.donut-legend{font-size:10px;color:var(--text-secondary);display:flex;flex-direction:column;gap:5px}
+.leg-row{display:flex;align-items:center;gap:6px}
+.leg-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.insight-row{font-size:11px;color:var(--text-secondary);padding:6px 0;border-bottom:0.5px solid var(--border-light);display:flex;align-items:flex-start;gap:7px;line-height:1.4}
+.insight-row:last-child{border-bottom:none}
+.ins-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;margin-top:2px}
+.mobile-outer{padding:16px;display:flex;gap:20px;align-items:flex-start;background:var(--bg-tertiary)}
+.mobile-frame{background:var(--bg-tertiary);border-radius:24px;border:2px solid var(--border-med);overflow:hidden;width:320px;flex-shrink:0;box-shadow:0 4px 20px rgba(0,0,0,0.12)}
+.mob-status{background:var(--edu-teal-dark);color:#fff;font-size:9px;padding:8px 16px;display:flex;justify-content:space-between}
+.mob-header{background:var(--edu-teal-dark);padding:10px 16px 16px;color:#fff}
+.mob-h-label{font-size:9px;opacity:0.65;margin-bottom:3px}
+.mob-h-title{font-size:14px;font-weight:600;margin-bottom:1px}
+.mob-h-sub{font-size:10px;opacity:0.7}
+.prog-wrap{background:rgba(255,255,255,0.2);border-radius:4px;height:4px;margin:10px 0 4px}
+.prog-fill{background:var(--edu-green);border-radius:4px;height:4px}
+.prog-label{font-size:9px;opacity:0.6}
+.mob-body{background:var(--bg-tertiary);padding:10px}
+.mob-offline-bar{display:flex;align-items:center;justify-content:space-between;background:var(--edu-warning-bg);border:0.5px solid var(--edu-warning);border-radius:6px;padding:6px 10px;font-size:10px;color:var(--edu-warning);margin-bottom:8px}
+.mob-sync-btn{background:var(--edu-warning);color:#fff;border:none;border-radius:4px;padding:3px 8px;font-size:9px;cursor:pointer;font-family:inherit}
+.mob-tabs{display:flex;gap:5px;overflow-x:auto;margin-bottom:8px;padding-bottom:2px}
+.mob-tab{padding:4px 10px;border-radius:14px;font-size:10px;white-space:nowrap;border:0.5px solid var(--border-med);color:var(--text-secondary);flex-shrink:0;cursor:pointer}
+.mob-tab.active{background:var(--edu-teal);color:#fff;border-color:var(--edu-teal)}
+.mob-tab.done{background:var(--edu-green-light);color:var(--edu-green-dk);border-color:var(--edu-green)}
+.mob-card{background:var(--bg-primary);border-radius:var(--radius-md);border:0.5px solid var(--border-light);margin-bottom:8px;overflow:hidden}
+.mob-card-h{padding:7px 10px;font-size:10px;font-weight:500;border-bottom:0.5px solid var(--border-light);background:var(--bg-secondary)}
+.mob-card-b{padding:10px}
+.mob-field-label{font-size:9px;color:var(--text-secondary);margin-bottom:3px}
+.mob-select{width:100%;padding:6px 8px;border:0.5px solid var(--border-med);border-radius:6px;font-size:11px;font-family:inherit;background:var(--bg-primary);color:var(--text-primary)}
+.mob-textarea{width:100%;padding:6px 8px;border:0.5px solid var(--border-med);border-radius:6px;font-size:10px;min-height:48px;resize:none;font-family:inherit;background:var(--bg-primary);color:var(--text-primary)}
+.mob-ai{background:var(--edu-teal-light);border:0.5px solid var(--edu-teal-mid);border-radius:6px;padding:7px 9px;font-size:10px;color:var(--edu-teal-dark);margin-top:4px;line-height:1.5}
+.mob-ai-label{font-size:8px;font-weight:600;color:var(--edu-teal);margin-bottom:3px;text-transform:uppercase;letter-spacing:0.5px}
+.mob-ai-btns{display:flex;gap:4px;margin-top:5px}
+.mob-ai-btn{font-size:9px;padding:2px 7px;border-radius:4px;border:0.5px solid var(--edu-teal);color:var(--edu-teal);background:transparent;cursor:pointer;font-family:inherit}
+.mob-ai-btn.acc{background:var(--edu-teal);color:#fff}
+.mob-actions{display:flex;gap:6px;margin-top:8px}
+.mob-btn{flex:1;padding:9px;border-radius:8px;font-size:11px;font-weight:500;cursor:pointer;font-family:inherit;border:0.5px solid var(--border-med);background:transparent;color:var(--text-secondary)}
+.mob-btn.primary{flex:2;background:var(--edu-teal);color:#fff;border-color:var(--edu-teal)}
+.mob-audit{font-size:9px;color:var(--text-tertiary);text-align:center;margin-top:6px;display:flex;align-items:center;justify-content:center;gap:4px}
+.mob-audit-dot{width:4px;height:4px;border-radius:50%;background:var(--border-med)}
+.mob-notes{flex:1;min-width:0}
+.mob-note-title{font-size:13px;font-weight:600;margin-bottom:10px;color:var(--text-primary)}
+.mob-note-card{background:var(--bg-primary);border:0.5px solid var(--border-light);border-radius:var(--radius-md);padding:10px 12px;margin-bottom:8px}
+.mob-note-head{font-weight:500;font-size:12px;color:var(--edu-teal);margin-bottom:5px}
+.mob-note-body{font-size:11px;color:var(--text-secondary);line-height:1.5}
+.report-layout{display:grid;grid-template-columns:1fr 270px;gap:12px}
+.report-main{background:var(--bg-primary);border:0.5px solid var(--border-light);border-radius:var(--radius-lg);overflow:hidden}
+.report-head{padding:12px 16px;border-bottom:0.5px solid var(--border-light);display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+.report-school-name{font-size:14px;font-weight:600}
+.report-meta{font-size:11px;color:var(--text-secondary);margin-top:3px;line-height:1.4}
+.report-section{padding:12px 16px;border-bottom:0.5px solid var(--border-light)}
+.report-section:last-child{border-bottom:none}
+.report-sec-title{font-size:12px;font-weight:500;margin-bottom:8px;display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+.report-text{font-size:11px;color:var(--text-primary);line-height:1.6;background:var(--bg-secondary);border-radius:var(--radius-sm);padding:10px 12px;border-left:2px solid var(--edu-teal)}
+.report-text.ai-draft{border-left-color:var(--edu-green);border-left-style:dashed}
+.ai-draft-badge{font-size:9px;background:var(--edu-green-light);color:var(--edu-green-dk);border:0.5px solid var(--edu-green);padding:2px 6px;border-radius:4px}
+.report-actions{margin-top:8px;display:flex;gap:6px;align-items:center}
+.report-actions .note{font-size:10px;color:var(--text-tertiary)}
+.report-sidebar{display:flex;flex-direction:column;gap:10px}
+.sidebar-card{background:var(--bg-primary);border:0.5px solid var(--border-light);border-radius:var(--radius-lg);overflow:hidden}
+.sidebar-head{padding:9px 12px;border-bottom:0.5px solid var(--border-light);font-size:11px;font-weight:500;background:var(--bg-secondary);display:flex;align-items:center;gap:6px}
+.sidebar-body{padding:10px 12px}
+.insight-item{font-size:11px;color:var(--text-secondary);padding:5px 0;border-bottom:0.5px solid var(--border-light);display:flex;align-items:flex-start;gap:6px;line-height:1.4}
+.insight-item:last-child{border-bottom:none}
+.ins-icon{width:10px;height:10px;border-radius:50%;flex-shrink:0;margin-top:2px}
+.chat-body-inner{padding:10px;display:flex;flex-direction:column;gap:7px;min-height:150px}
+.chat-msg{display:flex;flex-direction:column;max-width:92%}
+.chat-msg.bot{align-self:flex-start}
+.chat-msg.user{align-self:flex-end;align-items:flex-end}
+.chat-bubble{padding:7px 10px;border-radius:var(--radius-md);font-size:11px;line-height:1.5}
+.chat-msg.bot .chat-bubble{background:var(--bg-secondary);color:var(--text-primary)}
+.chat-msg.user .chat-bubble{background:var(--edu-teal);color:#fff}
+.chat-chips{display:flex;flex-wrap:wrap;gap:4px;margin-top:4px}
+.chat-chip{border:0.5px solid var(--edu-teal);color:var(--edu-teal);border-radius:10px;padding:2px 8px;font-size:10px;cursor:pointer;background:transparent;font-family:inherit;transition:background 0.1s}
+.chat-chip:hover{background:var(--edu-teal-light)}
+.chat-input-row{display:flex;gap:6px;padding:8px;border-top:0.5px solid var(--border-light)}
+.chat-input{flex:1;padding:6px 10px;border:0.5px solid var(--border-med);border-radius:14px;font-size:11px;font-family:inherit;background:var(--bg-secondary);color:var(--text-primary);outline:none}
+.chat-input:focus{border-color:var(--edu-teal)}
+.chat-send{background:var(--edu-teal);color:#fff;border:none;border-radius:50%;width:28px;height:28px;cursor:pointer;font-size:14px;flex-shrink:0;display:flex;align-items:center;justify-content:center}
+.lang-dropdown{background:var(--bg-primary);border:0.5px solid var(--border-med);border-radius:var(--radius-md);margin:8px 14px 0;overflow:hidden}
+.lang-grid{display:grid;grid-template-columns:1fr 1fr}
+.lang-opt{padding:10px 14px;font-size:12px;cursor:pointer;display:flex;align-items:center;gap:9px;border-right:0.5px solid var(--border-light);border-bottom:0.5px solid var(--border-light);transition:background 0.1s}
+.lang-opt:hover{background:var(--bg-secondary)}
+.lang-opt.active{background:var(--edu-teal-light)}
+.lang-opt.active span{color:var(--edu-teal);font-weight:500}
+.flag{width:22px;height:15px;border-radius:2px;overflow:hidden;display:flex;flex-shrink:0}
+.lang-footer{padding:7px 14px;font-size:10px;color:var(--text-tertiary);background:var(--bg-secondary);border-top:0.5px solid var(--border-light)}
+.lang-explain{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:14px}
+.lang-explain-card{background:var(--bg-primary);border:0.5px solid var(--border-light);border-radius:var(--radius-md);padding:12px}
+.lec-title{font-size:11px;font-weight:500;color:var(--text-primary);margin-bottom:5px}
+.lec-body{font-size:11px;color:var(--text-secondary);line-height:1.5}
+.ed-ai-chat-fr{background:var(--edu-teal-light);border:0.5px solid var(--edu-teal-mid);border-radius:var(--radius-md);padding:12px}
+.ed-ai-fr-label{font-size:10px;font-weight:600;color:var(--edu-teal);margin-bottom:6px}
+.ed-ai-fr-text{font-size:12px;color:var(--edu-teal-dark);line-height:1.5}
+</style>
+</head>
+<body>
+<div class="suite-wrap">
+  <div class="suite-header">
+    <div class="suite-logo"><img src="icon-white-bg.png" alt="EDUINSPECT360"></div>
+    <div>
+      <div class="suite-title">EDUINSPECT360 <span class="suite-tag">Platform Demo — v5</span></div>
+      <div class="suite-sub">Six interactive screens &middot; Click any tab to explore &middot; Built from actual system codebase &middot; March 2026</div>
+    </div>
+  </div>
+  <div class="switcher">
+    <span style="font-size:11px;color:#8a9aaa;align-self:center;margin-right:2px">Screens:</span>
+    <button class="sw-btn active" onclick="show(0)">1 &middot; Login</button>
+    <button class="sw-btn" onclick="show(1)">2 &middot; To-Do List</button>
+    <button class="sw-btn" onclick="show(2)">3 &middot; Dashboard</button>
+    <button class="sw-btn" onclick="show(3)">4 &middot; Mobile Inspection</button>
+    <button class="sw-btn" onclick="show(4)">5 &middot; Report Draft + AI</button>
+    <button class="sw-btn" onclick="show(5)">6 &middot; Language Switcher</button>
+  </div>
+  <div class="screen-container">
+
+    <!-- SCREEN 1: LOGIN -->
+    <div class="screen active" id="s0">
+      <div class="screen-label">Screen 1 of 6 <span>Login &mdash; brand colours, password strength, magic links for school accounts, language selection</span></div>
+      <div class="login-wrap">
+        <div class="login-card">
+          <div class="login-logo">
+            <div class="login-logo-img"><img src="icon-white-bg.png" alt="EDUINSPECT360"></div>
+            <div>
+              <div class="login-brand">EDUINSPECT360</div>
+              <div class="login-brand-sub">Empowering Educational Excellence</div>
+            </div>
+          </div>
+          <div class="login-title">Sign in to your account</div>
+          <div class="login-subtitle">Enter your credentials to access the inspection system</div>
+          <div class="login-field">
+            <label class="login-label">Email address</label>
+            <input class="login-input" type="email" value="sarah.chen@nei.gov.jm" readonly>
+          </div>
+          <div class="login-field">
+            <label class="login-label"><span>Password</span><a>Forgot password?</a></label>
+            <input class="login-input" type="password" value="Secure@Password12" readonly aria-label="Password">
+            <div class="pw-strength-row">
+              <div class="pw-seg strong"></div><div class="pw-seg strong"></div><div class="pw-seg strong"></div><div class="pw-seg strong"></div>
+            </div>
+            <div class="pw-hint" style="color:var(--edu-success)">Strong &middot; 12+ characters with uppercase, number and special character</div>
+          </div>
+          <button class="login-btn">Sign in securely</button>
+          <div class="login-divider">or for school accounts</div>
+          <div class="magic-box">A secure one-time link has been sent to the registered school email address. The link expires in 15 minutes and can only be used once.</div>
+          <div class="lang-row-login" style="margin-top:16px">
+            <button class="lang-btn-login active">EN</button>
+            <button class="lang-btn-login">FR</button>
+            <button class="lang-btn-login">ES</button>
+            <button class="lang-btn-login">PT</button>
+            <button class="lang-btn-login">AR</button>
+          </div>
+          <div style="text-align:center;font-size:10px;color:var(--text-tertiary);margin-top:10px">This session is secured and monitored &middot; All actions are logged</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SCREEN 2: TO-DO LIST -->
+    <div class="screen" id="s1">
+      <div class="screen-label">Screen 2 of 6 <span>To-Do List (NEIRESEARCH) &mdash; priority-first layout, AI draft indicators, inspection rounds workflow</span></div>
+      <div class="nav-bar">
+        <div class="nav-logo"><div class="nav-logo-mark"><img src="icon-white-bg.png" alt=""></div><div class="nav-logo-text">EDUINSPECT360</div></div>
+        <div class="nav-items">
+          <div class="nav-item active">To-Do List <span class="nav-badge">5</span></div>
+          <div class="nav-item">Inspections</div>
+          <div class="nav-item">Check Lists</div>
+          <div class="nav-item">Reports</div>
+          <div class="nav-item">Dashboard</div>
+          <div class="nav-item">System Admin</div>
+        </div>
+        <div class="nav-right">
+          <div class="session-timer"><div class="timer-dot"></div>28 min remaining</div>
+          <div class="nav-pill role">NEIRESEARCH</div>
+          <div class="nav-pill">EN</div>
+          <div class="nav-icon">SC</div>
+        </div>
+      </div>
+      <div class="breadcrumb"><span>Home</span><span class="bc-sep">/</span><span class="bc-current">To-Do List</span></div>
+      <div class="page-body">
+        <div class="page-title-row">
+          <div><div class="page-title">To-Do List</div><div class="page-sub">Wednesday, 22 March 2026 &middot; 5 items require your attention</div></div>
+          <button class="btn btn-primary">Ask ED AI about my tasks</button>
+        </div>
+        <div class="stats-row">
+          <div class="stat-card danger"><div class="stat-label">Action required today</div><div class="stat-value">2</div><div class="stat-sub">Rounds awaiting submission</div></div>
+          <div class="stat-card warning"><div class="stat-label">Due this week</div><div class="stat-value">3</div><div class="stat-sub">School profiles outstanding</div></div>
+          <div class="stat-card success"><div class="stat-label">Completed this month</div><div class="stat-value">14</div><div class="stat-sub">Inspection rounds actioned</div></div>
+          <div class="stat-card"><div class="stat-label">Upcoming inspections</div><div class="stat-value">8</div><div class="stat-sub">Starting in next 30 days</div></div>
+        </div>
+        <div class="card">
+          <div class="card-header"><div class="card-title">Inspection rounds to action <span class="chip chip-danger">2 urgent</span></div><button class="btn btn-secondary btn-sm">View all rounds</button></div>
+          <div style="display:grid;grid-template-columns:4px 1fr 1fr 1fr 110px 100px;gap:0;padding:7px 14px;font-size:10px;color:var(--text-tertiary);border-bottom:0.5px solid var(--border-light)"><span></span><span>Round / Name</span><span>Period</span><span>Schools</span><span>Status</span><span style="text-align:right">Action</span></div>
+          <div class="todo-row" style="grid-template-columns:4px 1fr 1fr 1fr 110px 100px">
+            <div class="pbar pbar-danger"></div>
+            <div><div style="font-size:12px;font-weight:500">R2024-03 &mdash; Spring Cycle</div><div class="row-meta"><div class="meta-dot"></div>Awaiting submission for DCI approval</div></div>
+            <div style="font-size:11px;color:var(--text-secondary)">Jan &ndash; Apr 2026</div>
+            <div style="font-size:11px;color:var(--text-secondary)">47 schools</div>
+            <div><span class="pill pill-danger">Submit required</span></div>
+            <div style="text-align:right"><button class="btn btn-primary btn-sm">Review now</button></div>
+          </div>
+          <div class="todo-row" style="grid-template-columns:4px 1fr 1fr 1fr 110px 100px">
+            <div class="pbar pbar-warn"></div>
+            <div><div style="font-size:12px;font-weight:500">R2024-04 &mdash; Summer Cycle</div><div class="row-meta"><div class="meta-dot"></div>Draft in progress &middot; due 28 March</div></div>
+            <div style="font-size:11px;color:var(--text-secondary)">May &ndash; Aug 2026</div>
+            <div style="font-size:11px;color:var(--text-secondary)">52 schools</div>
+            <div><span class="pill pill-warn">Draft</span></div>
+            <div style="text-align:right"><button class="btn btn-secondary btn-sm">Continue</button></div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header"><div class="card-title">School profiles outstanding <span class="chip chip-warn">3</span></div><button class="btn btn-secondary btn-sm">View all profiles</button></div>
+          <div style="display:grid;grid-template-columns:4px 1fr 1fr 110px 100px;gap:0;padding:7px 14px;font-size:10px;color:var(--text-tertiary);border-bottom:0.5px solid var(--border-light)"><span></span><span>School</span><span>Type / AI status</span><span>Status</span><span style="text-align:right">Action</span></div>
+          <div class="todo-row" style="grid-template-columns:4px 1fr 1fr 110px 100px">
+            <div class="pbar pbar-warn"></div>
+            <div><div style="font-size:12px;font-weight:500">St. Mary&apos;s Primary School</div><div class="row-meta"><div class="meta-dot"></div>Inspection starts 1 April &middot; profile due 25 March</div></div>
+            <div><div style="font-size:11px;color:var(--text-secondary)">Primary</div><div style="margin-top:3px"><span class="ai-badge">AI draft ready</span></div></div>
+            <div><span class="pill pill-warn">Needs review</span></div>
+            <div style="text-align:right"><button class="btn btn-primary btn-sm">Review draft</button></div>
+          </div>
+          <div class="todo-row" style="grid-template-columns:4px 1fr 1fr 110px 100px">
+            <div class="pbar pbar-info"></div>
+            <div><div style="font-size:12px;font-weight:500">Calabar High School</div><div class="row-meta"><div class="meta-dot"></div>Inspection starts 15 April &middot; profile due 8 April</div></div>
+            <div><div style="font-size:11px;color:var(--text-secondary)">Secondary</div><div style="margin-top:3px"><span style="font-size:9px;background:var(--edu-warning-bg);color:var(--edu-warning);padding:1px 5px;border-radius:4px">AI populating...</span></div></div>
+            <div><span class="pill pill-info">In progress</span></div>
+            <div style="text-align:right"><button class="btn btn-secondary btn-sm">View</button></div>
+          </div>
+          <div class="todo-row" style="grid-template-columns:4px 1fr 1fr 110px 100px">
+            <div class="pbar pbar-info"></div>
+            <div><div style="font-size:12px;font-weight:500">Kingston Technical High</div><div class="row-meta"><div class="meta-dot"></div>Inspection starts 20 April &middot; profile due 12 April</div></div>
+            <div><div style="font-size:11px;color:var(--text-secondary)">Secondary / Technical</div><div style="margin-top:3px"><span style="font-size:9px;background:var(--border-light);color:var(--text-tertiary);padding:1px 5px;border-radius:4px">Not started</span></div></div>
+            <div><span class="pill pill-info">Upcoming</span></div>
+            <div style="text-align:right"><button class="btn btn-secondary btn-sm">Start</button></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SCREEN 3: DASHBOARD -->
+    <div class="screen" id="s2">
+      <div class="screen-label">Screen 3 of 6 <span>Dashboard (DCI) &mdash; authority-wide portfolio, ratings chart, reports pipeline, ED AI insights widget</span></div>
+      <div class="nav-bar">
+        <div class="nav-logo"><div class="nav-logo-mark"><img src="icon-white-bg.png" alt=""></div><div class="nav-logo-text">EDUINSPECT360</div></div>
+        <div class="nav-items">
+          <div class="nav-item">To-Do List <span class="nav-badge">3</span></div>
+          <div class="nav-item">Inspections</div>
+          <div class="nav-item">Check Lists</div>
+          <div class="nav-item">Reports</div>
+          <div class="nav-item active">Dashboard</div>
+          <div class="nav-item">System Admin</div>
+        </div>
+        <div class="nav-right">
+          <div class="session-timer"><div class="timer-dot"></div>22 min remaining</div>
+          <div class="nav-pill role">DCI</div>
+          <div class="nav-pill">EN</div>
+          <div class="nav-icon">MJ</div>
+        </div>
+      </div>
+      <div class="breadcrumb"><span>Home</span><span class="bc-sep">/</span><span class="bc-current">Dashboard</span></div>
+      <div class="page-body">
+        <div class="page-title-row">
+          <div><div class="page-title">Dashboard</div><div class="page-sub">Spring Cycle 2026 &middot; as of 22 March 2026</div></div>
+          <div style="display:flex;gap:8px"><select aria-label="Select cycle" style="font-size:12px;padding:5px 9px;border:0.5px solid var(--border-med);border-radius:6px;background:var(--bg-primary);font-family:inherit"><option>Spring Cycle 2026</option></select><button class="btn btn-secondary">Export</button></div>
+        </div>
+        <div class="stats-row">
+          <div class="stat-card"><div class="stat-label">Total schools this cycle</div><div class="stat-value">147</div><div class="stat-sub">across 3 rounds</div></div>
+          <div class="stat-card warning"><div class="stat-label">Sensitised</div><div class="stat-value">147</div><div class="stat-sub">100% &mdash; complete</div></div>
+          <div class="stat-card success"><div class="stat-label">Pre-inspected</div><div class="stat-value">89</div><div class="stat-sub">61% of cycle</div></div>
+          <div class="stat-card danger"><div class="stat-label">Inspected &amp; reported</div><div class="stat-value">42</div><div class="stat-sub">29% &middot; 6 reports pending</div></div>
+        </div>
+        <div class="dash-grid">
+          <div class="dash-widget">
+            <div class="dw-head"><span>Inspection ratings &mdash; cycle to date</span><span style="font-size:10px;color:var(--text-tertiary)">42 schools</span></div>
+            <div class="dw-body">
+              <div class="bar-row"><div class="bar-label">Outstanding</div><div class="bar-track"><div class="bar-fill" style="width:14%;background:#2E7D32"></div></div><div class="bar-val" style="color:#2E7D32">6</div></div>
+              <div class="bar-row"><div class="bar-label">Good</div><div class="bar-track"><div class="bar-fill" style="width:45%;background:#87A55A"></div></div><div class="bar-val" style="color:#87A55A">19</div></div>
+              <div class="bar-row"><div class="bar-label">Satisfactory</div><div class="bar-track"><div class="bar-fill" style="width:33%;background:#A06010"></div></div><div class="bar-val" style="color:#A06010">14</div></div>
+              <div class="bar-row"><div class="bar-label" style="color:var(--edu-danger)">Poor</div><div class="bar-track"><div class="bar-fill" style="width:7%;background:#8B2020"></div></div><div class="bar-val" style="color:#8B2020">3</div></div>
+            </div>
+          </div>
+          <div class="dash-widget">
+            <div class="dw-head"><span>Reports pipeline</span></div>
+            <div class="dw-body">
+              <div class="donut-wrap">
+                <svg width="80" height="80" viewBox="0 0 80 80" aria-label="Reports pipeline chart">
+                  <circle cx="40" cy="40" r="28" fill="none" stroke="#f0f2f5" stroke-width="14"/>
+                  <circle cx="40" cy="40" r="28" fill="none" stroke="#2E7D32" stroke-width="14" stroke-dasharray="53 123" stroke-dashoffset="0" transform="rotate(-90 40 40)"/>
+                  <circle cx="40" cy="40" r="28" fill="none" stroke="#87A55A" stroke-width="14" stroke-dasharray="30 123" stroke-dashoffset="-53" transform="rotate(-90 40 40)"/>
+                  <circle cx="40" cy="40" r="28" fill="none" stroke="#A06010" stroke-width="14" stroke-dasharray="25 123" stroke-dashoffset="-83" transform="rotate(-90 40 40)"/>
+                  <circle cx="40" cy="40" r="28" fill="none" stroke="#8B2020" stroke-width="14" stroke-dasharray="15 123" stroke-dashoffset="-108" transform="rotate(-90 40 40)"/>
+                  <text x="40" y="45" text-anchor="middle" font-size="14" font-weight="600" fill="#1a1a1a">42</text>
+                </svg>
+                <div class="donut-legend">
+                  <div class="leg-row"><div class="leg-dot" style="background:#2E7D32"></div><span>Published (21)</span></div>
+                  <div class="leg-row"><div class="leg-dot" style="background:#87A55A"></div><span>DCI review (12)</span></div>
+                  <div class="leg-row"><div class="leg-dot" style="background:#A06010"></div><span>QA review (6)</span></div>
+                  <div class="leg-row"><div class="leg-dot" style="background:#8B2020"></div><span>Drafting (3)</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="dash-widget">
+            <div class="dw-head"><span>Progress by school type</span></div>
+            <div class="dw-body">
+              <div class="bar-row"><div class="bar-label">Primary</div><div class="bar-track"><div class="bar-fill" style="width:72%;background:var(--edu-teal)"></div></div><div class="bar-val">72%</div></div>
+              <div class="bar-row"><div class="bar-label">Secondary</div><div class="bar-track"><div class="bar-fill" style="width:58%;background:var(--edu-teal-mid)"></div></div><div class="bar-val">58%</div></div>
+              <div class="bar-row"><div class="bar-label">Technical</div><div class="bar-track"><div class="bar-fill" style="width:41%;background:var(--edu-green)"></div></div><div class="bar-val">41%</div></div>
+              <div class="bar-row"><div class="bar-label">Special needs</div><div class="bar-track"><div class="bar-fill" style="width:25%;background:#b0bec5"></div></div><div class="bar-val">25%</div></div>
+            </div>
+          </div>
+          <div class="dash-widget">
+            <div class="dw-head"><span>ED AI insights</span><span style="font-size:10px;background:var(--edu-teal-light);color:var(--edu-teal);padding:2px 7px;border-radius:4px">Live</span></div>
+            <div class="dw-body" style="padding:8px 12px">
+              <div class="insight-row"><div class="ins-dot" style="background:var(--edu-danger)"></div><span>3 reports overdue for DCI sign-off &mdash; oldest pending 8 days</span></div>
+              <div class="insight-row"><div class="ins-dot" style="background:var(--edu-warning)"></div><span>Parish 6 unsatisfactory rate 3.2% above cycle average</span></div>
+              <div class="insight-row"><div class="ins-dot" style="background:var(--edu-success)"></div><span>Primary schools trending 12% better than Spring 2025</span></div>
+              <div class="insight-row"><div class="ins-dot" style="background:var(--edu-teal)"></div><span>Round 4 planning due &mdash; 8 schools flagged for priority inclusion</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SCREEN 4: MOBILE ROIJ -->
+    <div class="screen" id="s3">
+      <div class="screen-label">Screen 4 of 6 <span>Mobile ROIJ Observation &mdash; PWA offline mode, ED AI phrase suggestions, section progress across 8 indicators</span></div>
+      <div class="mobile-outer">
+        <div class="mobile-frame">
+          <div class="mob-status"><span>09:47</span><span>&#9679; Offline mode</span></div>
+          <div class="mob-header">
+            <div class="mob-h-label">Daily ROIJ &middot; Observation 3 of 5</div>
+            <div class="mob-h-title">Indicator 02 &mdash; Teaching</div>
+            <div class="mob-h-sub">St. Mary&apos;s Primary School</div>
+            <div class="prog-wrap"><div class="prog-fill" style="width:37%"></div></div>
+            <div class="prog-label">Section 2 of 8 &middot; 37% complete</div>
+          </div>
+          <div class="mob-body">
+            <div class="mob-offline-bar"><span>3 entries pending sync</span><button class="mob-sync-btn">Sync now</button></div>
+            <div class="mob-tabs">
+              <div class="mob-tab done">Details</div>
+              <div class="mob-tab done">01 Management</div>
+              <div class="mob-tab active">02 Teaching</div>
+              <div class="mob-tab">03 Achievement</div>
+              <div class="mob-tab">04 Progress</div>
+              <div class="mob-tab">05&ndash;08</div>
+            </div>
+            <div class="mob-card">
+              <div class="mob-card-h">2.1 Teacher subject knowledge &amp; pedagogy</div>
+              <div class="mob-card-b">
+                <div class="mob-field-label" style="margin-bottom:3px">Judgement</div>
+                <select class="mob-select" aria-label="Judgement grade"><option>Outstanding</option><option selected>Good</option><option>Satisfactory</option><option>Poor</option></select>
+                <div style="margin-top:8px">
+                  <div class="mob-field-label">Strengths</div>
+                  <textarea class="mob-textarea" aria-label="Strengths">&#8226; Teacher demonstrates strong subject knowledge&#10;&#8226; Effective use of questioning techniques</textarea>
+                  <div class="mob-ai">
+                    <div class="mob-ai-label">ED AI suggestion &mdash; Good judgement</div>
+                    <div>&#8226; Clear objectives shared at lesson start; students aware of learning goals</div>
+                    <div class="mob-ai-btns">
+                      <button class="mob-ai-btn acc">Accept</button>
+                      <button class="mob-ai-btn">Edit</button>
+                      <button class="mob-ai-btn">Skip</button>
+                    </div>
+                  </div>
+                </div>
+                <div style="margin-top:8px">
+                  <div class="mob-field-label">Areas for improvement</div>
+                  <textarea class="mob-textarea" aria-label="Areas for improvement" placeholder="Add bullet points..."></textarea>
+                </div>
+              </div>
+            </div>
+            <div class="mob-actions">
+              <button class="mob-btn">Previous</button>
+              <button class="mob-btn primary">Save and continue</button>
+            </div>
+            <div class="mob-audit"><div class="mob-audit-dot"></div>This entry is logged and will sync when connected</div>
+          </div>
+        </div>
+        <div class="mob-notes">
+          <div class="mob-note-title">Design decisions &mdash; mobile ROIJ</div>
+          <div class="mob-note-card"><div class="mob-note-head">Offline-first architecture</div><div class="mob-note-body">Inspection data, all lookup tables and the AI phrase bank are cached on first load (~300KB). The inspector works throughout the school day without connectivity. The amber sync bar shows pending entries at all times.</div></div>
+          <div class="mob-note-card"><div class="mob-note-head">AI phrase bank (offline)</div><div class="mob-note-body">When a judgement grade is selected, ED AI immediately surfaces bullet points from the offline phrase bank appropriate to that grade and section. Accept adds the text in one tap &mdash; no server call required.</div></div>
+          <div class="mob-note-card"><div class="mob-note-head">Section progress &amp; conflict handling</div><div class="mob-note-body">Section tabs show Done (green) or pending state. Inspectors own specific sections &mdash; the system prevents two inspectors editing the same section simultaneously, eliminating conflict scenarios by design.</div></div>
+          <div class="mob-note-card"><div class="mob-note-head">Security always visible</div><div class="mob-note-body">&ldquo;This entry is logged&rdquo; on every form makes the audit trail visible &mdash; a trust signal and a behavioural governance control. On reconnect, offline entries are submitted using the authenticated session token.</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SCREEN 5: REPORT DRAFT -->
+    <div class="screen" id="s4">
+      <div class="screen-label">Screen 5 of 6 <span>Report Draft + ED AI (Lead Inspector) &mdash; AI-drafted sections distinguished visually, evidence tracing, conflict resolution</span></div>
+      <div class="nav-bar">
+        <div class="nav-logo"><div class="nav-logo-mark"><img src="icon-white-bg.png" alt=""></div><div class="nav-logo-text">EDUINSPECT360</div></div>
+        <div class="nav-items">
+          <div class="nav-item">To-Do List</div>
+          <div class="nav-item active">Inspections</div>
+          <div class="nav-item">Reports</div>
+        </div>
+        <div class="nav-right">
+          <div class="session-timer"><div class="timer-dot"></div>18 min remaining</div>
+          <div class="nav-pill role">LEADINSPECTOR</div>
+          <div class="nav-pill">EN</div>
+          <div class="nav-icon">RB</div>
+        </div>
+      </div>
+      <div class="breadcrumb"><span>Inspections</span><span class="bc-sep">/</span><span>St. Mary&apos;s Primary</span><span class="bc-sep">/</span><span class="bc-current">Inspection Report &mdash; Draft</span></div>
+      <div class="page-body">
+        <div class="page-title-row">
+          <div><div class="page-title">Inspection Report</div><div class="page-sub">St. Mary&apos;s Primary School &middot; INS-2026-0342 &middot; Lead Inspector: R. Brown &middot; 5 inspectors &middot; 23 observations</div></div>
+          <div style="display:flex;gap:8px"><button class="btn btn-secondary">Request QA review</button><button class="btn btn-primary">Submit to DCI</button></div>
+        </div>
+        <div class="report-layout">
+          <div>
+            <div class="report-main">
+              <div class="report-head">
+                <div><div class="report-school-name">St. Mary&apos;s Primary School</div><div class="report-meta">Parish: St. Mary &middot; School type: Primary &middot; Inspection: 10&ndash;12 March 2026</div></div>
+                <div style="text-align:right"><span class="pill pill-warn">Draft &mdash; awaiting LI approval</span><div class="audit-note" style="justify-content:flex-end;margin-top:5px"><div style="width:10px;height:10px;border-radius:2px;background:var(--border-light);display:flex;align-items:center;justify-content:center;font-size:7px">&#9679;</div>All edits are logged</div></div>
+              </div>
+              <div class="report-section">
+                <div class="report-sec-title">Overall judgement <span class="pill pill-warn">Satisfactory</span></div>
+                <div class="report-text">St. Mary&apos;s Primary School provides a satisfactory standard of education for its students. Leadership and management demonstrate commitment to improvement, though self-evaluation processes require greater rigour. Teaching quality is variable across year groups, with notable strengths in literacy at the upper primary level.</div>
+                <div class="report-actions"><button class="btn btn-secondary btn-sm">Edit section</button><button class="btn btn-secondary btn-sm">View sources</button></div>
+              </div>
+              <div class="report-section">
+                <div class="report-sec-title">1. Leadership and management <span class="pill pill-ok">Good</span> <span class="ai-draft-badge">AI-drafted</span></div>
+                <div class="report-text ai-draft">The principal demonstrates clear vision and effective communication with staff and the school community. Governance arrangements are adequate, with the board providing appropriate oversight of financial and academic matters. Self-evaluation is undertaken but lacks the rigour needed to drive sustained improvement.</div>
+                <div class="report-actions"><span class="note">AI draft from 5 observations + Section 1 judgements + PIN notes</span><button class="btn btn-secondary btn-sm">Accept</button><button class="btn btn-secondary btn-sm">Edit</button></div>
+              </div>
+              <div class="report-section">
+                <div class="report-sec-title">2. Teaching and learning <span class="pill pill-warn">Satisfactory</span> <span class="ai-draft-badge">AI-drafted</span> <span style="font-size:10px;background:var(--edu-warning-bg);color:var(--edu-warning);padding:2px 6px;border-radius:4px">1 conflict flagged</span></div>
+                <div class="report-text ai-draft">Teaching across the school is satisfactory overall, with pockets of good and outstanding practice observed in mathematics and literacy. The majority of teachers demonstrate sound subject knowledge; however, the use of differentiated activities requires further development across most year groups...</div>
+                <div class="report-actions"><span class="note">Medium confidence &mdash; 1 of 5 observations rated Good vs Satisfactory</span><button class="btn btn-secondary btn-sm">Resolve conflict</button></div>
+              </div>
+            </div>
+          </div>
+          <div class="report-sidebar">
+            <div class="sidebar-card">
+              <div class="sidebar-head"><div style="width:8px;height:8px;border-radius:50%;background:var(--edu-green)"></div>ED AI &mdash; report assistant</div>
+              <div class="chat-body-inner">
+                <div class="chat-msg bot"><div class="chat-bubble">I&apos;ve drafted sections 1&ndash;3 from 23 observation records. Section 2 has a conflict flag &mdash; one inspector rated Teaching as Good while four rated it Satisfactory. Shall I explain the discrepancy?</div></div>
+                <div class="chat-msg user"><div class="chat-bubble">Yes, show me the conflicting observation</div></div>
+                <div class="chat-msg bot"><div class="chat-bubble">Inspector Chen&apos;s Year 5 Maths observation rated Teaching as Good &mdash; strong questioning and clear objectives. The 4 Satisfactory ratings were in Years 2&ndash;4 where differentiation was weaker. The draft reflects the majority view.</div><div class="chat-chips"><button class="chat-chip">Update the section</button><button class="chat-chip">Keep current draft</button></div></div>
+              </div>
+              <div class="chat-input-row">
+                <input class="chat-input" placeholder="Ask about this report..." aria-label="Ask ED AI about this report">
+                <button class="chat-send" aria-label="Send">&#8593;</button>
+              </div>
+            </div>
+            <div class="sidebar-card">
+              <div class="sidebar-head">Key insights from 23 observations</div>
+              <div class="sidebar-body">
+                <div class="insight-item"><div class="ins-icon" style="background:var(--edu-success)"></div><span>Literacy outcomes above parish average for 3 consecutive years</span></div>
+                <div class="insight-item"><div class="ins-icon" style="background:var(--edu-warning)"></div><span>Differentiation flagged in 4 of 5 teaching observations</span></div>
+                <div class="insight-item"><div class="ins-icon" style="background:var(--edu-teal)"></div><span>School Self-Survey submitted &mdash; self-rating aligns with findings</span></div>
+                <div class="insight-item"><div class="ins-icon" style="background:var(--edu-warning)"></div><span>Attendance 91.2% &mdash; below national target of 93%</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SCREEN 6: LANGUAGE SWITCHER -->
+    <div class="screen" id="s5">
+      <div class="screen-label">Screen 6 of 6 <span>Language switcher &mdash; server-side .NET Resources, integrated nav dropdown, ED AI responds in selected language</span></div>
+      <div class="nav-bar">
+        <div class="nav-logo"><div class="nav-logo-mark"><img src="icon-white-bg.png" alt=""></div><div class="nav-logo-text">EDUINSPECT360</div></div>
+        <div class="nav-items">
+          <div class="nav-item active">Liste des t&acirc;ches <span class="nav-badge">5</span></div>
+          <div class="nav-item">Inspections</div>
+          <div class="nav-item">Rapports</div>
+          <div class="nav-item">Tableau de bord</div>
+          <div class="nav-item">Administration</div>
+        </div>
+        <div class="nav-right">
+          <div class="session-timer"><div class="timer-dot"></div>25 min</div>
+          <div class="nav-pill role">NEIRESEARCH</div>
+          <div class="nav-pill" style="cursor:pointer;background:rgba(135,165,90,0.28);color:#C8DE78" onclick="toggleLangDrop()">FR &#9662;</div>
+          <div class="nav-icon">ML</div>
+        </div>
+      </div>
+      <div id="langDrop" style="display:none">
+        <div class="lang-dropdown">
+          <div style="padding:8px 14px;font-size:11px;color:var(--text-tertiary);border-bottom:0.5px solid var(--border-light)">Select your preferred language &mdash; saved to your account</div>
+          <div class="lang-grid">
+            <div class="lang-opt" onclick="toggleLangDrop()"><div class="flag" style="background:#002395"><div style="flex:1;background:#002395"></div><div style="flex:1;background:#fff"></div><div style="flex:1;background:#ED2939"></div></div><span>English</span></div>
+            <div class="lang-opt active" onclick="toggleLangDrop()"><div class="flag" style="background:#002395"><div style="flex:1;background:#002395"></div><div style="flex:1;background:#fff"></div><div style="flex:1;background:#ED2939"></div></div><span>Fran&ccedil;ais &#10003;</span></div>
+            <div class="lang-opt" onclick="toggleLangDrop()"><div class="flag"><div style="flex:1;background:#AA151B"></div><div style="flex:1;background:#F1BF00"></div><div style="flex:1;background:#AA151B"></div></div><span>Espa&ntilde;ol</span></div>
+            <div class="lang-opt" onclick="toggleLangDrop()"><div class="flag" style="background:#009C3B"></div><span>Portugu&ecirc;s</span></div>
+            <div class="lang-opt" onclick="toggleLangDrop()"><div class="flag" style="background:#1a5276"></div><span>&#1575;&#1604;&#1593;&#1585;&#1576;&#1610;&#1577;</span></div>
+            <div class="lang-opt" style="cursor:default;color:var(--text-tertiary)"><span style="font-size:11px">More languages coming soon</span></div>
+          </div>
+          <div class="lang-footer">Language preference is saved server-side to your account &mdash; not in a browser cookie</div>
+        </div>
+      </div>
+      <div class="breadcrumb"><span>Accueil</span><span class="bc-sep">/</span><span class="bc-current">Liste des t&acirc;ches</span></div>
+      <div class="page-body">
+        <div class="page-title-row">
+          <div><div class="page-title">Liste des t&acirc;ches</div><div class="page-sub">Mercredi, 22 mars 2026 &middot; 5 &eacute;l&eacute;ments n&eacute;cessitent votre attention</div></div>
+          <button class="btn btn-primary">Demander &agrave; ED AI</button>
+        </div>
+        <div class="stats-row">
+          <div class="stat-card danger"><div class="stat-label">Action requise aujourd&apos;hui</div><div class="stat-value">2</div><div class="stat-sub">Cycles en attente</div></div>
+          <div class="stat-card warning"><div class="stat-label">Cette semaine</div><div class="stat-value">3</div><div class="stat-sub">Profils scolaires</div></div>
+          <div class="stat-card success"><div class="stat-label">Termin&eacute; ce mois</div><div class="stat-value">14</div><div class="stat-sub">Cycles trait&eacute;s</div></div>
+          <div class="stat-card"><div class="stat-label">Inspections &agrave; venir</div><div class="stat-value">8</div><div class="stat-sub">Dans les 30 prochains jours</div></div>
+        </div>
+        <div class="card" style="margin-bottom:12px">
+          <div class="card-header"><div class="card-title">ED AI r&eacute;pond en fran&ccedil;ais <div style="width:8px;height:8px;border-radius:50%;background:var(--edu-green)"></div></div></div>
+          <div style="padding:12px 14px">
+            <div class="ed-ai-chat-fr">
+              <div class="ed-ai-fr-label">ED AI &middot; R&eacute;ponse en fran&ccedil;ais</div>
+              <div class="ed-ai-fr-text">Bonjour! Vous avez 2 cycles d&apos;inspection urgents n&eacute;cessitant une soumission pour approbation DCI, et 3 profils scolaires &agrave; compl&eacute;ter cette semaine. Le profil de St. Mary&apos;s Primary est prioritaire &mdash; l&apos;inspection commence le 1er avril.</div>
+              <div class="chat-chips" style="margin-top:8px">
+                <button class="chat-chip">Oui, montrez-moi</button>
+                <button class="chat-chip">Cycle R2024-03</button>
+                <button class="chat-chip">Profil St. Mary&apos;s</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header"><div class="card-title">How the three-tier language system works</div></div>
+          <div style="padding:12px 14px">
+            <div class="lang-explain">
+              <div class="lang-explain-card"><div class="lec-title" style="color:var(--edu-teal)">Tier 1 &mdash; UI chrome</div><div class="lec-body">.NET Resource strings serve all navigation labels, buttons, form fields and table headers in the selected language from the server. No client-side DOM manipulation. Secure and fast.</div></div>
+              <div class="lang-explain-card"><div class="lec-title" style="color:var(--edu-teal)">Tier 2 &mdash; ED AI responses</div><div class="lec-body">The Claude API system prompt includes the user&apos;s language preference from their server-side session. All chatbot responses, report summaries and data insights appear in the selected language automatically.</div></div>
+              <div class="lang-explain-card"><div class="lec-title" style="color:var(--edu-teal)">Tier 3 &mdash; Inspection narratives</div><div class="lec-body">Reports and observations are stored in the language they were written. ED AI can translate individual sections on request &mdash; preserving the integrity of the original professional judgement text.</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div style="text-align:center;font-size:11px;color:#8a9aaa;margin-top:12px;padding-bottom:20px">
+    EDUINSPECT360 Platform Demo Suite &middot; v5 &middot; March 2026 &middot; Screens grounded in actual codebase analysis (228 C# files, 278 view files, 302 database entities)
+  </div>
+</div>
+<script>
+function show(i){
+  document.querySelectorAll('.screen').forEach(function(s,j){s.classList.toggle('active',j===i);});
+  document.querySelectorAll('.sw-btn').forEach(function(b,j){b.classList.toggle('active',j===i);});
+  var d=document.getElementById('langDrop');
+  if(d) d.style.display='none';
+}
+function toggleLangDrop(){
+  var d=document.getElementById('langDrop');
+  if(d) d.style.display=d.style.display==='none'?'block':'none';
+}
+document.querySelectorAll('.lang-btn-login').forEach(function(b){
+  b.addEventListener('click',function(){
+    document.querySelectorAll('.lang-btn-login').forEach(function(x){x.classList.remove('active');});
+    this.classList.add('active');
+  });
+});
+</script>
+</body>
+</html>
