@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy | EDUINSPECT360</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="navbar"></div>
+
+  <main>
+    <header style="background: var(--blue-dark); padding: 60px 0; color: white; text-align: center;">
+      <div class="container">
+        <h1 style="font-family: var(--font-head); font-size: 32px;">Privacy Policy</h1>
+        <p style="opacity: 0.8; margin-top: 10px;">Last Updated: March 2026</p>
+      </div>
+    </header>
+
+    <section style="padding: 60px 0; line-height: 1.8; color: var(--text-body);">
+      <div class="container" style="max-width: 800px;">
+        
+        <h2>1. Introduction</h2>
+        <p>EDUINSPECT360 Limited ("we", "us", or "our") is committed to protecting the privacy and security of your personal data. This policy outlines how we collect and use personal data through your use of this website and our communication channels.</p>
+
+        <h2>2. Data We Collect</h2>
+        <p>When you use our contact form or request a briefing, we collect:</p>
+        <ul>
+          <li>Identity Data: Name and job title.</li>
+          <li>Contact Data: Email address and telephone number.</li>
+          <li>Professional Data: Organisation name and organisation type (e.g., MAT, Local Authority).</li>
+        </ul>
+
+        <h2>3. How We Use Your Data</h2>
+        <p>We use your data strictly to respond to your enquiries, provide platform demonstrations, and (with your consent) send updates regarding our school inspection software. We do not sell your data to third parties.</p>
+
+        <h2>4. Data Security</h2>
+        <p>Consistent with our <strong>Data Governance</strong> principles, we have put in place appropriate security measures to prevent your personal data from being accidentally lost, used, or accessed in an unauthorised way.</p>
+
+        <h2>5. Cookies</h2>
+        <p>Our website uses cookies to improve your experience. For detailed information on the cookies we use and the purposes for which we use them, please see our <a href="cookies.html" style="color: var(--blue);">Cookie Policy</a>.</p>
+
+        <h2>6. Your Rights</h2>
+        <p>Under UK GDPR, you have the right to access, correct, or erase your personal data. To exercise these rights, please contact us at <strong>enquiries@eduinspect360.com</strong>.</p>
+
+      </div>
+    </section>
+  </main>
+
+  <div id="footer"></div>
+  <script src="nav.js"></script>
+  <div id="cookie-banner" style="position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); width: 90%; max-width: 600px; background: #fff; border: 1px solid #d0e6f0; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); padding: 20px; display: flex; align-items: center; justify-content: space-between; z-index: 10000; gap: 20px;">
+  <div style="font-family: 'Poppins', sans-serif; font-size: 13px; color: #3a4a5a; line-height: 1.5;">
+    <strong>We value your privacy.</strong><br>
+    We use cookies to enhance your experience and analyze our traffic. By clicking "Accept All", you consent to our use of cookies. <a href="privacy.html" style="color: #2c6f90; text-decoration: underline;">Read Policy</a>
+  </div>
+  <div style="display: flex; gap: 10px;">
+    <button onclick="dismissCookieBanner()" style="background: transparent; border: 1px solid #2c6f90; color: #2c6f90; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-size: 12px; font-weight: 600;">Reject All</button>
+    <button onclick="dismissCookieBanner()" style="background: #2c6f90; border: none; color: #fff; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-size: 12px; font-weight: 600;">Accept All</button>
+  </div>
+</div>
+
+<script>
+  function dismissCookieBanner() {
+    document.getElementById('cookie-banner').style.display = 'none';
+    localStorage.setItem('cookiesAccepted', 'true');
+  }
+  // Check if already accepted
+  if(localStorage.getItem('cookiesAccepted')) {
+    document.getElementById('cookie-banner').style.display = 'none';
+  }
+</script>
+</body>
+</html>

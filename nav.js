@@ -64,13 +64,13 @@ document.getElementById('footer').innerHTML = `
         <a href="resources.html">Resources</a>
         <a href="contact.html">Contact us</a>
       </div>
-      <div class="footer-col">
-        <h4>Legal</h4>
-        <a href="#">Privacy policy</a>
-        <a href="#">Terms of use</a>
-        <a href="#">Data governance</a>
-        <a href="#">Cookie policy</a>
-      </div>
+     <div class="footer-col">
+  <h4>Legal</h4>
+  <a href="privacy.html">Privacy policy</a>
+  <a href="terms.html">Terms of use</a>
+  <a href="governance.html">Data governance</a>
+  <a href="cookies.html">Cookie policy</a>
+</div>
     </div>
     <div class="footer-bottom">
       <p>© 2025 EDUINSPECT360 Limited &nbsp;·&nbsp; inquiries@eduinspect360.com &nbsp;·&nbsp; 2 Wheeleys Road, Birmingham B15 2LD</p>

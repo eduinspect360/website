@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Governance | EDUINSPECT360</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="navbar"></div>
+
+  <main>
+    <header style="background: var(--blue-dark); padding: 60px 0; color: white; text-align: center;">
+      <div class="container">
+        <h1 style="font-family: var(--font-head); font-size: 32px;">Governance</h1>
+        <p style="opacity: 0.8; margin-top: 10px;">Last Updated: March 2026</p>
+      </div>
+    </header>
+
+   <section style="padding: 60px 0; line-height: 1.8; color: var(--text-body);">
+  <div class="container" style="max-width: 800px;">
+    
+    <h2>Data Governance & Security</h2>
+    <p>EDUINSPECT360 is built on a foundation of "Privacy by Design," ensuring that UK education data is handled with the highest levels of integrity.</p>
+
+    <div style="background: var(--blue-light); border-left: 4px solid var(--blue); padding: 30px; margin: 40px 0; border-radius: var(--radius-md);">
+      <h3 style="color: var(--blue-dark); margin-top: 0;">AI & Ethics Statement</h3>
+      <p>As we integrate intelligent automation to assist with the inspection process, we adhere to the following principles:</p>
+      
+      <ul style="list-style: none; padding: 0;">
+        <li style="margin-bottom: 15px; display: flex; align-items: flex-start; gap: 12px;">
+          <span style="color: var(--blue); font-weight: bold;">•</span>
+          <span><strong>No Automated Grading:</strong> The platform provides data-driven evidence, but final inspection judgements are always made by professional inspectors.</span>
+        </li>
+        <li style="margin-bottom: 15px; display: flex; align-items: flex-start; gap: 12px;">
+          <span style="color: var(--blue); font-weight: bold;">•</span>
+          <span><strong>Algorithmic Transparency:</strong> We provide clear "Explainability" for any auto-suggested narrative or risk-flags within the dashboard.</span>
+        </li>
+        <li style="margin-bottom: 0; display: flex; align-items: flex-start; gap: 12px;">
+          <span style="color: var(--blue); font-weight: bold;">•</span>
+          <span><strong>GDPR Compliance:</strong> Our use of AI is fully compliant with UK GDPR requirements regarding profiling and automated processing.</span>
+        </li>
+      </ul>
+    </div>
+
+    <h2>Data Residency</h2>
+    <p>All data is hosted in ISO 27001 certified data centres located within the United Kingdom. We do not transfer personal data outside of the EEA without explicit contractual safeguards.</p>
+
+  </div>
+</section>
+  </main>
+
+  <div id="footer"></div>
+  <script src="nav.js"></script>
+  <div id="cookie-banner" style="position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); width: 90%; max-width: 600px; background: #fff; border: 1px solid #d0e6f0; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); padding: 20px; display: flex; align-items: center; justify-content: space-between; z-index: 10000; gap: 20px;">
+  <div style="font-family: 'Poppins', sans-serif; font-size: 13px; color: #3a4a5a; line-height: 1.5;">
+    <strong>We value your privacy.</strong><br>
+    We use cookies to enhance your experience and analyze our traffic. By clicking "Accept All", you consent to our use of cookies. <a href="privacy.html" style="color: #2c6f90; text-decoration: underline;">Read Policy</a>
+  </div>
+  <div style="display: flex; gap: 10px;">
+    <button onclick="dismissCookieBanner()" style="background: transparent; border: 1px solid #2c6f90; color: #2c6f90; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-size: 12px; font-weight: 600;">Reject All</button>
+    <button onclick="dismissCookieBanner()" style="background: #2c6f90; border: none; color: #fff; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-size: 12px; font-weight: 600;">Accept All</button>
+  </div>
+</div>
+
+<script>
+  function dismissCookieBanner() {
+    document.getElementById('cookie-banner').style.display = 'none';
+    localStorage.setItem('cookiesAccepted', 'true');
+  }
+  // Check if already accepted
+  if(localStorage.getItem('cookiesAccepted')) {
+    document.getElementById('cookie-banner').style.display = 'none';
+  }
+</script>
+</body>
+</html>
