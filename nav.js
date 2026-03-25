@@ -83,7 +83,7 @@ if (footerContainer) {
       </div>
 
       <div class="footer-bottom">
-        <p style="color: var(--blue-mid);">© 2025 EDUINSPECT360 Limited &nbsp;·&nbsp; inquiries@eduinspect360.com &nbsp;·&nbsp; 2 Wheeleys Road, Birmingham B15 2LD</p>
+        <p style="color: var(--blue-mid);">© 2026 EDUINSPECT360 Limited &nbsp;·&nbsp; enquiries@eduinspect360.com &nbsp;·&nbsp; 2 Wheeleys Road, Birmingham B15 2LD</p>
         <div class="footer-reg"><span style="color: var(--blue-mid);">UK Company No. 15126870</span></div>
       </div>
     </div>
