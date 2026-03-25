@@ -46,7 +46,9 @@ if (footerContainer) {
     <div class="container">
       <div class="footer-grid">
         <div class="footer-brand-col">
-          <div class="footer-brand-text">
+         <div class="footer-logo-wrap">
+          <img src="icon-white-bg.png" alt="EDUINSPECT360" class="footer-icon">
+        <div class="footer-brand-text">
               <div class="footer-brand-name" style="color: #ffffff;">EDUINSPECT360</div>
               <div class="footer-brand-tag" style="color: var(--blue-mid);">Empowering Educational Excellence</div>
             </div>
