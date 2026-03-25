@@ -95,41 +95,67 @@
         <span class="pill pill-green">Request a briefing</span>
         <h2 style="margin-bottom:8px;">Tell us about your organisation.</h2>
         <p style="font-size:13px;color:var(--text-muted);margin-bottom:24px;">We tailor every briefing to the size, context, and current inspection processes of the organisation. The more you tell us, the more useful the conversation will be.</p>
-        <div class="form-wrap" action="https://formspree.io/f/mbdprbww"
-      method="POST">
-          <div class="form-row-2">
-            <div class="form-group"><label>First name *</label><input type="text" placeholder="Jane" required></div>
-            <div class="form-group"><label>Last name *</label><input type="text" placeholder="Smith" required></div>
-          </div>
-          <div class="form-group"><label>Job title *</label><input type="text" placeholder="e.g. Director of Education" required></div>
-          <div class="form-group"><label>Organisation name *</label><input type="text" placeholder="e.g. Birmingham City Council" required></div>
-          <div class="form-group">
-            <label>Organisation type *</label>
-            <select required aria-label="Organisation type">
-              <option value="">Select type</option>
-              <option>Local authority</option>
-              <option>Multi-Academy Trust</option>
-              <option>Regional inspection body</option>
-              <option>International education authority</option>
-              <option>Other</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label>Number of schools in your portfolio</label>
-            <select aria-label="Number of schools in your portfolio">
-              <option value="">Select range</option>
-              <option>1–10</option>
-              <option>11–50</option>
-              <option>51–150</option>
-              <option>151–300</option>
-              <option>300+</option>
-            </select>
-          </div>
-          <div class="form-group"><label>Your biggest inspection challenge right now</label><textarea aria-label="Your biggest inspection challenge" placeholder="Briefly describe your current process or the main challenge you are trying to solve..."></textarea></div>
-          <div class="form-group"><label>Email address *</label><input type="email" placeholder="jane.smith@example.gov.uk" required></div>
-          <button class="form-submit" type="submit">Request a briefing</button>
-          <p class="form-note">We will respond within one working day. Your details will not be shared with third parties.</p>
-        </div>
+       <form class="form-wrap" action="https://formspree.io/f/mbdprbww" method="POST">
+
+  <div class="form-row-2">
+    <div class="form-group">
+      <label>First name *</label>
+      <input type="text" name="firstName" placeholder="Jane" required>
+    </div>
+    <div class="form-group">
+      <label>Last name *</label>
+      <input type="text" name="lastName" placeholder="Smith" required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label>Job title *</label>
+    <input type="text" name="jobTitle" placeholder="e.g. Director of Education" required>
+  </div>
+
+  <div class="form-group">
+    <label>Organisation name *</label>
+    <input type="text" name="organisation" placeholder="e.g. Birmingham City Council" required>
+  </div>
+
+  <div class="form-group">
+    <label>Organisation type *</label>
+    <select name="orgType" required>
+      <option value="">Select type</option>
+      <option>Local authority</option>
+      <option>Multi-Academy Trust</option>
+      <option>Regional inspection body</option>
+      <option>International education authority</option>
+      <option>Other</option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label>Number of schools</label>
+    <select name="schoolCount">
+      <option value="">Select range</option>
+      <option>1–10</option>
+      <option>11–50</option>
+      <option>51–150</option>
+      <option>151–300</option>
+      <option>300+</option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label>Biggest challenge</label>
+    <textarea name="challenge"></textarea>
+  </div>
+
+  <div class="form-group">
+    <label>Email address *</label>
+    <input type="email" name="email" required>
+  </div>
+
+  <button class="form-submit" type="submit">Request a briefing</button>
+ <p class="form-note">We will respond within one working day. Your details will not be shared with third parties.</p>
+</form>
+
       </div>
       <div>
         <span class="pill pill-blue">Contact details</span>
