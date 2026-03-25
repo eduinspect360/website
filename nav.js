@@ -1,4 +1,17 @@
 // nav.js — Balanced version: Original layout with W3C compliant colours
+
+// 1. GLOBAL REDIRECTS (Force HTTPS and WWW for GitHub Pages)
+(function() {
+    const host = window.location.hostname;
+    const protocol = window.location.protocol;
+
+    // Redirect if accessing via the non-www apex domain or via insecure HTTP
+    if (host === "eduinspect360.com" || (host === "www.eduinspect360.com" && protocol === "http:")) {
+        window.location.replace("https://www.eduinspect360.com" + window.location.pathname + window.location.search);
+    }
+})();
+
+// ... existing code follows ...
 const currentPage = window.location.pathname.split('/').pop() || 'index.html';
 
 const pages = [
