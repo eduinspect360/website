@@ -264,15 +264,27 @@
       <p>A monthly briefing covering Ofsted framework changes, inspection best practice, and EDUINSPECT360 platform updates. No marketing — unsubscribe any time.</p>
     </div>
     <div style="max-width:480px;margin:0 auto;">
-      <div class="form-wrap" style="padding:24px;">
+      <form id="newsletter-form" class="form-wrap" style="padding:24px;" action="https://formspree.io/f/mzdkbbkj" method="POST">
         <div class="form-row-2">
-          <div class="form-group"><label>First name</label><input type="text" placeholder="Jane"></div>
-          <div class="form-group"><label>Organisation</label><input type="text" placeholder="e.g. Birmingham LA"></div>
+          <div class="form-group">
+            <label for="firstName">First name</label>
+            <input type="text" id="firstName" name="firstName" placeholder="Jane" required>
+          </div>
+          <div class="form-group">
+            <label for="organisation">Organisation</label>
+            <input type="text" id="organisation" name="organisation" placeholder="e.g. Birmingham LA" required>
+          </div>
         </div>
-        <div class="form-group"><label>Work email address</label><input type="email" placeholder="jane@example.gov.uk"></div>
-        <button class="form-submit" type="submit">Subscribe to updates</button>
+        <div class="form-group">
+          <label for="email">Work email address</label>
+          <input type="email" id="email" name="email" placeholder="jane@example.gov.uk" required>
+        </div>
+        <button id="newsletter-submit" class="form-submit" type="submit">Subscribe to updates</button>
+        
+        <div id="newsletter-status" style="margin-top: 15px; display: none;"></div>
+        
         <p class="form-note">We will never share your email. Unsubscribe at any time.</p>
-      </div>
+      </form>
     </div>
   </div>
 </section>
@@ -289,6 +301,67 @@
 
 <div id="footer"></div>
 <script src="nav.js"></script>
+
+<script>
+  const newsletterForm = document.getElementById("newsletter-form");
+  const newsStatusDiv = document.getElementById("newsletter-status");
+  const newsSubmitBtn = document.getElementById("newsletter-submit");
+
+  async function handleNewsletterSubmit(event) {
+    event.preventDefault();
+    const data = new FormData(event.target);
+    
+    // 1. Enter Loading State
+    newsSubmitBtn.classList.add("loading");
+    newsSubmitBtn.disabled = true;
+    
+    // Feedback for the user
+    newsStatusDiv.className = ""; 
+    newsStatusDiv.style.display = "block";
+    newsStatusDiv.style.color = "var(--text-muted)";
+    newsStatusDiv.style.fontSize = "13px";
+    newsStatusDiv.innerHTML = "Processing subscription...";
+
+    fetch(event.target.action, {
+      method: newsletterForm.method,
+      body: data,
+      headers: { 'Accept': 'application/json' }
+    }).then(response => {
+      // 2. Exit Loading State
+      newsSubmitBtn.classList.remove("loading");
+      newsSubmitBtn.disabled = false;
+
+      if (response.ok) {
+        newsStatusDiv.classList.add("success");
+        newsStatusDiv.style.display = "flex";
+        newsStatusDiv.style.color = "#2c6f90"; // Match brand blue
+        newsStatusDiv.innerHTML = `
+          <div class="status-icon" style="margin-right:10px;">
+            <svg viewBox="0 0 10 10" style="width:16px; height:16px;"><polyline points="2,5 4.2,7.5 8,2.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+          </div>
+          <div>
+            <strong>Subscription Confirmed</strong><br>
+            You have been added to our briefing list.
+          </div>
+        `;
+        newsletterForm.reset();
+      } else {
+        newsStatusDiv.classList.add("error");
+        newsStatusDiv.style.color = "red";
+        newsStatusDiv.innerHTML = "Oops! We couldn't sign you up. Please check your email address.";
+      }
+    }).catch(error => {
+      newsSubmitBtn.classList.remove("loading");
+      newsSubmitBtn.disabled = false;
+      newsStatusDiv.classList.add("error");
+      newsStatusDiv.innerHTML = "Connection error. Please try again later.";
+      console.error("Newsletter error:", error);
+    });
+  }
+  
+  newsletterForm.addEventListener("submit", handleNewsletterSubmit);
+</script>
+
 <div id="cookie-banner" style="position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); width: 90%; max-width: 600px; background: #fff; border: 1px solid #d0e6f0; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); padding: 20px; display: flex; align-items: center; justify-content: space-between; z-index: 10000; gap: 20px;">
   <div style="font-family: 'Poppins', sans-serif; font-size: 13px; color: #3a4a5a; line-height: 1.5;">
     <strong>We value your privacy.</strong><br>
