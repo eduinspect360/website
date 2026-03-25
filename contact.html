@@ -95,32 +95,32 @@
         <span class="pill pill-green">Request a briefing</span>
         <h2 style="margin-bottom:8px;">Tell us about your organisation.</h2>
         <p style="font-size:13px;color:var(--text-muted);margin-bottom:24px;">We tailor every briefing to the size, context, and current inspection processes of the organisation. The more you tell us, the more useful the conversation will be.</p>
-       <form class="form-wrap" action="https://formspree.io/f/mbdprbww" method="POST">
+    <form class="form-wrap" action="https://formspree.io/f/mbdprbww" method="POST">
 
   <div class="form-row-2">
     <div class="form-group">
-      <label>First name *</label>
-      <input type="text" name="firstName" placeholder="Jane" required>
+      <label for="firstName">First name *</label>
+      <input type="text" id="firstName" name="firstName" placeholder="Jane" required>
     </div>
     <div class="form-group">
-      <label>Last name *</label>
-      <input type="text" name="lastName" placeholder="Smith" required>
+      <label for="lastName">Last name *</label>
+      <input type="text" id="lastName" name="lastName" placeholder="Smith" required>
     </div>
   </div>
 
   <div class="form-group">
-    <label>Job title *</label>
-    <input type="text" name="jobTitle" placeholder="e.g. Director of Education" required>
+    <label for="jobTitle">Job title *</label>
+    <input type="text" id="jobTitle" name="jobTitle" placeholder="e.g. Director of Education" required>
   </div>
 
   <div class="form-group">
-    <label>Organisation name *</label>
-    <input type="text" name="organisation" placeholder="e.g. Birmingham City Council" required>
+    <label for="organisation">Organisation name *</label>
+    <input type="text" id="organisation" name="organisation" placeholder="e.g. Birmingham City Council" required>
   </div>
 
   <div class="form-group">
-    <label>Organisation type *</label>
-    <select name="orgType" required>
+    <label for="orgType">Organisation type *</label>
+    <select id="orgType" name="orgType" required>
       <option value="">Select type</option>
       <option>Local authority</option>
       <option>Multi-Academy Trust</option>
@@ -131,8 +131,8 @@
   </div>
 
   <div class="form-group">
-    <label>Number of schools</label>
-    <select name="schoolCount">
+    <label for="schoolCount">Number of schools</label>
+    <select id="schoolCount" name="schoolCount">
       <option value="">Select range</option>
       <option>1–10</option>
       <option>11–50</option>
@@ -143,17 +143,17 @@
   </div>
 
   <div class="form-group">
-    <label>Biggest challenge</label>
-    <textarea name="challenge"></textarea>
+    <label for="challenge">Biggest challenge</label>
+    <textarea id="challenge" name="challenge"></textarea>
   </div>
 
   <div class="form-group">
-    <label>Email address *</label>
-    <input type="email" name="email" required>
+    <label for="email">Email address *</label>
+    <input type="email" id="email" name="email" required>
   </div>
 
   <button class="form-submit" type="submit">Request a briefing</button>
- <p class="form-note">We will respond within one working day. Your details will not be shared with third parties.</p>
+  <p class="form-note">We will respond within one working day. Your details will not be shared with third parties.</p>
 </form>
 
       </div>
