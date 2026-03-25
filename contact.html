@@ -95,7 +95,7 @@
         <span class="pill pill-green">Request a briefing</span>
         <h2 style="margin-bottom:8px;">Tell us about your organisation.</h2>
         <p style="font-size:13px;color:var(--text-muted);margin-bottom:24px;">We tailor every briefing to the size, context, and current inspection processes of the organisation. The more you tell us, the more useful the conversation will be.</p>
-    <form class="form-wrap" action="https://formspree.io/f/mbdprbww" method="POST">
+  <form id="contact-form" class="form-wrap" action="https://formspree.io/f/mbdprbww" method="POST"></form>
 
   <div class="form-row-2">
     <div class="form-group">
@@ -153,6 +153,7 @@
   </div>
 
   <button class="form-submit" type="submit">Request a briefing</button>
+  <div id="form-status"></div>
   <p class="form-note">We will respond within one working day. Your details will not be shared with third parties.</p>
 </form>
 
@@ -189,6 +190,59 @@
 </section>
 
 <div id="footer"></div>
+
 <script src="nav.js"></script>
+
+<script>
+  const contactForm = document.getElementById("contact-form");
+  const statusDiv = document.getElementById("form-status");
+  const submitBtn = contactForm.querySelector(".form-submit");
+
+  async function handleSubmit(event) {
+    event.preventDefault();
+    const data = new FormData(event.target);
+    
+    // UI Loading State
+    submitBtn.classList.add("loading");
+    submitBtn.disabled = true;
+    statusDiv.style.display = "none"; 
+
+    fetch(event.target.action, {
+      method: contactForm.method,
+      body: data,
+      headers: { 'Accept': 'application/json' }
+    }).then(response => {
+      submitBtn.classList.remove("loading");
+      submitBtn.disabled = false;
+
+      if (response.ok) {
+        statusDiv.classList.add("success");
+        statusDiv.style.display = "flex";
+        statusDiv.innerHTML = `
+          <div class="status-icon">
+            <svg viewBox="0 0 10 10"><polyline points="2,5 4.2,7.5 8,2.5"/></svg>
+          </div>
+          <div>
+            <strong>Enquiry Sent Successfully</strong><br>
+            Thank you. Our team will review your details and contact you within one working day.
+          </div>
+        `;
+        contactForm.reset();
+      } else {
+        statusDiv.classList.add("error");
+        statusDiv.style.display = "block";
+        statusDiv.innerHTML = "Something went wrong. Please check your information and try again.";
+      }
+    }).catch(error => {
+      submitBtn.classList.remove("loading");
+      submitBtn.disabled = false;
+      statusDiv.classList.add("error");
+      statusDiv.style.display = "block";
+      statusDiv.innerHTML = "Connection error. Please check your internet and try again.";
+    });
+  }
+  contactForm.addEventListener("submit", handleSubmit);
+</script>
+
 </body>
 </html>
