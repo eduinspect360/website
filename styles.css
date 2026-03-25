@@ -916,3 +916,39 @@ body { overflow-x: hidden; }
     .legal-grid { grid-template-columns: 1fr; gap: 40px; }
     .legal-sidebar { display: none; }
 }
+/* Refined Legal Header */
+.legal-hero {
+    background: var(--blue-deeper);
+    padding: 120px 0 80px 0; /* Extra breathing room */
+    position: relative;
+    overflow: hidden;
+}
+
+/* Add a subtle background pattern to match the SaaS feel */
+.legal-hero::after {
+    content: "";
+    position: absolute;
+    top: 0; right: 0; width: 300px; height: 300px;
+    background: radial-gradient(circle, var(--blue-dark) 0%, transparent 70%);
+    opacity: 0.5;
+}
+
+.legal-hero h1 {
+    font-family: var(--font-head);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    font-size: clamp(32px, 6vw, 52px); /* Responsive sizing */
+    margin-bottom: 15px;
+}
+
+.legal-hero .badge {
+    display: inline-block;
+    padding: 6px 12px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 4px;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+    color: var(--blue-mid);
+}
