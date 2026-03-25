@@ -202,22 +202,29 @@
     event.preventDefault();
     const data = new FormData(event.target);
     
-    // UI Loading State
+    // 1. Enter Loading State
     submitBtn.classList.add("loading");
     submitBtn.disabled = true;
-    statusDiv.style.display = "none"; 
+    
+    // Clear old state and show "Sending" feedback immediately
+    statusDiv.className = ""; // Reset all classes (success/error)
+    statusDiv.style.display = "block";
+    statusDiv.style.color = "var(--text-muted)";
+    statusDiv.innerHTML = "Sending enquiry...";
 
     fetch(event.target.action, {
       method: contactForm.method,
       body: data,
       headers: { 'Accept': 'application/json' }
     }).then(response => {
+      // 2. Exit Loading State
       submitBtn.classList.remove("loading");
       submitBtn.disabled = false;
 
       if (response.ok) {
         statusDiv.classList.add("success");
         statusDiv.style.display = "flex";
+        statusDiv.style.color = ""; // Use CSS brand colors
         statusDiv.innerHTML = `
           <div class="status-icon">
             <svg viewBox="0 0 10 10"><polyline points="2,5 4.2,7.5 8,2.5"/></svg>
@@ -231,16 +238,20 @@
       } else {
         statusDiv.classList.add("error");
         statusDiv.style.display = "block";
-        statusDiv.innerHTML = "Something went wrong. Please check your information and try again.";
+        statusDiv.style.color = "";
+        statusDiv.innerHTML = "Oops! There was a problem. Please check your fields and try again.";
       }
     }).catch(error => {
+      // 3. Handle Network Failures
       submitBtn.classList.remove("loading");
       submitBtn.disabled = false;
       statusDiv.classList.add("error");
       statusDiv.style.display = "block";
       statusDiv.innerHTML = "Connection error. Please check your internet and try again.";
+      console.error("Form submission error:", error);
     });
   }
+  
   contactForm.addEventListener("submit", handleSubmit);
 </script>
 
