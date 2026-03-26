@@ -28,7 +28,7 @@ const navLinks = pages.map(p =>
   `<a href="${p.href}" class="${currentPage === p.href ? 'active' : ''}">${p.label}</a>`
 ).join('');
 
-// 1. NAVBAR GENERATION (Restored to original structure)
+// 1. NAVBAR GENERATION (Restored with Mobile Toggle)
 const navbarContainer = document.getElementById('navbar');
 if (navbarContainer) {
   navbarContainer.innerHTML = `
@@ -42,6 +42,13 @@ if (navbarContainer) {
             <span class="navbar-tagline">Empowering Educational Excellence</span>
           </div>
         </a>
+        
+        <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+
         <div class="navbar-links" id="nav-menu">
           ${navLinks}
           <a href="contact.html" class="nav-cta">Request a briefing</a>
@@ -106,8 +113,11 @@ if (footerContainer) {
 // 3. SAFETY CHECK FOR MOBILE MENU
 const navToggle = document.getElementById('nav-toggle');
 const navMenu = document.getElementById('nav-menu');
+
 if (navToggle && navMenu) {
   navToggle.addEventListener('click', () => {
     navMenu.classList.toggle('open');
+    // Optional: Add a class to the toggle itself for an animation
+    navToggle.classList.toggle('active');
   });
 }
