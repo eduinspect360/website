@@ -1,5 +1,24 @@
 // nav.js — Balanced version: Original layout with W3C compliant colours
 
+// GOOGLE ANALYTICS 4 INJECTION
+(function() {
+    const GA_ID = 'G-72GC5HPZWV'; // <-- REPLACE WITH YOUR ACTUAL ID
+
+    // 1. Create the script element for gtag.js
+    const script = document.createElement('script');
+    script.async = true;
+    script.src = `https://www.googletagmanager.com/gtag/js?id=${GA_ID}`;
+    document.head.appendChild(script);
+
+    // 2. Initialize the dataLayer and gtag function
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    // 3. Configure the tracking
+    gtag('config', GA_ID);
+})();
+
 // 1. GLOBAL REDIRECTS (Force HTTPS and WWW for GitHub Pages)
 (function() {
     const host = window.location.hostname;
