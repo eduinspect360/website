@@ -75,7 +75,7 @@ p  { font-size: 12px; line-height: 1.8; color: var(--text-body); }
 .section-sm { padding: 48px 0; }
 .text-center { text-align: center; }
 .text-white  { color: var(--white) !important; }
-.text-green  { color: var(--green); }
+.text-green  { color: var(--green-deeper); }
 .text-blue   { color: var(--blue); }
 
 .pill {
@@ -106,8 +106,8 @@ p  { font-size: 12px; line-height: 1.8; color: var(--text-body); }
   transition: all 0.18s ease;
   letter-spacing: 0.2px;
 }
-.btn-green  { background: var(--green); color: var(--white); border-color: var(--green); }
-.btn-green:hover { background: var(--green-dark); border-color: var(--green-dark); }
+.btn-green  { background: var(--green-deeper); color: var(--white); border-color: var(--green-deeper); }
+.btn-green:hover { background: #3f4d24; border-color: #3f4d24; }
 .btn-blue   { background: var(--blue);  color: var(--white); border-color: var(--blue); }
 .btn-blue:hover  { background: var(--blue-dark); border-color: var(--blue-dark); }
 .btn-outline-white { background: transparent; color: var(--white); border-color: rgba(255,255,255,0.5); }
@@ -181,14 +181,14 @@ p  { font-size: 12px; line-height: 1.8; color: var(--text-body); }
   background: var(--blue-light);
 }
 .navbar-links .nav-cta {
-  background: var(--green);
+  background: var(--green-deeper);
   color: var(--white) !important;
   font-weight: 700;
   padding: 9px 16px;
   border-radius: var(--radius-sm);
   margin-left: 8px;
 }
-.navbar-links .nav-cta:hover { background: var(--green-dark) !important; }
+.navbar-links .nav-cta:hover { background: #3f4d24 !important; }
 
 /* mobile menu toggle */
 .nav-toggle {
@@ -620,7 +620,7 @@ p  { font-size: 12px; line-height: 1.8; color: var(--text-body); }
 }
 .founder-cred svg { width: 13px; height: 13px; stroke: var(--blue); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; fill: none; flex-shrink: 0; }
 .founder-bio { }
-.founder-eyebrow { font-size: 11px; font-weight: 700; font-family: var(--font-body); color: var(--green); text-transform: uppercase; letter-spacing: 0.7px; margin-bottom: 8px; }
+.founder-eyebrow { font-size: 11px; font-weight: 700; font-family: var(--font-body); color: var(--green-deeper); text-transform: uppercase; letter-spacing: 0.7px; margin-bottom: 8px; }
 .founder-bio h2 { margin-bottom: 6px; }
 .founder-bio .role-tag {
   display: inline-block;
@@ -748,7 +748,7 @@ p  { font-size: 12px; line-height: 1.8; color: var(--text-body); }
   margin-bottom: 6px;
   display: block;
 }
-.module-label-green { color: var(--green); }
+.module-label-green { color: var(--green-deeper); }
 .module-label-blue  { color: var(--blue); }
 
 /* ── W3C / ACCESSIBILITY ADDITIONS ── */
