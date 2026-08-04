@@ -36,8 +36,8 @@ const currentPage = window.location.pathname.split('/').pop() || 'index.html';
 const pages = [
   { href: 'index.html',      label: 'Home' },
   { href: 'platform.html',   label: 'Platform' },
-  { href: 'use-cases.html',  label: 'Use cases' },
   { href: 'inspectorates.html', label: 'Inspectorates' },
+  { href: 'use-cases.html',  label: 'Use cases' },
   { href: 'compliance.html', label: 'Compliance' },
   { href: 'about.html',      label: 'About us' },
   { href: 'resources.html',  label: 'Resources' },
