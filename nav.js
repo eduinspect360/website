@@ -62,7 +62,7 @@ if (navbarContainer) {
           </div>
         </a>
         
-        <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">
+        <button class="nav-toggle" id="nav-toggle" aria-label="Open menu" aria-expanded="false">
           <span></span>
           <span></span>
           <span></span>
@@ -135,8 +135,9 @@ const navMenu = document.getElementById('nav-menu');
 
 if (navToggle && navMenu) {
   navToggle.addEventListener('click', () => {
-    navMenu.classList.toggle('open');
+    const isOpen = navMenu.classList.toggle('open');
     // Optional: Add a class to the toggle itself for an animation
     navToggle.classList.toggle('active');
+    navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
   });
 }
