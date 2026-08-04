@@ -37,6 +37,7 @@ const pages = [
   { href: 'index.html',      label: 'Home' },
   { href: 'platform.html',   label: 'Platform' },
   { href: 'use-cases.html',  label: 'Use cases' },
+  { href: 'inspectorates.html', label: 'Inspectorates' },
   { href: 'compliance.html', label: 'Compliance' },
   { href: 'about.html',      label: 'About us' },
   { href: 'resources.html',  label: 'Resources' },
@@ -103,6 +104,7 @@ if (footerContainer) {
           <a href="compliance.html" style="color: var(--blue-mid);">Ofsted EIF alignment</a>
           <a href="use-cases.html" style="color: var(--blue-mid);">For local authorities</a>
           <a href="use-cases.html" style="color: var(--blue-mid);">For MATs</a>
+          <a href="inspectorates.html" style="color: var(--blue-mid);">For national inspectorates</a>
         </div>
 
         <div class="footer-col">
@@ -117,6 +119,7 @@ if (footerContainer) {
           <a href="privacy.html" style="color: var(--blue-mid);">Privacy policy</a>
           <a href="terms.html" style="color: var(--blue-mid);">Terms of use</a>
           <a href="governance.html" style="color: var(--blue-mid);">Data governance</a>
+          <a href="trust.html" style="color: var(--blue-mid);">Trust, data &amp; AI</a>
           <a href="cookies.html" style="color: var(--blue-mid);">Cookie policy</a>
         </div>
       </div>
