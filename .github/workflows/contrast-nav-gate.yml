@@ -1,0 +1,35 @@
+name: Contrast & Navigation Gate
+
+# Standing policy: the rendered-contrast (G1) + navigation-reachability (G2) gate
+# must pass before any change reaches main. Any NEW failure fails the build.
+# The gate exempts the .navbar-name logotype per WCAG 2.1 SC 1.4.3 (documented in the script).
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  gate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Playwright (Chromium)
+        run: |
+          npm init -y >/dev/null 2>&1
+          npm install playwright >/dev/null 2>&1
+          npx playwright install --with-deps chromium
+
+      - name: Serve site + run G1/G2 gate
+        run: |
+          python3 -m http.server 8899 >/tmp/site.log 2>&1 &
+          for i in $(seq 1 30); do curl -sf http://localhost:8899/index.html >/dev/null && break; sleep 1; done
+          BASE=http://localhost:8899 node scripts/contrast-nav-gate.cjs
+        # scripts/contrast-nav-gate.cjs exits non-zero on any non-exempt G1 failure,
+        # any page with no route back, or any broken internal link -> this step (and the build) fails.

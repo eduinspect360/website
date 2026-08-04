@@ -1,0 +1,29 @@
+#!/bin/sh
+# Standing policy: run the G1 rendered-contrast + G2 navigation-reachability gate before pushing.
+# Activate once per clone:  git config core.hooksPath .githooks
+# CI (.github/workflows/contrast-nav-gate.yml) is the authoritative gate; this hook is fast local feedback.
+# Best-effort: if Playwright/Node aren't available locally, it warns and lets the push through
+# (CI will still block). A real gate failure blocks the push (override with --no-verify, discouraged).
+
+DIR=$(git rev-parse --show-toplevel)
+GATE="$DIR/scripts/contrast-nav-gate.cjs"
+
+command -v node >/dev/null 2>&1   || { echo "pre-push: node not found — skipping gate (CI will still run it)."; exit 0; }
+command -v python3 >/dev/null 2>&1 || { echo "pre-push: python3 not found — skipping gate (CI will still run it)."; exit 0; }
+node -e "try{require.resolve('playwright')}catch(e){try{require.resolve('/tmp/ir-uat/node_modules/playwright')}catch(e2){process.exit(3)}}" 2>/dev/null
+if [ $? -eq 3 ]; then echo "pre-push: Playwright not installed locally — skipping gate (CI will still run it). Install: npm i -D playwright && npx playwright install chromium"; exit 0; fi
+
+echo "pre-push: running contrast + navigation gate…"
+python3 -m http.server 8899 --directory "$DIR" >/dev/null 2>&1 &
+SRV=$!
+trap 'kill $SRV 2>/dev/null' EXIT
+for i in $(seq 1 20); do curl -sf http://localhost:8899/index.html >/dev/null 2>&1 && break; sleep 0.5; done
+
+BASE=http://localhost:8899 node "$GATE"
+code=$?
+if [ $code -ne 0 ]; then
+  echo ""
+  echo "pre-push BLOCKED: the contrast/navigation gate reported a failure (see above)."
+  echo "Fix the failing pair(s)/link(s) before pushing, or override with 'git push --no-verify' (discouraged)."
+fi
+exit $code

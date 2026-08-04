@@ -49,7 +49,9 @@ const AUDIT = () => {
     for(const bgc of candidates){ const fgc=fg.a<1?comp(fg,bgc):fg; const rr=ratio(fgc,bgc); if(rr<r){r=rr; worstBg=bgc;} }
     const fgc=fg.a<1?comp(fg,worstBg):fg;
     if(r < thr){
-      out.push({ tag:el.tagName.toLowerCase(), cls:(el.className&&el.className.toString().slice(0,30))||'', text:el.textContent.trim().slice(0,42), fg:`rgb(${Math.round(fgc.r)},${Math.round(fgc.g)},${Math.round(fgc.b)})`, bg:`rgb(${Math.round(worstBg.r)},${Math.round(worstBg.g)},${Math.round(worstBg.b)})`, ratio:Math.round(r*100)/100, thr, large, gradient });
+      // WCAG 2.1 SC 1.4.3 exemption: logotype / brand name (the .navbar-name wordmark is part of the logo lockup)
+      const exempt = !!(el.classList && el.classList.contains('navbar-name'));
+      out.push({ tag:el.tagName.toLowerCase(), cls:(el.className&&el.className.toString().slice(0,30))||'', text:el.textContent.trim().slice(0,42), fg:`rgb(${Math.round(fgc.r)},${Math.round(fgc.g)},${Math.round(fgc.b)})`, bg:`rgb(${Math.round(worstBg.r)},${Math.round(worstBg.g)},${Math.round(worstBg.b)})`, ratio:Math.round(r*100)/100, thr, large, gradient, exempt });
     }
   }
   return out;
@@ -89,16 +91,23 @@ const AUDIT = () => {
   await ctx.close(); await b.close();
 
   // ===== REPORT =====
-  console.log('\n########## G1 — RENDERED CONTRAST (fg vs computed parent bg) ##########');
-  let g1fail=0;
+  console.log('\n########## G1 — RENDERED CONTRAST (fg vs actual computed parent bg, incl. gradient stops) ##########');
+  console.log('EXEMPTION: .navbar-name (the EDUINSPECT360 wordmark) is a logotype — WCAG 2.1 SC 1.4.3 exempts');
+  console.log('logotypes/brand names from contrast minimums. It is reported below as EXEMPT and does NOT fail the gate.');
+  console.log('Do not "fix" it by darkening the brand green; that is an intentional, spec-permitted exemption.\n');
+  let g1real=0, g1exempt=0;
   for(const pg of PAGES){
-    const fails=g1[pg];
-    if(!fails.length){ console.log(`PASS  ${pg}`); continue; }
-    g1fail+=fails.length;
-    console.log(`FAIL  ${pg}  (${fails.length})`);
-    for(const f of fails) console.log(`        ${f.ratio}:1 (need ${f.thr}) ${f.large?'[large]':''} <${f.tag}${f.cls?'.'+f.cls:''}> "${f.text}"  fg=${f.fg} bg=${f.bg}${f.gradient?' [gradient-ancestor]':''}`);
+    const all=g1[pg]; const fails=all.filter(f=>!f.exempt); const exempt=all.filter(f=>f.exempt);
+    g1real+=fails.length; g1exempt+=exempt.length;
+    if(!fails.length){ console.log(`PASS  ${pg}${exempt.length?`  (+${exempt.length} exempt logotype)`:''}`); }
+    else {
+      console.log(`FAIL  ${pg}  (${fails.length})`);
+      for(const f of fails) console.log(`        ${f.ratio}:1 (need ${f.thr}) ${f.large?'[large]':''} <${f.tag}${f.cls?'.'+f.cls:''}> "${f.text}"  fg=${f.fg} bg=${f.bg}${f.gradient?' [gradient-ancestor]':''}`);
+    }
+    for(const f of exempt) console.log(`      EXEMPT ${f.ratio}:1 <${f.tag}.${f.cls}> "${f.text}" — WCAG 1.4.3 logotype`);
   }
-  console.log(g1fail? `G1 RESULT: ${g1fail} failing pair(s)` : 'G1 RESULT: PASS — no pair below threshold');
+  console.log(g1real? `\nG1 RESULT: FAIL — ${g1real} non-exempt failing pair(s) (${g1exempt} exempt logotype instance(s))`
+                    : `\nG1 RESULT: PASS — 0 non-exempt failures (${g1exempt} exempt logotype instance(s), WCAG 1.4.3)`);
 
   console.log('\n########## G2 — NAVIGATION REACHABILITY ##########');
   console.log('Per-page:  navbar  routeBack  #links');
@@ -107,5 +116,9 @@ const AUDIT = () => {
   console.log('\nLink resolution (unique internal targets):');
   let broken=0;
   for(const h of [...uniq].sort()){ const s=linkStatus[h]; const bad=s!==200; if(bad)broken++; console.log(`${bad?'BROKEN':'  OK  '} ${s}  ${h}`); }
-  console.log((g2fail||broken)? `G2 RESULT: ${g2fail} page(s) with no route back, ${broken} broken link(s)` : 'G2 RESULT: PASS — every page has a route back; all links resolve');
+  console.log((g2fail||broken)? `G2 RESULT: FAIL — ${g2fail} page(s) with no route back, ${broken} broken link(s)` : 'G2 RESULT: PASS — every page has a route back; all links resolve');
+
+  const failed = g1real>0 || g2fail>0 || broken>0;
+  console.log(`\n########## GATE ${failed?'FAILED':'PASSED'} ##########`);
+  process.exit(failed?1:0);
 })();
