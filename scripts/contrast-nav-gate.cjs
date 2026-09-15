@@ -6,7 +6,7 @@ let chromium;
 try { ({ chromium } = require('playwright')); }
 catch { ({ chromium } = require('/tmp/ir-uat/node_modules/playwright')); }
 const BASE = process.env.BASE || 'http://localhost:8899';
-const PAGES = ['index.html','platform.html','use-cases.html','inspectorates.html','compliance.html','about.html','resources.html','contact.html','trust.html','governance.html','terms.html','cookies.html','privacy.html','system-demo.html'];
+const PAGES = ['index.html','platform.html','use-cases.html','inspectorates.html','compliance.html','about.html','resources.html','contact.html','trust.html','governance.html','terms.html','cookies.html','privacy.html','system-demo.html','inspection-readiness.html'];
 const okHost = h => ['localhost','127.0.0.1','[::1]'].includes(h);
 
 // in-page contrast auditor
@@ -85,9 +85,18 @@ const AUDIT = () => {
   }
   // resolve every unique internal link once
   const uniq = new Set(); for(const pg of PAGES) g2[pg].internalLinks.forEach(h=>uniq.add(h));
-  const ctx = await b.newContext(); const pr = await ctx.newPage();
-  ctx.route('**/*', r => okHost(new URL(r.request().url()).hostname)?r.continue():r.abort());
-  for(const h of uniq){ try{ const resp=await pr.goto(`${BASE}/${h}`,{waitUntil:'domcontentloaded'}); linkStatus[h]=resp?resp.status():0; }catch(e){ linkStatus[h]='ERR'; } }
+  const ctx = await b.newContext();
+  // Resolve each internal link via an HTTP request (not page navigation): page.goto aborts on
+  // non-HTML targets like PDFs (Chromium hands them to the viewer) even when they serve 200,
+  // so an HTTP GET is the correct status check for any content type.
+  for(const h of uniq){
+    try{
+      const url=`${BASE}/${h}`;
+      if(!okHost(new URL(url).hostname)){ linkStatus[h]='BLOCKED'; continue; }
+      const resp=await ctx.request.get(url);
+      linkStatus[h]=resp.status();
+    }catch(e){ linkStatus[h]='ERR'; }
+  }
   await ctx.close(); await b.close();
 
   // ===== REPORT =====
