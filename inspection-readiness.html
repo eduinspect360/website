@@ -44,32 +44,46 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Sora:wght@500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
   <style>
-    /* page-scoped, tokens only */
-    .note-lead { font-size: 1.06rem; color: var(--text-body); max-width: 62ch; }
-    .note-body p { max-width: 68ch; }
-    .note-diag {
-      background: var(--green-light); border-left: 4px solid var(--green-dark);
-      border-radius: var(--radius-sm); padding: 16px 20px; margin: 20px 0;
-      color: var(--text-body); max-width: 68ch;
-    }
-    .note-diag strong { color: var(--green-deeper); }
-    .note-one-line {
-      font-family: var(--font-head); font-size: 1.15rem; line-height: 1.55;
-      color: var(--blue-deeper); border-left: 4px solid var(--blue);
-      padding: 4px 0 4px 20px; max-width: 62ch; margin: 8px 0 4px;
-    }
-    .note-download { margin-top: 14px; }
-    .note-num {
-      display:inline-grid; place-items:center; width: 34px; height: 34px; flex: 0 0 34px;
-      border-radius: 50%; background: var(--blue-deeper); color: var(--white);
-      font-family: var(--font-head); font-weight: 600; font-size: .95rem; margin-right: 12px;
-    }
-    .note-h { display:flex; align-items:center; }
-    .page-hero h1 { line-height: 1.18; margin: 0 0 22px; }
-    .page-hero .hero-sub { font-size: 14px; line-height: 1.8; margin-top: 0; }
+    /* page-scoped, tokens only — desktop-first, scales down */
+    .page-hero h1 { line-height: 1.16; margin: 0 0 22px; max-width: 800px; font-size: 40px; }
+    .page-hero .hero-sub { font-size: 15px; line-height: 1.75; margin-top: 0; max-width: 680px; }
     .note-eyebrow { font-family: var(--font-head); font-size: .85rem;
       letter-spacing: .12em; text-transform: uppercase;
       color: var(--green-mid); margin: 0 0 16px; }
+
+    .note-grid { display: grid; grid-template-columns: 300px 1fr; gap: 56px; align-items: start; }
+    .note-rail h2 { margin: 10px 0 0; font-size: 24px; line-height: 1.25; }
+    .note-num {
+      display: inline-grid; place-items: center; width: 44px; height: 44px;
+      border-radius: 50%; background: var(--blue-deeper); color: var(--white);
+      font-family: var(--font-head); font-weight: 600; font-size: 1.15rem;
+    }
+    .note-content { max-width: 70ch; }
+    .note-content p { font-size: 14.5px; line-height: 1.75; }
+    .note-content ul { font-size: 14.5px; line-height: 1.7; padding-left: 20px; }
+    .note-content li { margin-bottom: 10px; }
+    .note-diag {
+      background: var(--green-light); border-left: 4px solid var(--green-dark);
+      border-radius: var(--radius-sm); padding: 16px 20px; margin: 22px 0 0;
+      color: var(--text-body); font-size: 14px; line-height: 1.7;
+    }
+    .note-diag strong { color: var(--green-deeper); }
+
+    .note-close { text-align: center; }
+    .note-one-line {
+      font-family: var(--font-head); font-size: 1.4rem; line-height: 1.55;
+      color: var(--blue-deeper); max-width: 880px; margin: 0 auto 20px;
+    }
+    .note-close .note-after { max-width: 640px; margin: 0 auto 26px; font-size: 14.5px; }
+
+    @media (max-width: 860px) {
+      .page-hero h1 { font-size: 30px; }
+      .note-grid { grid-template-columns: 1fr; gap: 18px; }
+      .note-rail { display: flex; align-items: center; gap: 14px; }
+      .note-rail h2 { margin: 0; font-size: 21px; }
+      .note-num { width: 36px; height: 36px; font-size: .95rem; flex: 0 0 36px; }
+      .note-one-line { font-size: 1.15rem; }
+    }
   </style>
 </head>
 <body>
@@ -87,70 +101,80 @@
 
 <main id="main-content">
 
-<section class="section bg-white note-body">
-  <div class="container">
-    <h2 class="note-h"><span class="note-num" aria-hidden="true">1</span>The approval chain is the hard part — not the visit</h2>
+<section class="section bg-white">
+  <div class="container note-grid">
+    <div class="note-rail"><span class="note-num" aria-hidden="true">1</span><h2>The approval chain is the hard part — not the visit</h2></div>
+    <div class="note-content">
     <p>The school visit is the visible work. The difficulty lives afterwards: getting a draft report from a lead inspector, through quality assurance, back to the school for response, through senior sign-off, and out to publication — with a defensible record of who decided what, and when.</p>
     <p>A platform earns its place here or nowhere, and the test is whether it handles the unhappy path:</p>
-    <ul style="max-width:68ch;">
+    <ul>
       <li>A report rejected at QA and sent back for revision, then resubmitted — without losing the original judgements or the audit trail.</li>
       <li>A school's formal response to findings, captured against the specific judgement it contests — not bolted on as a loose comment.</li>
       <li>A status that is always unambiguous: any inspector can see exactly where any report sits, and what is blocking it.</li>
     </ul>
     <div class="note-diag"><strong>A useful diagnostic:</strong> when evaluating any system, ask to see a report rejected and resubmitted. If the demonstration only shows a report moving cleanly forward, it has shown you the easy 20%.</div>
   </div>
+  </div>
 </section>
 
-<section class="section bg-blue-lt note-body">
-  <div class="container">
-    <h2 class="note-h"><span class="note-num" aria-hidden="true">2</span>Every judgement must trace back to its evidence</h2>
+<section class="section bg-blue-lt">
+  <div class="container note-grid">
+    <div class="note-rail"><span class="note-num" aria-hidden="true">2</span><h2>Every judgement must trace back to its evidence</h2></div>
+    <div class="note-content">
     <p>A judgement that cannot be traced to the observation behind it is indefensible the moment it is challenged — by a school, a ministry, or an auditor. This is the single most important property of an inspection record, and the easiest to lose when a paper-and-spreadsheet process is digitised carelessly.</p>
-    <ul style="max-width:68ch;">
+    <ul>
       <li>Each judgement links to the specific evidence — lesson observations, document review, interviews — that produced it.</li>
       <li>The link survives editing, re-grading and the passage of years, so a report defended long after publication still holds together.</li>
       <li>Evidence is captured on site, at the point of observation — not reconstructed from memory days later.</li>
     </ul>
   </div>
+  </div>
 </section>
 
-<section class="section bg-white note-body">
-  <div class="container">
-    <h2 class="note-h"><span class="note-num" aria-hidden="true">3</span>AI can draft. It must never decide.</h2>
+<section class="section bg-white">
+  <div class="container note-grid">
+    <div class="note-rail"><span class="note-num" aria-hidden="true">3</span><h2>AI can draft. It must never decide.</h2></div>
+    <div class="note-content">
     <p>AI is genuinely useful in inspection — compiling school context, structuring collected evidence, turning an inspector's notes into well-formed draft prose. It removes administrative weight, and that weight is considerable. But its role has a hard boundary, and a credible platform enforces it in the architecture, not in a policy document:</p>
-    <ul style="max-width:68ch;">
+    <ul>
       <li><strong>Every AI-generated output requires named human approval</strong> before it affects any published outcome. Nothing reaches a school automatically.</li>
       <li>The judgement is always the inspector's. AI structures and drafts; it does not grade.</li>
       <li><strong>Every AI action is written to an append-only audit log</strong> — so the inspectorate can show, at any later date, what was generated, by what, and who signed it off.</li>
     </ul>
     <p>This matters more each year. A government inspectorate must be able to answer, to a minister or an auditor: <em>where was AI used, and who was accountable for the result?</em> A platform that cannot answer that cleanly is a liability, however capable it appears.</p>
   </div>
+  </div>
 </section>
 
-<section class="section bg-green-lt note-body">
-  <div class="container">
-    <h2 class="note-h"><span class="note-num" aria-hidden="true">4</span>Data must be sovereign — and provably segregated</h2>
+<section class="section bg-green-lt">
+  <div class="container note-grid">
+    <div class="note-rail"><span class="note-num" aria-hidden="true">4</span><h2>Data must be sovereign — and provably segregated</h2></div>
+    <div class="note-content">
     <p>Inspection data is among the most sensitive an education system holds: named pupils, identifiable staff, judgements with real consequences. Three things are non-negotiable:</p>
-    <ul style="max-width:68ch;">
+    <ul>
       <li><strong>Segregation is architectural, not procedural.</strong> Where a platform serves more than one client, one jurisdiction's data must be structurally incapable of informing another's — not merely a rule an administrator is trusted to remember.</li>
       <li><strong>Residency is the inspectorate's decision</strong> — where the data is hosted, and under whose jurisdiction, is the client's call, not the supplier's.</li>
       <li><strong>Exit is defined before entry.</strong> Full export in open formats and a documented path out, agreed at the start. Data a supplier can hold hostage was never sovereign.</li>
     </ul>
   </div>
+  </div>
 </section>
 
-<section class="section bg-white note-body">
-  <div class="container">
-    <h2 class="note-h"><span class="note-num" aria-hidden="true">5</span>The framework is yours — the platform must bend to it</h2>
+<section class="section bg-white">
+  <div class="container note-grid">
+    <div class="note-rail"><span class="note-num" aria-hidden="true">5</span><h2>The framework is yours — the platform must bend to it</h2></div>
+    <div class="note-content">
     <p>Every inspectorate is different: its evaluation areas, its grading scale, its inspection categories, its approval routes, its report structure. A platform hardcoded to one country's model forces every other client to adopt that model — which no serious inspectorate will, nor should.</p>
     <p>The right question is not <em>"does it match our framework today?"</em> but <em>"when our framework changes — and it will — is that a configuration change, or a redevelopment project?"</em> A framework revision should not stall published output for a year while the system catches up.</p>
+  </div>
   </div>
 </section>
 
 <section class="section bg-blue-lt">
-  <div class="container">
-    <div class="section-header"><h2>What good looks like, in one line</h2></div>
+  <div class="container note-close">
+    <div class="section-header centered"><h2>What good looks like, in one line</h2></div>
     <p class="note-one-line">A defensible judgement, traceable to its evidence, moved through an approval chain that survives challenge, assisted by AI that never decides, on data the inspectorate wholly controls, within a framework that is genuinely its own.</p>
-    <p style="max-width:68ch;">None of this is exotic. But it is the part that is hard to build and easy to get wrong — and it is worth testing for directly before committing to any system, this one included.</p>
+    <p class="note-after">None of this is exotic. But it is the part that is hard to build and easy to get wrong — and it is worth testing for directly before committing to any system, this one included.</p>
     <p class="note-download"><a class="btn btn-green" href="EDUINSPECT360_Inspection_Readiness_Note.pdf">Download as PDF</a></p>
   </div>
 </section>
