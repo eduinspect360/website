@@ -44,46 +44,30 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Sora:wght@500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
   <style>
-    /* page-scoped, tokens only — desktop-first, scales down */
-    .page-hero h1 { line-height: 1.16; margin: 0 0 22px; max-width: 800px; font-size: 40px; }
-    .page-hero .hero-sub { font-size: 15px; line-height: 1.75; margin-top: 0; max-width: 680px; }
-    .note-eyebrow { font-family: var(--font-head); font-size: .85rem;
-      letter-spacing: .12em; text-transform: uppercase;
-      color: var(--green-mid); margin: 0 0 16px; }
+    /* page-scoped, design-system tokens only */
+    .test-lead { font-size: 13px; color: var(--text-body); line-height: 1.85; max-width: 760px; margin: 0 0 28px; }
+    .test-lead strong { color: var(--text-dark); font-weight: 600; }
 
-    .note-grid { display: grid; grid-template-columns: 300px 1fr; gap: 56px; align-items: start; }
-    .note-rail h2 { margin: 10px 0 0; font-size: 24px; line-height: 1.25; }
-    .note-num {
-      display: inline-grid; place-items: center; width: 44px; height: 44px;
-      border-radius: 50%; background: var(--blue-deeper); color: var(--white);
-      font-family: var(--font-head); font-weight: 600; font-size: 1.15rem;
-    }
-    .note-content { max-width: 70ch; }
-    .note-content p { font-size: 14.5px; line-height: 1.75; }
-    .note-content ul { font-size: 14.5px; line-height: 1.7; padding-left: 20px; }
-    .note-content li { margin-bottom: 10px; }
     .note-diag {
       background: var(--green-light); border-left: 4px solid var(--green-dark);
-      border-radius: var(--radius-sm); padding: 16px 20px; margin: 22px 0 0;
-      color: var(--text-body); font-size: 14px; line-height: 1.7;
+      border-radius: var(--radius-sm); padding: 18px 22px; margin: 28px 0 0;
+      color: var(--text-body); font-size: 13px; line-height: 1.75; max-width: 860px;
     }
     .note-diag strong { color: var(--green-deeper); }
 
-    .note-close { text-align: center; }
-    .note-one-line {
-      font-family: var(--font-head); font-size: 1.4rem; line-height: 1.55;
-      color: var(--blue-deeper); max-width: 880px; margin: 0 auto 20px;
+    .note-emphasis {
+      border-left: 4px solid var(--blue); background: var(--blue-light);
+      border-radius: var(--radius-sm); padding: 18px 22px; margin: 28px 0 0;
+      color: var(--text-body); font-size: 13px; line-height: 1.75; max-width: 860px;
     }
-    .note-close .note-after { max-width: 640px; margin: 0 auto 26px; font-size: 14.5px; }
+    .note-emphasis em { color: var(--blue-deeper); font-style: italic; }
 
-    @media (max-width: 860px) {
-      .page-hero h1 { font-size: 30px; }
-      .note-grid { grid-template-columns: 1fr; gap: 18px; }
-      .note-rail { display: flex; align-items: center; gap: 14px; }
-      .note-rail h2 { margin: 0; font-size: 21px; }
-      .note-num { width: 36px; height: 36px; font-size: .95rem; flex: 0 0 36px; }
-      .note-one-line { font-size: 1.15rem; }
+    .note-close .section-header { margin-bottom: 24px; }
+    .note-close .note-one-line {
+      font-family: var(--font-head); font-size: 22px; line-height: 1.55; font-weight: 600; /* pull-quote step, between h3(20) and h2(28) */
+      color: var(--blue-deeper); max-width: 860px; margin: 0 auto 20px;
     }
+    .note-close .note-after { max-width: 640px; margin: 0 auto 28px; font-size: 13px; color: var(--text-muted); line-height: 1.8; }
   </style>
 </head>
 <body>
@@ -93,99 +77,121 @@
 
 <section class="page-hero">
   <div class="container">
-    <p class="note-eyebrow">A note for inspectorates</p>
-    <h1>What a modern inspection platform has to get right</h1>
-    <p class="hero-sub">Most systems sold to ministries manage schools. Very few manage the <em>inspection of</em> schools — a different problem, with an evidence trail, an approval chain and a publication obligation at the end of it — and these are the five tests that decide whether a platform is genuinely useful.</p>
+    <span class="pill pill-white">A note for inspectorates</span>
+    <h1>What a modern inspection platform <em>has to get right</em></h1>
+    <p class="hero-sub">Most systems sold to ministries manage schools. Very few manage the <strong>inspection of</strong> schools — a different problem, with an evidence trail, an approval chain and a publication obligation at the end of it — and these are the five tests that decide whether a platform is genuinely useful.</p>
+    <div class="btn-group">
+      <a href="#main-content" class="btn btn-green">Read the five tests</a>
+      <a href="inspectorates.html" class="btn btn-outline-white">For national inspectorates</a>
+    </div>
   </div>
 </section>
 
 <main id="main-content">
 
+<!-- ── TEST 1 ── -->
 <section class="section bg-white">
-  <div class="container note-grid">
-    <div class="note-rail"><span class="note-num" aria-hidden="true">1</span><h2>The approval chain is the hard part — not the visit</h2></div>
-    <div class="note-content">
-    <p>The school visit is the visible work. The difficulty lives afterwards: getting a draft report from a lead inspector, through quality assurance, back to the school for response, through senior sign-off, and out to publication — with a defensible record of who decided what, and when.</p>
-    <p>A platform earns its place here or nowhere, and the test is whether it handles the unhappy path:</p>
-    <ul>
-      <li>A report rejected at QA and sent back for revision, then resubmitted — without losing the original judgements or the audit trail.</li>
-      <li>A school's formal response to findings, captured against the specific judgement it contests — not bolted on as a loose comment.</li>
-      <li>A status that is always unambiguous: any inspector can see exactly where any report sits, and what is blocking it.</li>
-    </ul>
+  <div class="container">
+    <div class="section-header">
+      <span class="pill pill-blue">Test 1 of 5 · The approval chain</span>
+      <h2>The approval chain is the hard part — not the visit.</h2>
+      <p>The school visit is the visible work. The difficulty lives afterwards: getting a draft report from a lead inspector, through quality assurance, back to the school for response, through senior sign-off, and out to publication — with a defensible record of who decided what, and when.</p>
+    </div>
+    <p class="test-lead">A platform earns its place here or nowhere, and the test is whether it handles the <strong>unhappy path</strong>:</p>
+    <div class="grid-3">
+      <div class="card card-blue-top"><h3>Rejection and resubmission</h3><p>A report rejected at QA and sent back for revision, then resubmitted — without losing the original judgements or the audit trail.</p></div>
+      <div class="card card-blue-top"><h3>Response tied to the judgement</h3><p>A school's formal response to findings, captured against the specific judgement it contests — not bolted on as a loose comment.</p></div>
+      <div class="card card-blue-top"><h3>Status that is never in doubt</h3><p>Any inspector can see exactly where any report sits, and what is blocking it — an unambiguous status at every stage.</p></div>
+    </div>
     <div class="note-diag"><strong>A useful diagnostic:</strong> when evaluating any system, ask to see a report rejected and resubmitted. If the demonstration only shows a report moving cleanly forward, it has shown you the easy 20%.</div>
   </div>
-  </div>
 </section>
 
+<!-- ── TEST 2 ── -->
 <section class="section bg-blue-lt">
-  <div class="container note-grid">
-    <div class="note-rail"><span class="note-num" aria-hidden="true">2</span><h2>Every judgement must trace back to its evidence</h2></div>
-    <div class="note-content">
-    <p>A judgement that cannot be traced to the observation behind it is indefensible the moment it is challenged — by a school, a ministry, or an auditor. This is the single most important property of an inspection record, and the easiest to lose when a paper-and-spreadsheet process is digitised carelessly.</p>
-    <ul>
-      <li>Each judgement links to the specific evidence — lesson observations, document review, interviews — that produced it.</li>
-      <li>The link survives editing, re-grading and the passage of years, so a report defended long after publication still holds together.</li>
-      <li>Evidence is captured on site, at the point of observation — not reconstructed from memory days later.</li>
-    </ul>
-  </div>
+  <div class="container">
+    <div class="section-header">
+      <span class="pill pill-green">Test 2 of 5 · Evidence traceability</span>
+      <h2>Every judgement must trace back to its evidence.</h2>
+      <p>A judgement that cannot be traced to the observation behind it is indefensible the moment it is challenged — by a school, a ministry, or an auditor. This is the single most important property of an inspection record, and the easiest to lose when a paper-and-spreadsheet process is digitised carelessly.</p>
+    </div>
+    <div class="grid-3">
+      <div class="card card-green-top"><h3>Judgement linked to evidence</h3><p>Each judgement links to the specific evidence — lesson observations, document review, interviews — that produced it.</p></div>
+      <div class="card card-green-top"><h3>The link survives time</h3><p>It survives editing, re-grading and the passage of years, so a report defended long after publication still holds together.</p></div>
+      <div class="card card-green-top"><h3>Captured on site</h3><p>Evidence is captured at the point of observation — not reconstructed from memory days later.</p></div>
+    </div>
   </div>
 </section>
 
+<!-- ── TEST 3 ── -->
 <section class="section bg-white">
-  <div class="container note-grid">
-    <div class="note-rail"><span class="note-num" aria-hidden="true">3</span><h2>AI can draft. It must never decide.</h2></div>
-    <div class="note-content">
-    <p>AI is genuinely useful in inspection — compiling school context, structuring collected evidence, turning an inspector's notes into well-formed draft prose. It removes administrative weight, and that weight is considerable. But its role has a hard boundary, and a credible platform enforces it in the architecture, not in a policy document:</p>
-    <ul>
-      <li><strong>Every AI-generated output requires named human approval</strong> before it affects any published outcome. Nothing reaches a school automatically.</li>
-      <li>The judgement is always the inspector's. AI structures and drafts; it does not grade.</li>
-      <li><strong>Every AI action is written to an append-only audit log</strong> — so the inspectorate can show, at any later date, what was generated, by what, and who signed it off.</li>
-    </ul>
-    <p>This matters more each year. A government inspectorate must be able to answer, to a minister or an auditor: <em>where was AI used, and who was accountable for the result?</em> A platform that cannot answer that cleanly is a liability, however capable it appears.</p>
-  </div>
+  <div class="container">
+    <div class="section-header">
+      <span class="pill pill-blue">Test 3 of 5 · AI governance</span>
+      <h2>AI can draft. It must never decide.</h2>
+      <p>AI is genuinely useful in inspection — compiling school context, structuring collected evidence, turning an inspector's notes into well-formed draft prose. It removes administrative weight, and that weight is considerable. But its role has a hard boundary, and a credible platform enforces it in the architecture, not in a policy document.</p>
+    </div>
+    <div class="grid-3">
+      <div class="card card-blue-top"><h3>Named human approval</h3><p>Every AI-generated output requires named human approval before it affects any published outcome. Nothing reaches a school automatically.</p></div>
+      <div class="card card-blue-top"><h3>The inspector decides</h3><p>The judgement is always the inspector's. AI structures and drafts; it does not grade.</p></div>
+      <div class="card card-blue-top"><h3>Append-only audit log</h3><p>Every AI action is written to an append-only audit log — what was generated, by what, and who signed it off.</p></div>
+    </div>
+    <div class="note-emphasis">This matters more each year. A government inspectorate must be able to answer, to a minister or an auditor: <em>where was AI used, and who was accountable for the result?</em> A platform that cannot answer that cleanly is a liability, however capable it appears.</div>
   </div>
 </section>
 
+<!-- ── TEST 4 ── -->
 <section class="section bg-green-lt">
-  <div class="container note-grid">
-    <div class="note-rail"><span class="note-num" aria-hidden="true">4</span><h2>Data must be sovereign — and provably segregated</h2></div>
-    <div class="note-content">
-    <p>Inspection data is among the most sensitive an education system holds: named pupils, identifiable staff, judgements with real consequences. Three things are non-negotiable:</p>
-    <ul>
-      <li><strong>Segregation is architectural, not procedural.</strong> Where a platform serves more than one client, one jurisdiction's data must be structurally incapable of informing another's — not merely a rule an administrator is trusted to remember.</li>
-      <li><strong>Residency is the inspectorate's decision</strong> — where the data is hosted, and under whose jurisdiction, is the client's call, not the supplier's.</li>
-      <li><strong>Exit is defined before entry.</strong> Full export in open formats and a documented path out, agreed at the start. Data a supplier can hold hostage was never sovereign.</li>
-    </ul>
-  </div>
+  <div class="container">
+    <div class="section-header">
+      <span class="pill pill-green">Test 4 of 5 · Data sovereignty</span>
+      <h2>Data must be sovereign — and provably segregated.</h2>
+      <p>Inspection data is among the most sensitive an education system holds: named pupils, identifiable staff, judgements with real consequences. Three things are non-negotiable.</p>
+    </div>
+    <div class="grid-3">
+      <div class="card card-blue-top"><h3>Architectural segregation</h3><p>Segregation is architectural, not procedural. Where a platform serves more than one client, one jurisdiction's data must be structurally incapable of informing another's — not merely a rule an administrator is trusted to remember.</p></div>
+      <div class="card card-blue-top"><h3>Residency is your decision</h3><p>Where the data is hosted, and under whose jurisdiction, is the inspectorate's call — not the supplier's.</p></div>
+      <div class="card card-blue-top"><h3>Exit defined before entry</h3><p>Full export in open formats and a documented path out, agreed at the start. Data a supplier can hold hostage was never sovereign.</p></div>
+    </div>
   </div>
 </section>
 
+<!-- ── TEST 5 ── -->
 <section class="section bg-white">
-  <div class="container note-grid">
-    <div class="note-rail"><span class="note-num" aria-hidden="true">5</span><h2>The framework is yours — the platform must bend to it</h2></div>
-    <div class="note-content">
-    <p>Every inspectorate is different: its evaluation areas, its grading scale, its inspection categories, its approval routes, its report structure. A platform hardcoded to one country's model forces every other client to adopt that model — which no serious inspectorate will, nor should.</p>
-    <p>The right question is not <em>"does it match our framework today?"</em> but <em>"when our framework changes — and it will — is that a configuration change, or a redevelopment project?"</em> A framework revision should not stall published output for a year while the system catches up.</p>
-  </div>
+  <div class="container">
+    <div class="section-header">
+      <span class="pill pill-blue">Test 5 of 5 · Framework configurability</span>
+      <h2>The framework is yours — the platform must bend to it.</h2>
+      <p>Every inspectorate is different: its evaluation areas, its grading scale, its inspection categories, its approval routes, its report structure. A platform hardcoded to one country's model forces every other client to adopt that model — which no serious inspectorate will, nor should.</p>
+    </div>
+    <div class="grid-2">
+      <div class="card card-blue-top"><h3>The wrong question</h3><p>&ldquo;Does it match our framework <em>today</em>?&rdquo; — a snapshot that flatters a demo but says nothing about what happens when the framework moves on, as every inspectorate's framework eventually does.</p></div>
+      <div class="card card-green-top"><h3>The right question</h3><p>&ldquo;When our framework changes — and it will — is that a configuration change, or a redevelopment project?&rdquo; A framework revision should not stall published output for a year while the system catches up.</p></div>
+    </div>
   </div>
 </section>
 
-<section class="section bg-blue-lt">
-  <div class="container note-close">
-    <div class="section-header centered"><h2>What good looks like, in one line</h2></div>
+<!-- ── WHAT GOOD LOOKS LIKE ── -->
+<section class="section bg-blue-lt note-close">
+  <div class="container">
+    <div class="section-header centered">
+      <span class="pill pill-green">In one line</span>
+      <h2>What good looks like.</h2>
+    </div>
     <p class="note-one-line">A defensible judgement, traceable to its evidence, moved through an approval chain that survives challenge, assisted by AI that never decides, on data the inspectorate wholly controls, within a framework that is genuinely its own.</p>
     <p class="note-after">None of this is exotic. But it is the part that is hard to build and easy to get wrong — and it is worth testing for directly before committing to any system, this one included.</p>
-    <p class="note-download"><a class="btn btn-green" href="EDUINSPECT360_Inspection_Readiness_Note.pdf">Download as PDF</a></p>
+    <div style="text-align:center;"><a class="btn btn-green" href="EDUINSPECT360_Inspection_Readiness_Note.pdf">Download as PDF</a></div>
   </div>
 </section>
 
+<!-- ── CTA ── -->
 <section class="cta-section">
   <div class="container">
     <h2>Written from experience, not theory</h2>
     <p>Simon Bell developed the national school inspection system for Jamaica's National Education Inspectorate, and earlier worked on Cambridge Education's Ofsted inspection systems. EDUINSPECT360 is the product of both.</p>
-    <div class="btn-group">
+    <div class="btn-group" style="justify-content:center;">
+      <a href="contact.html" class="btn btn-outline-white" style="background:#fff;color:var(--green-deeper);border-color:#fff;">Start a conversation</a>
       <a href="inspectorates.html" class="btn btn-outline-white">For national inspectorates</a>
-      <a href="contact.html" class="btn btn-green">Start a conversation</a>
     </div>
   </div>
 </section>
