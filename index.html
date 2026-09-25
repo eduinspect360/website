@@ -69,6 +69,19 @@
       }
     }
   </script>
+  <!-- VideoObject structured data (promo film) -->
+  <script type="application/ld+json">
+  {
+      "@context": "https://schema.org",
+      "@type": "VideoObject",
+      "name": "EDUINSPECT360 — Inspect more. Write less.",
+      "description": "How EDUINSPECT360 supports every role in the inspection process — with AI that drafts and humans who decide.",
+      "thumbnailUrl": "https://www.eduinspect360.com/media/eduinspect360-film-poster.jpg",
+      "uploadDate": "2026-09-25",
+      "duration": "PT1M36S",
+      "contentUrl": "https://www.eduinspect360.com/media/eduinspect360-film.mp4"
+    }
+  </script>
   <!-- ═══════════════════════════════════════════════════════════ -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -96,6 +109,63 @@
       <a href="contact.html" class="btn btn-green">Request a briefing</a>
       <a href="platform.html" class="btn btn-outline-white">See how it works</a>
       <a href="inspectorates.html" class="btn btn-outline-white">For national inspectorates &rarr;</a>
+      <button type="button" id="hero-watch-film-btn" class="btn btn-outline-white">&#9654; Watch the film (1:36)</button>
+    </div>
+  </div>
+</section>
+
+<!-- ── FILM MODAL (hero "Watch the film" player) ── -->
+<dialog id="film-modal" class="film-dialog" aria-label="EDUINSPECT360 promo film">
+  <div class="film-dialog-inner">
+    <div class="film-dialog-head">
+      <button type="button" id="film-modal-close" class="film-dialog-close" aria-label="Close film">&#10005;</button>
+    </div>
+    <div class="film-video-wrap">
+      <video controls playsinline preload="none" poster="media/eduinspect360-film-poster.jpg">
+        <source src="media/eduinspect360-film.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+  </div>
+</dialog>
+
+<!-- ── FILM (see it in 96 seconds) ── -->
+<section class="section bg-grey" id="film">
+  <div class="container">
+    <div class="section-header centered">
+      <span class="pill pill-blue">See it in 96 seconds</span>
+      <h2>Inspect more. Write less.</h2>
+      <p>How EDUINSPECT360 supports every role in the inspection process — with AI that drafts and humans who decide.</p>
+    </div>
+    <div class="film-embed">
+      <div class="film-video-frame">
+        <video controls playsinline preload="none" poster="media/eduinspect360-film-poster.jpg">
+          <source src="media/eduinspect360-film.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+      </div>
+      <details class="film-transcript">
+        <summary>Read the film transcript</summary>
+        <div class="film-transcript-body">
+          <p class="film-transcript-note">The film has a music soundtrack and no voiceover. On-screen text, in the order it appears:</p>
+          <p>INSPECTION<br>is meant to be about schools.</p>
+          <p>Evidence in notebooks.<br>Judgements in spreadsheets.<br>Reports in Word.<br>Sign-off by email.</p>
+          <p>Too much time writing.<br>Not enough time inspecting.</p>
+          <p>Reports that take days.</p>
+          <p>Inspect more. Write less.</p>
+          <p>Capture evidence once. On site.</p>
+          <p>In minutes — not days.</p>
+          <p>AI drafts. Inspectors decide.<br>Every action logged.</p>
+          <p>Meet your AI support team.<br>Supporting every role. Replacing none.</p>
+          <p>Researcher — Drafts school profiles from your data.<br>Scheduler — Proposes optimal inspection schedules.<br>Report Writer — Drafts reports from inspection evidence.<br>QA — Checks reports for accuracy, tone and consistency.</p>
+          <p>Every judgement, traced to its evidence.</p>
+          <p>An approval chain that survives challenge.</p>
+          <p>See every school. Spot patterns early.</p>
+          <p>The real platform. Built for inspectorates.</p>
+          <p>Your framework. Ofsted EIF 2025 — or your own.<br>Your data. Segregated per client.<br>Your jurisdiction. Configurable data residency.</p>
+          <p>Inspect more. Write less.<br>Book a 45-minute briefing<br>eduinspect360.com</p>
+        </div>
+      </details>
     </div>
   </div>
 </section>
@@ -320,6 +390,7 @@
 </main>
 <div id="footer"></div>
 <script src="nav.js"></script>
+<script src="film.js"></script>
 <div id="cookie-banner" style="position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); width: 90%; max-width: 600px; background: #fff; border: 1px solid #d0e6f0; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); padding: 20px; display: flex; align-items: center; justify-content: space-between; z-index: 10000; gap: 20px;">
   <div style="font-family: 'Poppins', sans-serif; font-size: 13px; color: #3a4a5a; line-height: 1.5;">
     <strong>We value your privacy.</strong><br>
