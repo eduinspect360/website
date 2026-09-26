@@ -11,4 +11,7 @@
   <url><loc>https://www.eduinspect360.com/contact.html</loc><lastmod>2026-03-23</lastmod><changefreq>yearly</changefreq><priority>0.6</priority></url>
   <url><loc>https://www.eduinspect360.com/system-demo.html</loc><lastmod>2026-08-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://www.eduinspect360.com/inspection-readiness.html</loc><lastmod>2026-09-15</lastmod><changefreq>yearly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://www.eduinspect360.com/capability-statement.html</loc><lastmod>2026-09-26</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <!-- book.html deliberately NOT listed here: it carries <meta name="robots" content="noindex"> until the
+       Cal.com booking link (__CAL_LINK__ in book.html) is set. Add it once that TODO is resolved. -->
 </urlset>

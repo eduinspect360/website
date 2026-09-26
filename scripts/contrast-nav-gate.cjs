@@ -6,7 +6,7 @@ let chromium;
 try { ({ chromium } = require('playwright')); }
 catch { ({ chromium } = require('/tmp/ir-uat/node_modules/playwright')); }
 const BASE = process.env.BASE || 'http://localhost:8899';
-const PAGES = ['index.html','platform.html','use-cases.html','inspectorates.html','compliance.html','about.html','resources.html','contact.html','trust.html','governance.html','terms.html','cookies.html','privacy.html','system-demo.html','inspection-readiness.html'];
+const PAGES = ['index.html','platform.html','use-cases.html','inspectorates.html','compliance.html','about.html','resources.html','contact.html','trust.html','governance.html','terms.html','cookies.html','privacy.html','system-demo.html','inspection-readiness.html','book.html','capability-statement.html'];
 const okHost = h => ['localhost','127.0.0.1','[::1]'].includes(h);
 
 // in-page contrast auditor
