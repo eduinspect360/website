@@ -1,4 +1,4 @@
-// nav.js — Balanced version: Original layout with W3C compliant colours
+// nav.js: Balanced version: Original layout with W3C compliant colours
 
 // GOOGLE ANALYTICS 4 INJECTION
 (function() {
@@ -94,16 +94,16 @@ if (footerContainer) {
             </div>
           </div>
           <p style="margin-top:20px; color: var(--blue-mid);">
-            School inspection management software for local authorities, Multi-Academy Trusts, and inspection bodies across the UK and international centres.
+            Inspection management software for national inspectorates and education bodies, configurable to regional, district or institution level.
           </p>
         </div>
         
         <div class="footer-col">
           <h4>Platform</h4>
           <a href="platform.html" style="color: var(--blue-mid);">Features overview</a>
-          <a href="compliance.html" style="color: var(--blue-mid);">Ofsted EIF alignment</a>
-          <a href="use-cases.html" style="color: var(--blue-mid);">For local authorities</a>
-          <a href="use-cases.html" style="color: var(--blue-mid);">For MATs</a>
+          <a href="compliance.html" style="color: var(--blue-mid);">Framework alignment</a>
+          <a href="use-cases.html" style="color: var(--blue-mid);">For regional and district bodies</a>
+          <a href="use-cases.html" style="color: var(--blue-mid);">For institution groups</a>
           <a href="inspectorates.html" style="color: var(--blue-mid);">For national inspectorates</a>
         </div>
 
