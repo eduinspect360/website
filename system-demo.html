@@ -443,7 +443,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-seri
             </div>
           </div>
           <div class="dash-widget">
-            <div class="dw-head"><span>ED AI insights</span><span style="font-size:10px;background:var(--edu-teal-light);color:var(--edu-teal);padding:2px 7px;border-radius:4px">Live</span></div>
+            <div class="dw-head"><span>ED AI insights</span><span style="font-size:10px;background:var(--edu-teal-light);color:var(--edu-teal);padding:2px 7px;border-radius:4px">Sample</span></div>
             <div class="dw-body" style="padding:8px 12px">
               <div class="insight-row"><div class="ins-dot" style="background:var(--edu-danger)"></div><span>3 reports overdue for DEPUTY sign-off: oldest pending 8 days</span></div>
               <div class="insight-row"><div class="ins-dot" style="background:var(--edu-warning)"></div><span>Region 3 unsatisfactory rate 3.2% above cycle average</span></div>
@@ -457,10 +457,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-seri
 
     <!-- SCREEN 4: MOBILE ROIJ -->
     <div class="screen" id="s3">
-      <div class="screen-label">Screen 4 of 6 <span>Mobile ROIJ Observation: PWA offline mode, ED AI phrase suggestions, section progress across 8 indicators</span></div>
+      <div class="screen-label">Screen 4 of 6 <span>Mobile ROIJ Observation: ED AI phrase suggestions, section progress across 8 indicators</span></div>
       <div class="mobile-outer">
         <div class="mobile-frame">
-          <div class="mob-status"><span>09:47</span><span>&#9679; Offline mode</span></div>
+          <div class="mob-status"><span>09:47</span><span></span></div>
           <div class="mob-header">
             <div class="mob-h-label">Daily ROIJ &middot; Observation 3 of 5</div>
             <div class="mob-h-title">Indicator 02: Teaching</div>
@@ -469,7 +469,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-seri
             <div class="prog-label">Section 2 of 8 &middot; 37% complete</div>
           </div>
           <div class="mob-body">
-            <div class="mob-offline-bar"><span>3 entries pending sync</span><button class="mob-sync-btn">Sync now</button></div>
             <div class="mob-tabs">
               <div class="mob-tab done">Details</div>
               <div class="mob-tab done">01 Management</div>
@@ -506,15 +505,13 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-seri
               <button class="mob-btn">Previous</button>
               <button class="mob-btn primary">Save and continue</button>
             </div>
-            <div class="mob-audit"><div class="mob-audit-dot"></div>This entry is logged and will sync when connected</div>
+            <div class="mob-audit"><div class="mob-audit-dot"></div>This entry is logged</div>
           </div>
         </div>
         <div class="mob-notes">
           <div class="mob-note-title">Design decisions: mobile ROIJ</div>
-          <div class="mob-note-card"><div class="mob-note-head">Offline-first architecture</div><div class="mob-note-body">Inspection data, all lookup tables and the AI phrase bank are cached on first load (~300KB). The inspector works throughout the school day without connectivity. The amber sync bar shows pending entries at all times.</div></div>
-          <div class="mob-note-card"><div class="mob-note-head">AI phrase bank (offline)</div><div class="mob-note-body">When a judgement grade is selected, ED AI immediately surfaces bullet points from the offline phrase bank appropriate to that grade and section. Accept adds the text in one tap, with no server call required.</div></div>
           <div class="mob-note-card"><div class="mob-note-head">Section progress &amp; conflict handling</div><div class="mob-note-body">Section tabs show Done (green) or pending state. Inspectors own specific sections. The system prevents two inspectors editing the same section simultaneously, eliminating conflict scenarios by design.</div></div>
-          <div class="mob-note-card"><div class="mob-note-head">Security always visible</div><div class="mob-note-body">&ldquo;This entry is logged&rdquo; on every form makes the audit trail visible, a trust signal and a behavioural governance control. On reconnect, offline entries are submitted using the authenticated session token.</div></div>
+          <div class="mob-note-card"><div class="mob-note-head">Security always visible</div><div class="mob-note-body">&ldquo;This entry is logged&rdquo; on every form makes the audit trail visible, a trust signal and a behavioural governance control.</div></div>
         </div>
       </div>
     </div>
@@ -595,7 +592,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-seri
 
     <!-- SCREEN 6: LANGUAGE SWITCHER -->
     <div class="screen" id="s5">
-      <div class="screen-label">Screen 6 of 6 <span>Language switcher: server-side .NET Resources, integrated nav dropdown, ED AI responds in selected language</span></div>
+      <div class="screen-label">Screen 6 of 6 <span>Language switcher: server-side .NET Resources, integrated nav dropdown, built for multiple languages</span></div>
       <div class="nav-bar">
         <div class="nav-logo"><div class="nav-logo-mark"><img src="icon-white-bg.png" alt=""></div><div class="nav-logo-text">EDUINSPECT360</div></div>
         <div class="nav-items">
