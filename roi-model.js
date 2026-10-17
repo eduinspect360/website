@@ -9,12 +9,12 @@
     qaRateRatio: 392 / 335,   // QA day cost relative to a team inspector day
     draftShare: 18 / 38,      // drafting window as a share of visit to publication (18 of 38 working days)
     cases: {
-      conservative: { sw: 0.15, sq: 0.15, st: 0.10 },
-      expected:     { sw: 0.25, sq: 0.25, st: 0.20 }
+      conservative: { sw: 0.40, sq: 0.30, st: 0.40 },
+      expected:     { sw: 0.70, sq: 0.50, st: 0.60 }
     }
   };
 
-  var DEFAULTS = { insp: 1000, team: 2, write: 0.5, pub: 38, rate: 335, cur: 'GBP', org: '' };
+  var DEFAULTS = { insp: 1000, team: 2, write: 1, site: 2, pub: 38, rate: 335, cur: 'GBP', org: '' };
   var CURRENCIES = ['GBP', 'USD', 'EUR', 'AED', 'THB'];
 
   function num(v, fallback) {
@@ -30,6 +30,7 @@
       insp: num(p.get('insp'), DEFAULTS.insp),
       team: num(p.get('team'), DEFAULTS.team),
       write: num(p.get('write'), DEFAULTS.write),
+      site: num(p.get('site'), DEFAULTS.site),
       pub: num(p.get('pub'), DEFAULTS.pub),
       rate: num(p.get('rate'), DEFAULTS.rate),
       cur: CURRENCIES.indexOf(cur) > -1 ? cur : DEFAULTS.cur,
@@ -46,7 +47,7 @@
       writingDays: dW,
       qaDays: dQ,
       daysBack: days,
-      extraInspections: days / (W + A.qaDays),
+      extraInspections: days / (i.team * i.site + W + A.qaDays),
       value: dW * i.rate + dQ * i.rate * A.qaRateRatio,
       daysSooner: i.pub * A.draftShare * c.st
     };
@@ -58,7 +59,7 @@
 
   function toQuery(i) {
     var p = new URLSearchParams();
-    p.set('insp', i.insp); p.set('team', i.team); p.set('write', i.write);
+    p.set('insp', i.insp); p.set('team', i.team); p.set('write', i.write); p.set('site', i.site);
     p.set('pub', i.pub); p.set('rate', i.rate); p.set('cur', i.cur);
     if (i.org) p.set('org', i.org);
     return p.toString();

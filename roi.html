@@ -127,10 +127,16 @@
           <input type="number" id="team" name="team" inputmode="decimal" min="0" step="0.5" aria-describedby="team-err">
           <span class="roi-err" id="team-err">Enter a number of 0 or more.</span>
         </div>
+        <div class="form-group" data-field="site">
+          <label for="site">On-site days per inspection</label>
+          <input type="number" id="site" name="site" inputmode="decimal" min="0" step="0.5" aria-describedby="site-hint site-err">
+          <span class="roi-hint" id="site-hint">England's graded and ungraded inspections normally last 2 days.<sup><a href="#src-4">4</a></sup></span>
+          <span class="roi-err" id="site-err">Enter a number of 0 or more.</span>
+        </div>
         <div class="form-group" data-field="write">
           <label for="write">Report writing days per inspection, per inspector</label>
           <input type="number" id="write" name="write" inputmode="decimal" min="0" step="0.25" aria-describedby="write-hint write-err">
-          <span class="roi-hint" id="write-hint">Our planning default is 0.5 days each. Use your timesheet data if you hold it.</span>
+          <span class="roi-hint" id="write-hint">Our planning default is 1 day each. Use your timesheet data if you hold it.</span>
           <span class="roi-err" id="write-err">Enter a number of 0 or more.</span>
         </div>
         <div class="form-group" data-field="pub">
@@ -220,15 +226,15 @@
     </div>
 
     <h3>Our planning assumptions</h3>
-    <p>No inspectorate publishes the days it spends writing reports, and no published study measures the saving from AI assisted report drafting. The saving shares below are therefore our planning assumptions. We set them with reference to public sector drafting trials in which staff self-report time saved.<sup><a href="#src-3">3</a></sup> Replace them with your own timesheet data and pilot results.</p>
+    <p>We use planning assumptions you can change. Replace them with your own timesheet data or pilot results. The saving shares below are our planning assumptions. The expected case reflects report drafting moving from days to hours with EDUINSPECT360, with every section reviewed and approved by an inspector. Public sector drafting trials report time saved on drafting tasks too.<sup><a href="#src-3">3</a></sup> Both cases can be replaced with your own pilot data.</p>
     <div class="roi-table-wrap">
       <table class="roi-table">
         <caption class="sr-only">Saving shares used in each case</caption>
         <thead><tr><th scope="col">Share of time saved</th><th scope="col">Conservative</th><th scope="col">Expected</th></tr></thead>
         <tbody>
-          <tr><th scope="row">Report writing (s<sub>w</sub>)</th><td>15%</td><td>25%</td></tr>
-          <tr><th scope="row">Quality assurance review (s<sub>q</sub>)</th><td>15%</td><td>25%</td></tr>
-          <tr><th scope="row">Drafting window (s<sub>t</sub>)</th><td>10%</td><td>20%</td></tr>
+          <tr><th scope="row">Report writing (s<sub>w</sub>)</th><td>40%</td><td>70%</td></tr>
+          <tr><th scope="row">Quality assurance review (s<sub>q</sub>)</th><td>30%</td><td>50%</td></tr>
+          <tr><th scope="row">Drafting window (s<sub>t</sub>)</th><td>40%</td><td>60%</td></tr>
         </tbody>
       </table>
     </div>
@@ -239,20 +245,20 @@
       <li>Report writing days back: <code>D<sub>w</sub> = inspections × W × s<sub>w</sub></code></li>
       <li>Quality assurance days back: <code>D<sub>q</sub> = inspections × 1/3 day × s<sub>q</sub></code>. A quality assurance day covers about 3 reports.<sup><a href="#src-2">2</a></sup></li>
       <li>Inspector days back to classrooms: <code>D<sub>w</sub> + D<sub>q</sub></code></li>
-      <li>Extra inspections possible: <code>(D<sub>w</sub> + D<sub>q</sub>) ÷ (W + 1/3)</code></li>
+      <li>Extra inspections possible: <code>(D<sub>w</sub> + D<sub>q</sub>) ÷ (inspectors × on-site days + W + 1/3)</code>. The divisor is the full inspector time one inspection takes: on site, writing and review.<sup><a href="#src-4">4</a></sup></li>
       <li>Value of time redeployed: <code>D<sub>w</sub> × day cost + D<sub>q</sub> × quality assurance day cost</code>. The quality assurance day cost is your day cost × 1.17, the ratio of the published rates of 392 and 335.<sup><a href="#src-2">2</a></sup></li>
       <li>Working days sooner to published results: <code>days from visit to published × (18 ÷ 38) × s<sub>t</sub></code>. The drafting window is 18 of the 38 working days in England's published timeline.<sup><a href="#src-1">1</a>, <a href="#src-4">4</a></sup></li>
     </ol>
 
     <h3>Worked example with the defaults</h3>
-    <p>1,000 inspections, 2 inspectors each writing for 0.5 days (W = 1.0 day), a day cost of £335 and 38 working days to publication. In the expected case, D<sub>w</sub> is 250 days and D<sub>q</sub> is 83 days, so 333 inspector days return to classrooms, equal to 250 extra inspections, worth about £116,000 a year, with reports published 3.6 working days sooner.</p>
+    <p>1,000 inspections, 2 inspectors each on site for 2 days and writing for 1 day (W = 2 days), a day cost of £335 and 38 working days to publication. In the expected case, D<sub>w</sub> is 1,400 days and D<sub>q</sub> is 167 days, so 1,567 inspector days return to classrooms. One inspection takes 2 × 2 + 2 + 1/3 = 6.33 inspector days, so that is 247 extra inspections, worth about £534,000 a year, with reports published 10.8 working days sooner.</p>
 
     <h3>Sources</h3>
     <ol class="roi-sources">
       <li id="src-1">Ofsted, methodology for state-funded schools inspections and outcomes as at 31 December 2021, GOV.UK: reports are published "within 38 working days of the end of the inspection".</li>
       <li id="src-2">Ofsted, Payments for contracted Ofsted inspectors, GOV.UK, updated 26 June 2025: £335 a day for a team inspector and £392 a day for quality assurance, where a full day covers the quality assurance of an average of 3 inspection outputs.</li>
       <li id="src-3">UK Government, "Landmark government trial shows AI could save civil servants nearly 2 weeks a year", GOV.UK, 2 June 2025: an average of 26 minutes a day saved across more than 20,000 civil servants, self-reported.</li>
-      <li id="src-4">Ofsted, School inspection handbook for September 2023 (now withdrawn): the draft report goes to the school within 18 working days of the end of the inspection.</li>
+      <li id="src-4">Ofsted, School inspection handbook for September 2023 (now withdrawn): graded and ungraded inspections "normally last 2 days", and the draft report goes to the school within 18 working days of the end of the inspection.</li>
     </ol>
   </div>
 </section>
@@ -277,7 +283,7 @@
 (function () {
   'use strict';
   var R = window.ROI, F = R.fmt;
-  var ids = ['insp', 'team', 'write', 'pub', 'rate'];
+  var ids = ['insp', 'team', 'site', 'write', 'pub', 'rate'];
   var el = {}; ids.concat(['cur']).forEach(function (k) { el[k] = document.getElementById(k); });
   var org = '';
   var CANON = 'https://www.eduinspect360.com/roi.html';
