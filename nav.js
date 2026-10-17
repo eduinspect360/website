@@ -111,7 +111,7 @@ if (footerContainer) {
           <h4>Company</h4>
           <a href="about.html" style="color: var(--blue-mid);">About us</a>
           <a href="resources.html" style="color: var(--blue-mid);">Resources</a>
-          <a href="roi.html" style="color: var(--blue-mid);">Days Back to Classrooms</a>
+          <a href="roi.html" style="color: var(--blue-mid);">Days Back for Inspection</a>
           <a href="business-case.html" style="color: var(--blue-mid);">Business case in a page</a>
           <a href="contact.html" style="color: var(--blue-mid);">Contact us</a>
         </div>
