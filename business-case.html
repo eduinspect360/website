@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Business Case in a Page: Inspection Platform | EDUINSPECT360</title>
+  <meta name="description" content="A business case in a page for an inspection platform: a 5 line executive summary, a cost benefit table you complete, and ready to paste paragraphs for strategic need, value for money, delivery and assurance.">
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="EDUINSPECT360 Limited">
+  <link rel="canonical" href="https://www.eduinspect360.com/business-case.html">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Business Case in a Page: Inspection Platform | EDUINSPECT360">
+  <meta property="og:description" content="A 2 page business case template for an inspection platform, with a cost benefit table you complete and paragraphs you can paste into your submission.">
+  <meta property="og:url" content="https://www.eduinspect360.com/business-case.html">
+  <meta property="og:site_name" content="EDUINSPECT360">
+  <meta property="og:image" content="https://www.eduinspect360.com/icon-white-bg.png">
+  <meta property="og:locale" content="en_GB">
+  <meta name="twitter:card" content="summary">
+
+  <link rel="icon" type="image/png" href="icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Sora:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* page-scoped, design-system tokens only */
+    .bc-wrap { max-width: 900px; margin: 0 auto; padding: 0 32px; }
+    .bc-actions { display: flex; gap: 12px; flex-wrap: wrap; margin: 28px 0 8px; }
+    .bc-head { border-bottom: 3px solid var(--blue); padding-bottom: 14px; margin-bottom: 20px; }
+    .bc-head h1 { font-size: 28px; margin-bottom: 6px; }
+    .bc-head p { color: var(--text-muted); font-size: 13px; max-width: 700px; }
+    .bc-sec { margin-bottom: 26px; }
+    .bc-sec h2 { font-size: 17px; margin-bottom: 10px; color: var(--blue-dark); }
+    .bc-sec p, .bc-sec li { font-size: 13px; line-height: 1.75; color: var(--text-body); }
+    .bc-summary { list-style: decimal; padding-left: 22px; }
+    .bc-summary li { margin-bottom: 6px; }
+    .bc-summary strong { color: var(--text-dark); }
+    .bc-box { background: var(--blue-light); border-left: 4px solid var(--blue); border-radius: var(--radius-sm); padding: 14px 18px; font-size: 12px; color: var(--text-body); margin-bottom: 14px; }
+
+    .bc-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+    .bc-table th, .bc-table td { padding: 8px 10px; border-bottom: 1px solid var(--border); text-align: left; vertical-align: middle; color: var(--text-body); }
+    .bc-table thead th { background: var(--blue-deeper); color: #fff; font-weight: 600; }
+    .bc-table tr.grp th { background: var(--grey-light); color: var(--text-dark); font-weight: 700; font-size: 11px; text-transform: uppercase; letter-spacing: 0.4px; }
+    .bc-table tbody th[scope="row"] { font-weight: 500; color: var(--text-dark); }
+    .bc-table tr.tot th, .bc-table tr.tot td { font-weight: 700; color: var(--text-dark); background: var(--green-light); }
+    .bc-table input { width: 100%; min-width: 0; padding: 7px 8px; min-height: 40px; border: 1px solid var(--blue-mid); border-radius: var(--radius-sm); font: inherit; font-size: 13px; color: var(--text-dark); background: #fff; }
+    .bc-table input:focus-visible, .bc-actions .btn:focus-visible, .bc-copy-btn:focus-visible { outline: 3px solid var(--blue); outline-offset: 2px; }
+    .bc-table .basis { font-size: 11px; color: var(--text-muted); }
+    .bc-cur { font-weight: 400; opacity: 0.9; }
+
+    .bc-copy { border: 1px solid var(--border); border-radius: var(--radius-md); padding: 18px 22px; background: #fff; }
+    .bc-copy h3 { font-size: 13px; color: var(--blue-dark); margin: 12px 0 2px; }
+    .bc-copy h3:first-of-type { margin-top: 0; }
+    .bc-copy p { font-size: 12.5px; line-height: 1.7; margin: 0; }
+    .bc-copy-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 10px; }
+    .bc-copy-btn { background: var(--green-deeper); color: #fff; border: 1px solid var(--green-deeper); border-radius: var(--radius-sm); padding: 10px 18px; min-height: 44px; font-family: var(--font-head); font-size: 12px; font-weight: 700; cursor: pointer; }
+    .bc-copy-btn:hover { background: #3f4d24; }
+    .bc-copied { font-size: 11px; color: var(--green-deeper); font-weight: 600; }
+
+    .bc-foot { font-size: 10.5px; color: var(--text-muted); padding-left: 18px; list-style: decimal; line-height: 1.55; }
+    .bc-foot li { font-size: 10.5px; color: var(--text-muted); margin-bottom: 3px; }
+    .bc-note { font-size: 11px; color: var(--text-muted); margin-top: 8px; }
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+    .bc-print-only { display: none; }
+    .bc-link { color: var(--blue); font-weight: 600; text-decoration: underline; text-underline-offset: 2px; }
+
+    @media (max-width: 640px) {
+      .bc-wrap { padding: 0 16px; }
+      .bc-head h1 { font-size: 24px; }
+      .bc-actions .btn { width: 100%; justify-content: center; text-align: center; }
+      .bc-table thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0); }
+      .bc-table, .bc-table tbody, .bc-table tr, .bc-table th, .bc-table td { display: block; width: 100%; }
+      .bc-table tr { border: 1px solid var(--border); border-radius: var(--radius-sm); margin-bottom: 10px; padding: 8px 10px; }
+      .bc-table tr.grp { border: none; padding: 0; margin: 14px 0 6px; }
+      .bc-table th, .bc-table td { border: none; padding: 4px 0; }
+      .bc-table td[data-label]::before { content: attr(data-label); display: block; font-size: 11px; font-weight: 700; color: var(--text-dark); margin-bottom: 2px; }
+    }
+
+    /* Print: 2 A4 pages. Used to build EDUINSPECT360_Business_Case.pdf */
+    @media print {
+      #navbar, #footer, .skip-to-main, .bc-actions, .bc-copy-btn, .bc-copied, .bc-web-only, .bc-note-web { display: none !important; }
+      .bc-print-only { display: block; }
+      @page { size: A4; margin: 12mm 14mm; }
+      html, body { background: #fff; }
+      body { font-size: 11px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .section { padding: 0 !important; }
+      .bc-wrap { max-width: 100%; padding: 0; }
+      .bc-head { margin-bottom: 10px; padding-bottom: 8px; }
+      .bc-head h1 { font-size: 24px; margin-bottom: 4px; }
+      .bc-head p { font-size: 11.5px; }
+      .bc-sec { margin-bottom: 18px; }
+      .bc-sec h2 { font-size: 14px; margin-bottom: 5px; break-after: avoid; }
+      .bc-sec p, .bc-sec li { font-size: 11.5px; line-height: 1.6; }
+      .bc-summary li { margin-bottom: 5px; }
+      .bc-table { font-size: 10.5px; }
+      .bc-table th, .bc-table td { padding: 5px 7px; }
+      .bc-table input { border: none; border-bottom: 1px solid var(--border); border-radius: 0; padding: 0 2px; min-height: 0; font-size: 10.5px; background: transparent; }
+      .bc-table tr, .bc-copy h3, .bc-copy p { break-inside: avoid; }
+      .bc-table tr.grp { break-after: avoid; }
+      .bc-copy { padding: 12px 16px; }
+      .bc-copy h3 { font-size: 12px; margin: 10px 0 2px; break-after: avoid; }
+      .bc-copy p { font-size: 11px; line-height: 1.6; }
+      .bc-box { font-size: 10.5px; padding: 8px 12px; margin-bottom: 10px; }
+      .bc-foot, .bc-foot li { font-size: 9.5px; line-height: 1.5; }
+      .bc-sec p.bc-note { font-size: 10px; }
+      .bc-pagebreak { break-before: page; }
+      .bc-link { color: var(--text-dark); text-decoration: none; }
+    }
+  </style>
+</head>
+<body>
+
+<a href="#main-content" class="skip-to-main">Skip to main content</a>
+<div id="navbar"></div>
+
+<main id="main-content">
+<section class="section bg-white" style="padding-top:40px;">
+  <div class="bc-wrap">
+
+    <div class="bc-actions">
+      <a href="EDUINSPECT360_Business_Case.pdf" class="btn btn-green">Download as PDF</a>
+      <a href="roi.html" class="btn btn-outline-blue" id="calc-link">Calculate your figures</a>
+      <a href="book.html" class="btn btn-outline-blue">Book a 45-minute briefing</a>
+    </div>
+
+    <header class="bc-head">
+      <h1>Business case in a page</h1>
+      <p>Days back to classrooms, and findings to establishments sooner. A template for inspectorates and education bodies. Complete the table with your own figures and paste the paragraphs into your submission. <span id="prepared"></span></p>
+    </header>
+
+    <section class="bc-sec" aria-labelledby="exec-h">
+      <h2 id="exec-h">Executive summary</h2>
+      <ol class="bc-summary">
+        <li><strong>The need.</strong> Report writing takes inspectors out of classrooms and delays findings reaching the establishments inspected.</li>
+        <li><strong>The change.</strong> EDUINSPECT360 drafts each report from the evidence inspectors capture, and inspectors review, edit and approve every section.</li>
+        <li><strong>The days.</strong> At <span data-bc="insp">1,000</span> inspections a year, the planning range is <span data-bc="daysC">900</span> to <span data-bc="daysE">1,567</span> inspector days a year redeployed to classrooms.</li>
+        <li><strong>The speed.</strong> Reports reach establishments <span data-bc="soonC">7.2</span> to <span data-bc="soonE">10.8</span> working days sooner, from a published expectation of 38 working days.<sup>1</sup></li>
+        <li><strong>The control.</strong> Judgements stay with inspectors, every AI action is logged, and the next step is a 45-minute briefing and a pilot scoped to your framework.</li>
+      </ol>
+    </section>
+
+    <section class="bc-sec" aria-labelledby="cb-h">
+      <h2 id="cb-h">Cost benefit table <span class="bc-cur" id="cb-cur">(GBP)</span></h2>
+      <div class="bc-box bc-web-only">Benefit figures start from our planning defaults. Overwrite any cell with your own numbers. Enter your costs from your quote. <a class="bc-link" href="roi.html" id="calc-link2">Calculate your figures</a> to set the benefit rows from your own inspection volumes.</div>
+      <div class="bc-box bc-print-only">Benefit figures show our planning defaults for 1,000 inspections a year. Replace them with your own figures. Enter your costs from your quote. Calculate your figures at eduinspect360.com/roi.html.</div>
+      <table class="bc-table" id="cb-table">
+        <caption class="sr-only">Cost benefit table, conservative and expected cases</caption>
+        <thead>
+          <tr><th scope="col">Item</th><th scope="col">Conservative</th><th scope="col">Expected</th><th scope="col">Basis</th></tr>
+        </thead>
+        <tbody>
+          <tr class="grp"><th scope="colgroup" colspan="4">Benefits per year</th></tr>
+          <tr><th scope="row">Inspector days redeployed to classrooms</th>
+            <td data-label="Conservative"><input type="text" inputmode="decimal" id="b-days-c" aria-label="Inspector days redeployed, conservative"></td>
+            <td data-label="Expected"><input type="text" inputmode="decimal" id="b-days-e" aria-label="Inspector days redeployed, expected"></td>
+            <td class="basis">Writing and review time saved</td></tr>
+          <tr><th scope="row">Extra inspections possible, same team</th>
+            <td data-label="Conservative"><input type="text" inputmode="decimal" id="b-ins-c" aria-label="Extra inspections, conservative"></td>
+            <td data-label="Expected"><input type="text" inputmode="decimal" id="b-ins-e" aria-label="Extra inspections, expected"></td>
+            <td class="basis">Days back ÷ inspector days per inspection</td></tr>
+          <tr><th scope="row">Working days sooner to published results</th>
+            <td data-label="Conservative"><input type="text" inputmode="decimal" id="b-soon-c" aria-label="Working days sooner, conservative"></td>
+            <td data-label="Expected"><input type="text" inputmode="decimal" id="b-soon-e" aria-label="Working days sooner, expected"></td>
+            <td class="basis">Drafting window compressed</td></tr>
+          <tr><th scope="row">Value of inspector time redeployed</th>
+            <td data-label="Conservative"><input type="text" inputmode="decimal" id="b-val-c" aria-label="Value of time redeployed, conservative"></td>
+            <td data-label="Expected"><input type="text" inputmode="decimal" id="b-val-e" aria-label="Value of time redeployed, expected"></td>
+            <td class="basis">Days × your day cost</td></tr>
+          <tr class="grp"><th scope="colgroup" colspan="4">Costs in year 1</th></tr>
+          <tr><th scope="row">Platform subscription</th>
+            <td data-label="Conservative"><input type="text" inputmode="decimal" class="cost" id="c1-c" aria-label="Platform subscription, conservative"></td>
+            <td data-label="Expected"><input type="text" inputmode="decimal" class="cost" id="c1-e" aria-label="Platform subscription, expected"></td>
+            <td class="basis">From your quote</td></tr>
+          <tr><th scope="row">Implementation and configuration</th>
+            <td data-label="Conservative"><input type="text" inputmode="decimal" class="cost" id="c2-c" aria-label="Implementation, conservative"></td>
+            <td data-label="Expected"><input type="text" inputmode="decimal" class="cost" id="c2-e" aria-label="Implementation, expected"></td>
+            <td class="basis">From your quote</td></tr>
+          <tr><th scope="row">Training and change support</th>
+            <td data-label="Conservative"><input type="text" inputmode="decimal" class="cost" id="c3-c" aria-label="Training, conservative"></td>
+            <td data-label="Expected"><input type="text" inputmode="decimal" class="cost" id="c3-e" aria-label="Training, expected"></td>
+            <td class="basis">From your quote</td></tr>
+          <tr><th scope="row">Internal project time</th>
+            <td data-label="Conservative"><input type="text" inputmode="decimal" class="cost" id="c4-c" aria-label="Internal project time, conservative"></td>
+            <td data-label="Expected"><input type="text" inputmode="decimal" class="cost" id="c4-e" aria-label="Internal project time, expected"></td>
+            <td class="basis">Your estimate</td></tr>
+          <tr class="tot"><th scope="row">Total costs, year 1</th>
+            <td data-label="Conservative" id="t-cost-c">0</td><td data-label="Expected" id="t-cost-e">0</td><td class="basis">Sum of costs</td></tr>
+          <tr class="tot"><th scope="row">Net benefit, year 1</th>
+            <td data-label="Conservative" id="t-net-c">0</td><td data-label="Expected" id="t-net-e">0</td><td class="basis">Value of time redeployed less total costs</td></tr>
+        </tbody>
+      </table>
+      <p class="bc-note">Only direct inspector report writing and quality assurance time is counted. Travel, overheads, school side time and the value of earlier publication are not included. The value is time redeployed to classroom work, not a staffing reduction.</p>
+    </section>
+
+    <section class="bc-sec bc-pagebreak" aria-labelledby="copy-h">
+      <div class="bc-copy-head">
+        <h2 id="copy-h" style="margin:0;">Copy into your submission</h2>
+        <span><span class="bc-copied" id="copied" role="status"></span> <button type="button" class="bc-copy-btn" id="copy-btn">Copy all text</button></span>
+      </div>
+      <div class="bc-copy" id="copy-text">
+        <h3>Strategic need</h3>
+        <p>[Organisation] completes <span data-bc="insp">1,000</span> inspections a year. Each ends with a written report, and that writing time is inspector time not spent in classrooms. A published expectation in England is to publish reports within 38 working days of the end of an inspection,<sup>1</sup> and research published by the FDA in January 2026 reports that 98% of HM Inspectors work beyond their contracted hours.<sup>2</sup> [Organisation] needs to return inspector time to observation and get findings to establishments sooner, without weakening professional judgement.</p>
+        <h3>Value for money</h3>
+        <p>On planning assumptions that [Organisation] can replace with its own timesheet data, the platform returns <span data-bc="daysC">900</span> to <span data-bc="daysE">1,567</span> inspector days a year to classrooms. That is <span data-bc="insC">142</span> to <span data-bc="insE">247</span> extra inspections with the same team, valued at <span data-bc="valC">£307,200</span> to <span data-bc="valE">£534,333</span> a year at a day cost of <span data-bc="rate">£335</span>. Only direct report writing and quality assurance time is counted. In England a contracted team inspector day costs £335 and a quality assurance day £392.<sup>3</sup> Costs are set out in the table above.</p>
+        <h3>Delivery</h3>
+        <p>EDUINSPECT360 is configured to [Organisation]'s own inspection framework, grading scale and report structure, so a framework change is a configuration change and not a redevelopment project. Delivery starts with a 45-minute briefing against the framework, followed by a pilot scoped to a defined set of inspections, with benefits measured against [Organisation]'s own baseline.</p>
+        <h3>Assurance</h3>
+        <p>A named inspector reviews and approves every AI drafted section before it affects any outcome, and judgements remain the inspector's. Every AI action is written to an append-only audit log. Data is segregated per client and [Organisation] decides where it is hosted. This matches the human oversight Ofsted publishes for its own use of AI.<sup>4</sup> EDUINSPECT360 is aligned to ISO 27001, SOC 2 Type II, Cyber Essentials Plus and WCAG 2.1 AA.</p>
+      </div>
+    </section>
+
+    <section class="bc-sec" aria-labelledby="src-h">
+      <h2 id="src-h">Sources</h2>
+      <ol class="bc-foot">
+        <li>Ofsted, methodology for state-funded schools inspections and outcomes as at 31 December 2021, GOV.UK: reports are published "within 38 working days of the end of the inspection".</li>
+        <li>FDA, news release on research into HM Inspectors working beyond their contracted hours, 22 January 2026: 98 per cent work beyond their contracted hours.</li>
+        <li>Ofsted, Payments for contracted Ofsted inspectors, GOV.UK, updated 26 June 2025: £335 a day for a team inspector and £392 a day for quality assurance, covering an average of 3 inspection outputs.</li>
+        <li>Ofsted, Ofsted's use of AI, GOV.UK, updated 21 October 2025: meaningful human control of AI processes and appropriate human oversight.</li>
+      </ol>
+      <p class="bc-note">Saving shares are EDUINSPECT360 planning assumptions: conservative 40% of writing time, 30% of review time and 40% of the drafting window, expected 70%, 50% and 60%, reflecting drafting moving from days to hours. Both cases can be replaced with your own pilot data. The full method is at eduinspect360.com/roi.html.</p>
+    </section>
+
+  </div>
+</section>
+</main>
+
+<div id="footer"></div>
+<script src="nav.js"></script>
+<script src="roi-model.js"></script>
+<script>
+(function () {
+  'use strict';
+  var R = window.ROI, F = R.fmt;
+  var p = R.parseParams(window.location.search);
+  var o = R.calc(p), c = o.conservative, e = o.expected;
+
+  function $(id) { return document.getElementById(id); }
+  function fill(key, txt) { document.querySelectorAll('[data-bc="' + key + '"]').forEach(function (n) { n.textContent = txt; }); }
+
+  fill('insp', F.whole(p.insp));
+  fill('daysC', F.whole(c.daysBack)); fill('daysE', F.whole(e.daysBack));
+  fill('insC', F.whole(c.extraInspections)); fill('insE', F.whole(e.extraInspections));
+  fill('valC', F.money(c.value, p.cur)); fill('valE', F.money(e.value, p.cur));
+  fill('soonC', F.one(c.daysSooner)); fill('soonE', F.one(e.daysSooner));
+  fill('rate', F.money(p.rate, p.cur));
+  $('cb-cur').textContent = '(' + p.cur + ')';
+  if (p.org) {
+    $('prepared').textContent = 'Prepared for ' + p.org + '.';
+    document.querySelectorAll('#copy-text').forEach(function (n) {
+      n.innerHTML = n.innerHTML.replace(/\[Organisation\]/g, function () { return '<span data-org></span>'; });
+      n.querySelectorAll('[data-org]').forEach(function (s) { s.textContent = p.org; });
+    });
+  }
+
+  $('b-days-c').value = F.whole(c.daysBack);        $('b-days-e').value = F.whole(e.daysBack);
+  $('b-ins-c').value  = F.whole(c.extraInspections); $('b-ins-e').value  = F.whole(e.extraInspections);
+  $('b-soon-c').value = F.one(c.daysSooner);         $('b-soon-e').value = F.one(e.daysSooner);
+  $('b-val-c').value  = F.whole(c.value);          $('b-val-e').value  = F.whole(e.value);
+
+  var q = R.toQuery(p);
+  $('calc-link').setAttribute('href', 'roi.html?' + q);
+  $('calc-link2').setAttribute('href', 'roi.html?' + q);
+
+  function n(id) { var v = parseFloat(String($(id).value).replace(/[^0-9.\-]/g, '')); return isFinite(v) ? v : 0; }
+  function totals() {
+    ['c', 'e'].forEach(function (k) {
+      var cost = 0;
+      for (var i = 1; i <= 4; i++) cost += n('c' + i + '-' + k);
+      $('t-cost-' + k).textContent = F.money(cost, p.cur);
+      $('t-net-' + k).textContent = F.money(n('b-val-' + k) - cost, p.cur);
+    });
+  }
+  document.querySelectorAll('#cb-table input').forEach(function (i) { i.addEventListener('input', totals); });
+  totals();
+
+  $('copy-btn').addEventListener('click', function () {
+    var text = $('copy-text').innerText.replace(/\n{3,}/g, '\n\n');
+    function done(msg) { $('copied').textContent = msg; setTimeout(function () { $('copied').textContent = ''; }, 3000); }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(function () { done('Copied'); }, function () { sel(); });
+    } else { sel(); }
+    function sel() {
+      var r = document.createRange(); r.selectNodeContents($('copy-text'));
+      var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+      done('Selected. Press Ctrl+C or Cmd+C to copy');
+    }
+  });
+})();
+</script>
+
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "903b300fd7564a74a16041c5b19b96ee"}'></script>
+</body>
+</html>

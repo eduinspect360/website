@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Days Back to Classrooms: Inspection ROI Calculator | EDUINSPECT360</title>
+  <meta name="description" content="Work out how many inspector days return to classrooms, how many extra inspections your team can complete and how many working days sooner reports are published. Runs in your browser. Nothing you enter is sent anywhere.">
+  <meta name="keywords" content="inspection ROI calculator, inspector time saved, report writing time inspection, inspection report publication time, education inspectorate business case">
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="EDUINSPECT360 Limited">
+  <link rel="canonical" href="https://www.eduinspect360.com/roi.html">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Days Back to Classrooms: Inspection ROI Calculator | EDUINSPECT360">
+  <meta property="og:description" content="How many days could your inspectors get back? Calculate in 1 minute. Runs in your browser. Nothing you enter is sent anywhere.">
+  <meta property="og:url" content="https://www.eduinspect360.com/roi.html">
+  <meta property="og:site_name" content="EDUINSPECT360">
+  <meta property="og:image" content="https://www.eduinspect360.com/icon-white-bg.png">
+  <meta property="og:image:width" content="800">
+  <meta property="og:image:height" content="800">
+  <meta property="og:locale" content="en_GB">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Days Back to Classrooms: Inspection ROI Calculator | EDUINSPECT360">
+  <meta name="twitter:description" content="How many days could your inspectors get back? Calculate in 1 minute.">
+  <meta name="twitter:image" content="https://www.eduinspect360.com/icon-white-bg.png">
+
+  <link rel="icon" type="image/png" href="icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Sora:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* page-scoped, design-system tokens only */
+    .roi-grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 32px; align-items: start; }
+    .roi-panel { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 28px; box-shadow: var(--shadow-sm); }
+    .roi-panel h2 { font-size: 20px; margin-bottom: 6px; }
+    .roi-panel > p { color: var(--text-muted); font-size: 12px; margin-bottom: 20px; }
+    .roi-panel .form-group input, .roi-panel .form-group select { min-height: 44px; font-size: 14px; background: #fff; }
+    .roi-panel .form-group input:focus-visible, .roi-panel .form-group select:focus-visible,
+    .roi-link:focus-visible, .btn:focus-visible { outline: 3px solid var(--blue); outline-offset: 2px; }
+    .roi-hint { display: block; font-size: 11px; color: var(--text-muted); margin-top: 4px; line-height: 1.5; }
+    .roi-err { display: none; font-size: 11px; color: #9b1c1c; margin-top: 4px; font-weight: 600; }
+    .form-group.invalid .roi-err { display: block; }
+    .form-group.invalid input { border-color: #9b1c1c; }
+
+    .roi-prepared { display: none; margin-bottom: 18px; }
+    .roi-prepared.show { display: inline-block; }
+
+    .roi-results { display: grid; grid-template-columns: 1fr; gap: 14px; }
+    .roi-stat { background: var(--white); border: 1px solid var(--border); border-left: 4px solid var(--green); border-radius: var(--radius-md); padding: 18px 22px; box-shadow: var(--shadow-sm); }
+    .roi-stat h3 { font-size: 13px; font-weight: 700; color: var(--text-dark); margin-bottom: 10px; display: flex; gap: 10px; align-items: baseline; }
+    .roi-stat-n { font-family: var(--font-head); font-weight: 700; color: var(--text-dark); line-height: 1.1; }
+    .roi-cases { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .roi-case-label { display: block; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-muted); margin-bottom: 2px; }
+    .roi-case-exp .roi-case-label { color: var(--green-deeper); }
+    .roi-case-exp .roi-stat-n { font-size: 34px; color: var(--green-deeper); }
+    .roi-case-con .roi-stat-n { font-size: 24px; color: var(--blue-dark); }
+    .roi-case-con { padding-top: 8px; }
+    .roi-unit { display: block; font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+    .roi-rank { display: inline-flex; width: 22px; height: 22px; border-radius: 50%; background: var(--green-light); color: var(--green-deeper); font-size: 11px; font-weight: 700; align-items: center; justify-content: center; border: 1px solid var(--green-mid); flex-shrink: 0; }
+
+    .roi-actions { margin-top: 22px; }
+    .roi-note { font-size: 11px; color: var(--text-muted); margin-top: 14px; line-height: 1.6; }
+    .roi-link { color: var(--blue); font-weight: 600; text-decoration: underline; text-underline-offset: 2px; }
+
+    .roi-method h3 { font-size: 16px; margin: 26px 0 10px; }
+    .roi-method p, .roi-method li { font-size: 13px; color: var(--text-body); line-height: 1.8; max-width: 820px; }
+    .roi-method ol { padding-left: 22px; list-style: decimal; }
+    .roi-method ol li { margin-bottom: 8px; }
+    .roi-method code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px; background: var(--grey-light); padding: 2px 6px; border-radius: 4px; color: var(--text-dark); overflow-wrap: anywhere; }
+    .roi-table-wrap { overflow-x: auto; max-width: 560px; margin: 8px 0 4px; }
+    .roi-table { border-collapse: collapse; width: 100%; font-size: 12px; }
+    .roi-table th, .roi-table td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--border); color: var(--text-body); }
+    .roi-table th { color: var(--text-dark); font-weight: 700; background: var(--grey-light); }
+    .roi-sources { font-size: 11px; color: var(--text-muted); padding-left: 20px; list-style: decimal; line-height: 1.7; max-width: 820px; }
+    .roi-sources li { margin-bottom: 4px; font-size: 11px; color: var(--text-muted); }
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+
+    @media (max-width: 960px) { .roi-grid { grid-template-columns: 1fr; } }
+    @media (max-width: 640px) {
+      .roi-panel { padding: 20px 16px; }
+      .roi-stat { padding: 16px; }
+      .roi-case-exp .roi-stat-n { font-size: 30px; }
+      .roi-case-con .roi-stat-n { font-size: 22px; }
+      .roi-actions .btn { width: 100%; justify-content: center; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<a href="#main-content" class="skip-to-main">Skip to main content</a>
+<div id="navbar"></div>
+
+<section class="page-hero">
+  <div class="container">
+    <span class="pill pill-white">Inspection ROI calculator</span>
+    <h1>Days Back to <em>Classrooms</em></h1>
+    <p class="hero-sub">Every day an inspector spends writing is a day not spent watching teaching and learning. EDUINSPECT360 returns those days to classrooms and gets findings to establishments sooner. Enter your numbers and see the difference in 1 minute.</p>
+    <div class="btn-group">
+      <a href="#calculator" class="btn btn-green">Calculate your days</a>
+      <a href="business-case.html" class="btn btn-outline-white" id="hero-bc-link">Business case in a page</a>
+    </div>
+  </div>
+</section>
+
+<main id="main-content">
+
+<section class="section bg-white" id="calculator">
+  <div class="container">
+    <span class="pill pill-green roi-prepared" id="prepared" role="status"></span>
+
+    <div class="roi-grid">
+
+      <!-- INPUTS -->
+      <form class="roi-panel" id="roi-form" novalidate autocomplete="off" aria-labelledby="inputs-h">
+        <h2 id="inputs-h">Your inspections</h2>
+        <p>The figures start with planning defaults, so a result shows straight away. Replace them with your own.</p>
+
+        <div class="form-group" data-field="insp">
+          <label for="insp">Inspections per year</label>
+          <input type="number" id="insp" name="insp" inputmode="numeric" min="0" step="1" aria-describedby="insp-err">
+          <span class="roi-err" id="insp-err">Enter a number of 0 or more.</span>
+        </div>
+        <div class="form-group" data-field="team">
+          <label for="team">Inspectors per inspection</label>
+          <input type="number" id="team" name="team" inputmode="decimal" min="0" step="0.5" aria-describedby="team-err">
+          <span class="roi-err" id="team-err">Enter a number of 0 or more.</span>
+        </div>
+        <div class="form-group" data-field="site">
+          <label for="site">On-site days per inspection</label>
+          <input type="number" id="site" name="site" inputmode="decimal" min="0" step="0.5" aria-describedby="site-hint site-err">
+          <span class="roi-hint" id="site-hint">England's graded and ungraded inspections normally last 2 days.<sup><a href="#src-4">4</a></sup></span>
+          <span class="roi-err" id="site-err">Enter a number of 0 or more.</span>
+        </div>
+        <div class="form-group" data-field="write">
+          <label for="write">Report writing days per inspection, per inspector</label>
+          <input type="number" id="write" name="write" inputmode="decimal" min="0" step="0.25" aria-describedby="write-hint write-err">
+          <span class="roi-hint" id="write-hint">Our planning default is 1 day each. Use your timesheet data if you hold it.</span>
+          <span class="roi-err" id="write-err">Enter a number of 0 or more.</span>
+        </div>
+        <div class="form-group" data-field="pub">
+          <label for="pub">Working days from visit to published report</label>
+          <input type="number" id="pub" name="pub" inputmode="numeric" min="0" step="1" aria-describedby="pub-hint pub-err">
+          <span class="roi-hint" id="pub-hint">England publishes within 38 working days of the end of an inspection.<sup><a href="#src-1">1</a></sup></span>
+          <span class="roi-err" id="pub-err">Enter a number of 0 or more.</span>
+        </div>
+        <div class="form-row-2">
+          <div class="form-group" data-field="rate">
+            <label for="rate">Inspector day cost</label>
+            <input type="number" id="rate" name="rate" inputmode="decimal" min="0" step="1" aria-describedby="rate-err">
+            <span class="roi-err" id="rate-err">Enter a number of 0 or more.</span>
+          </div>
+          <div class="form-group">
+            <label for="cur">Currency</label>
+            <select id="cur" name="cur">
+              <option value="GBP">GBP (£)</option>
+              <option value="USD">USD ($)</option>
+              <option value="EUR">EUR (€)</option>
+              <option value="AED">AED (AED)</option>
+              <option value="THB">THB (฿)</option>
+            </select>
+          </div>
+        </div>
+        <span class="roi-hint">The default of 335 is the published daily rate for an England team inspector.<sup><a href="#src-2">2</a></sup> Enter your own cost in your chosen currency. No exchange rate is applied.</span>
+      </form>
+
+      <!-- RESULTS -->
+      <div>
+        <div class="roi-results" id="results" aria-labelledby="results-h">
+          <h2 class="sr-only" id="results-h">Your results</h2>
+
+          <div class="roi-stat">
+            <h3><span class="roi-rank" aria-hidden="true">1</span>Inspector days back to classrooms, per year</h3>
+            <div class="roi-cases">
+              <div class="roi-case-con"><span class="roi-case-label">Conservative</span><span class="roi-stat-n" id="o1c">0</span><span class="roi-unit">days</span></div>
+              <div class="roi-case-exp"><span class="roi-case-label">Expected</span><span class="roi-stat-n" id="o1e">0</span><span class="roi-unit">days</span></div>
+            </div>
+          </div>
+
+          <div class="roi-stat">
+            <h3><span class="roi-rank" aria-hidden="true">2</span>Extra inspections possible with the same team</h3>
+            <div class="roi-cases">
+              <div class="roi-case-con"><span class="roi-case-label">Conservative</span><span class="roi-stat-n" id="o2c">0</span><span class="roi-unit">inspections a year</span></div>
+              <div class="roi-case-exp"><span class="roi-case-label">Expected</span><span class="roi-stat-n" id="o2e">0</span><span class="roi-unit">inspections a year</span></div>
+            </div>
+          </div>
+
+          <div class="roi-stat">
+            <h3><span class="roi-rank" aria-hidden="true">3</span>Value of inspector time redeployed, per year</h3>
+            <div class="roi-cases">
+              <div class="roi-case-con"><span class="roi-case-label">Conservative</span><span class="roi-stat-n" id="o3c">0</span><span class="roi-unit">redeployed to classroom work</span></div>
+              <div class="roi-case-exp"><span class="roi-case-label">Expected</span><span class="roi-stat-n" id="o3e">0</span><span class="roi-unit">redeployed to classroom work</span></div>
+            </div>
+          </div>
+
+          <div class="roi-stat">
+            <h3><span class="roi-rank" aria-hidden="true">4</span>Working days sooner to published results</h3>
+            <div class="roi-cases">
+              <div class="roi-case-con"><span class="roi-case-label">Conservative</span><span class="roi-stat-n" id="o4c">0</span><span class="roi-unit">working days sooner</span></div>
+              <div class="roi-case-exp"><span class="roi-case-label">Expected</span><span class="roi-stat-n" id="o4e">0</span><span class="roi-unit">working days sooner</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="sr-only" id="live" role="status" aria-live="polite"></div>
+
+        <div class="btn-group roi-actions">
+          <a href="book.html" class="btn btn-green">Book a 45-minute briefing</a>
+          <a href="#" class="btn btn-outline-blue" id="mail-btn">Send to a colleague</a>
+          <a href="business-case.html" class="btn btn-outline-blue" id="bc-link">Business case in a page</a>
+        </div>
+        <p class="roi-note">These days are redeployed to classrooms and to faster results. They are not job cuts. Everything runs in your browser and nothing you enter is sent anywhere. "Send to a colleague" opens your own email app with the result and a link back to these figures.</p>
+        <noscript><p class="roi-note"><strong>This calculator needs JavaScript.</strong> The method is published below.</p></noscript>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section bg-blue-lt" id="how">
+  <div class="container roi-method">
+    <div class="section-header">
+      <span class="pill pill-blue">How we calculate this</span>
+      <h2>The method is published, and the assumptions are yours to change.</h2>
+      <p>The model counts direct inspector time only. It leaves out travel, overheads, school side time and the value of earlier publication, so the figures stay conservative.</p>
+    </div>
+
+    <h3>Our planning assumptions</h3>
+    <p>We use planning assumptions you can change. Replace them with your own timesheet data or pilot results. The saving shares below are our planning assumptions. The expected case reflects report drafting moving from days to hours with EDUINSPECT360, with every section reviewed and approved by an inspector. Public sector drafting trials report time saved on drafting tasks too.<sup><a href="#src-3">3</a></sup> Both cases can be replaced with your own pilot data.</p>
+    <div class="roi-table-wrap">
+      <table class="roi-table">
+        <caption class="sr-only">Saving shares used in each case</caption>
+        <thead><tr><th scope="col">Share of time saved</th><th scope="col">Conservative</th><th scope="col">Expected</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Report writing (s<sub>w</sub>)</th><td>40%</td><td>70%</td></tr>
+          <tr><th scope="row">Quality assurance review (s<sub>q</sub>)</th><td>30%</td><td>50%</td></tr>
+          <tr><th scope="row">Drafting window (s<sub>t</sub>)</th><td>40%</td><td>60%</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Formulas</h3>
+    <ol>
+      <li>Writing days per inspection: <code>W = inspectors per inspection × writing days per inspector</code></li>
+      <li>Report writing days back: <code>D<sub>w</sub> = inspections × W × s<sub>w</sub></code></li>
+      <li>Quality assurance days back: <code>D<sub>q</sub> = inspections × 1/3 day × s<sub>q</sub></code>. A quality assurance day covers about 3 reports.<sup><a href="#src-2">2</a></sup></li>
+      <li>Inspector days back to classrooms: <code>D<sub>w</sub> + D<sub>q</sub></code></li>
+      <li>Extra inspections possible: <code>(D<sub>w</sub> + D<sub>q</sub>) ÷ (inspectors × on-site days + W + 1/3)</code>. The divisor is the full inspector time one inspection takes: on site, writing and review.<sup><a href="#src-4">4</a></sup></li>
+      <li>Value of time redeployed: <code>D<sub>w</sub> × day cost + D<sub>q</sub> × quality assurance day cost</code>. The quality assurance day cost is your day cost × 1.17, the ratio of the published rates of 392 and 335.<sup><a href="#src-2">2</a></sup></li>
+      <li>Working days sooner to published results: <code>days from visit to published × (18 ÷ 38) × s<sub>t</sub></code>. The drafting window is 18 of the 38 working days in England's published timeline.<sup><a href="#src-1">1</a>, <a href="#src-4">4</a></sup></li>
+    </ol>
+
+    <h3>Worked example with the defaults</h3>
+    <p>1,000 inspections, 2 inspectors each on site for 2 days and writing for 1 day (W = 2 days), a day cost of £335 and 38 working days to publication. In the expected case, D<sub>w</sub> is 1,400 days and D<sub>q</sub> is 167 days, so 1,567 inspector days return to classrooms. One inspection takes 2 × 2 + 2 + 1/3 = 6.33 inspector days, so that is 247 extra inspections, worth about £534,000 a year, with reports published 10.8 working days sooner.</p>
+
+    <h3>Sources</h3>
+    <ol class="roi-sources">
+      <li id="src-1">Ofsted, methodology for state-funded schools inspections and outcomes as at 31 December 2021, GOV.UK: reports are published "within 38 working days of the end of the inspection".</li>
+      <li id="src-2">Ofsted, Payments for contracted Ofsted inspectors, GOV.UK, updated 26 June 2025: £335 a day for a team inspector and £392 a day for quality assurance, where a full day covers the quality assurance of an average of 3 inspection outputs.</li>
+      <li id="src-3">UK Government, "Landmark government trial shows AI could save civil servants nearly 2 weeks a year", GOV.UK, 2 June 2025: an average of 26 minutes a day saved across more than 20,000 civil servants, self-reported.</li>
+      <li id="src-4">Ofsted, School inspection handbook for September 2023 (now withdrawn): graded and ungraded inspections "normally last 2 days", and the draft report goes to the school within 18 working days of the end of the inspection.</li>
+    </ol>
+  </div>
+</section>
+
+<section class="cta-section">
+  <div class="container">
+    <h2>See the days come back with your own framework.</h2>
+    <p>I walk you through EDUINSPECT360 against your inspection framework, and we check the assumptions together against your own timesheet data.</p>
+    <div class="btn-group" style="justify-content:center;">
+      <a href="book.html" class="btn btn-outline-white" style="background:#fff;color:var(--green-deeper);border-color:#fff;">Book a 45-minute briefing</a>
+      <a href="business-case.html" class="btn btn-outline-white">Business case in a page</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<div id="footer"></div>
+<script src="nav.js"></script>
+<script src="roi-model.js"></script>
+<script>
+(function () {
+  'use strict';
+  var R = window.ROI, F = R.fmt;
+  var ids = ['insp', 'team', 'site', 'write', 'pub', 'rate'];
+  var el = {}; ids.concat(['cur']).forEach(function (k) { el[k] = document.getElementById(k); });
+  var org = '';
+  var CANON = 'https://www.eduinspect360.com/roi.html';
+  var timer = null;
+
+  function load() {
+    var p = R.parseParams(window.location.search);
+    org = p.org;
+    ids.forEach(function (k) { el[k].value = p[k]; });
+    el.cur.value = p.cur;
+    var badge = document.getElementById('prepared');
+    if (org) { badge.textContent = 'Prepared for ' + org; badge.classList.add('show'); }
+  }
+
+  function read() {
+    var v = { cur: el.cur.value, org: org }, ok = true;
+    ids.forEach(function (k) {
+      var raw = el[k].value.trim(), n = Number(raw);
+      var good = raw !== '' && isFinite(n) && n >= 0 && n <= 1e9;
+      var grp = el[k].closest('.form-group');
+      grp.classList.toggle('invalid', !good);
+      el[k].setAttribute('aria-invalid', good ? 'false' : 'true');
+      if (!good) ok = false;
+      v[k] = good ? n : 0;
+    });
+    return { v: v, ok: ok };
+  }
+
+  function set(id, txt) { document.getElementById(id).textContent = txt; }
+
+  function update() {
+    var r = read(), v = r.v;
+    var out = R.calc(v), c = out.conservative, e = out.expected;
+    set('o1c', F.whole(c.daysBack));          set('o1e', F.whole(e.daysBack));
+    set('o2c', F.whole(c.extraInspections));  set('o2e', F.whole(e.extraInspections));
+    set('o3c', F.money(c.value, v.cur));      set('o3e', F.money(e.value, v.cur));
+    set('o4c', F.one(c.daysSooner));          set('o4e', F.one(e.daysSooner));
+
+    var q = R.toQuery(v);
+    document.getElementById('bc-link').setAttribute('href', 'business-case.html?' + q);
+    document.getElementById('hero-bc-link').setAttribute('href', 'business-case.html?' + q);
+    document.getElementById('mail-btn').setAttribute('href', mailto(v, c, e, q));
+    try { window.history.replaceState(null, '', '?' + q + window.location.hash); } catch (err) {}
+
+    clearTimeout(timer);
+    timer = setTimeout(function () {
+      document.getElementById('live').textContent = r.ok
+        ? 'Expected case: ' + F.whole(e.daysBack) + ' inspector days back to classrooms a year, ' + F.whole(e.extraInspections) + ' extra inspections possible, ' + F.money(e.value, v.cur) + ' of time redeployed, and ' + F.one(e.daysSooner) + ' working days sooner to published results.'
+        : 'Check the highlighted fields. Each needs a number of 0 or more.';
+    }, 700);
+  }
+
+  function mailto(v, c, e, q) {
+    var who = v.org ? v.org : 'our inspections';
+    var subject = 'Days Back to Classrooms: ' + F.whole(e.daysBack) + ' inspector days a year';
+    var body =
+      'Hello,\n\n' +
+      'I used the Days Back to Classrooms calculator for ' + who + ' and thought you would want to see the result.\n\n' +
+      'Expected case at ' + F.whole(v.insp) + ' inspections a year:\n' +
+      '* ' + F.whole(e.daysBack) + ' inspector days back to classrooms a year\n' +
+      '* ' + F.whole(e.extraInspections) + ' extra inspections possible with the same team\n' +
+      '* ' + F.money(e.value, v.cur) + ' of inspector time redeployed a year\n' +
+      '* ' + F.one(e.daysSooner) + ' working days sooner to published results\n\n' +
+      'Conservative case: ' + F.whole(c.daysBack) + ' days, ' + F.whole(c.extraInspections) + ' extra inspections, ' + F.money(c.value, v.cur) + ', ' + F.one(c.daysSooner) + ' working days sooner.\n\n' +
+      'These are planning figures and the method is published on the page. Open the calculator with these figures:\n' +
+      CANON + '?' + q + '\n';
+    return 'mailto:?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+  }
+
+  load();
+  ids.forEach(function (k) { el[k].addEventListener('input', update); });
+  el.cur.addEventListener('change', update);
+  document.getElementById('roi-form').addEventListener('submit', function (ev) { ev.preventDefault(); });
+  update();
+})();
+</script>
+
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "903b300fd7564a74a16041c5b19b96ee"}'></script>
+</body>
+</html>
