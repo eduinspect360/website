@@ -1,5 +1,81 @@
 // nav.js: Balanced version: Original layout with W3C compliant colours
 
+// CONSENT-GATED GOOGLE ANALYTICS 4 + COOKIE BANNER
+// GA4 (gtag.js) is NEVER injected unless the visitor has chosen "Accept".
+// Choice is stored in localStorage under 'cookieConsent' ('granted' | 'denied').
+// The old 'cookiesAccepted' key is deliberately ignored: it never meant consent.
+(function() {
+    const GA_ID = 'G-72GC5HPZWV';
+    const KEY = 'cookieConsent';
+
+    function getConsent() {
+        try { return window.localStorage.getItem(KEY); } catch (e) { return null; }
+    }
+    function setConsent(v) {
+        try {
+            if (v === null) window.localStorage.removeItem(KEY);
+            else window.localStorage.setItem(KEY, v);
+        } catch (e) { /* storage unavailable: choice not persisted */ }
+    }
+    function hasGranted() { return getConsent() === 'granted'; }
+
+    function loadGA() {
+        if (window.__ga4Loaded) return;
+        window.__ga4Loaded = true;
+        const script = document.createElement('script');
+        script.async = true;
+        script.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
+        document.head.appendChild(script);
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { window.dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', GA_ID);
+    }
+
+    function removeBanner() {
+        const b = document.getElementById('cookie-banner');
+        if (b) b.remove();
+    }
+
+    function showBanner() {
+        if (document.getElementById('cookie-banner') || !document.body) return;
+        const btn = 'flex:1 1 0; min-width:96px; min-height:40px; background:#2c6f90; border:2px solid #2c6f90; color:#fff; padding:8px 16px; border-radius:6px; cursor:pointer; font-family:inherit; font-size:13px; font-weight:600;';
+        const b = document.createElement('div');
+        b.id = 'cookie-banner';
+        b.setAttribute('role', 'region');
+        b.setAttribute('aria-label', 'Cookie consent');
+        b.style.cssText = 'position:fixed; bottom:20px; left:50%; transform:translateX(-50%); width:90%; max-width:600px; background:#fff; border:1px solid #d0e6f0; border-radius:12px; box-shadow:0 10px 25px rgba(0,0,0,0.1); padding:16px 20px; display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; z-index:10000; gap:16px;';
+        b.innerHTML =
+            '<div style="flex:1 1 280px; font-family:\'Poppins\',sans-serif; font-size:13px; color:#3a4a5a; line-height:1.5;">' +
+            'We use cookie-free analytics, and Google Analytics cookies only if you agree. Read our ' +
+            '<a href="privacy.html" style="color:#2c6f90; text-decoration:underline;">Privacy Policy</a> and ' +
+            '<a href="cookies.html" style="color:#2c6f90; text-decoration:underline;">Cookie Policy</a>.</div>' +
+            '<div style="display:flex; gap:10px; flex:1 1 220px;">' +
+            '<button type="button" id="cookie-accept" style="' + btn + '">Accept</button>' +
+            '<button type="button" id="cookie-reject" style="' + btn + '">Reject</button></div>';
+        document.body.appendChild(b);
+        document.getElementById('cookie-accept').addEventListener('click', function() {
+            setConsent('granted'); removeBanner(); loadGA();
+        });
+        document.getElementById('cookie-reject').addEventListener('click', function() {
+            setConsent('denied'); removeBanner();
+        });
+    }
+
+    // Footer "Cookie settings" link: clears the choice and re-shows the banner.
+    window.openCookieSettings = function() {
+        setConsent(null);
+        removeBanner();
+        showBanner();
+    };
+
+    if (hasGranted()) loadGA();
+
+    function init() { if (getConsent() === null) showBanner(); }
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+    else init();
+})();
+
 // 1. GLOBAL REDIRECTS (Force HTTPS and WWW for GitHub Pages)
 (function() {
     const host = window.location.hostname;
@@ -104,6 +180,7 @@ if (footerContainer) {
           <a href="governance.html" style="color: var(--blue-mid);">Data governance</a>
           <a href="trust.html" style="color: var(--blue-mid);">Trust, data &amp; AI</a>
           <a href="cookies.html" style="color: var(--blue-mid);">Cookie policy</a>
+          <a href="#" id="cookie-settings-link" style="color: var(--blue-mid);">Cookie settings</a>
         </div>
       </div>
 
@@ -127,3 +204,8 @@ if (navToggle && navMenu) {
     navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
   });
 }
+// 4. COOKIE SETTINGS LINK (footer + any element with data-cookie-settings)
+document.addEventListener('click', function(e) {
+  const t = e.target.closest && e.target.closest('#cookie-settings-link, [data-cookie-settings]');
+  if (t) { e.preventDefault(); window.openCookieSettings(); }
+});

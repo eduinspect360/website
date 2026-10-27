@@ -37,7 +37,7 @@
                 <article class="legal-content">
     <p><strong>Last updated: 27 October 2026</strong></p>
     <h2 id="what">1. Our use of cookies</h2>
-    <p>This website sets no advertising or tracking cookies, and we do not use cookies to follow you across sites. This page explains what is and is not stored on your device when you visit.</p>
+    <p>This website sets no advertising cookies. Our main analytics (Cloudflare Web Analytics) uses no cookies. We also use Google Analytics 4, which sets cookies only if you select Accept on the cookie banner. If you select Reject, or make no choice, Google Analytics is not loaded and sets nothing. This page explains what is stored on your device when you visit.</p>
 
     <h2 id="how">2. What this site and its providers use</h2>
     <div style="margin: 30px 0; border: 1px solid var(--grey-mid); border-radius: 8px; overflow-x: auto;">
@@ -48,7 +48,11 @@
             </tr>
             <tr style="border-bottom: 1px solid var(--grey-light);">
                 <td style="padding: 15px;"><strong>Cloudflare Web Analytics</strong></td>
-                <td style="padding: 15px;">Shows us how the site is used (pages visited, approximate country, browser type). It does not use cookies and does not track individual visitors across sites.</td>
+                <td style="padding: 15px;">Shows us how the site is used (pages visited, approximate country, browser type). It is always on, uses no cookies and does not track individual visitors across sites. Our lawful basis is legitimate interests.</td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--grey-light);">
+                <td style="padding: 15px;"><strong>Google Analytics 4 (cookies _ga and _ga_*)</strong></td>
+                <td style="padding: 15px;">Only with your consent. Helps us understand how the site and our campaigns are used (pages visited, how visitors arrive, approximate location). Google acts as our processor. Data may be transferred to the United States under the UK Extension to the EU-US Data Privacy Framework. The cookies last up to 2 years. Our lawful basis is your consent.</td>
             </tr>
             <tr style="border-bottom: 1px solid var(--grey-light);">
                 <td style="padding: 15px;"><strong>Cal.com booking calendar</strong></td>
@@ -59,14 +63,14 @@
                 <td style="padding: 15px;">Our fonts load from Google, so your browser makes a request to Google servers to fetch them.</td>
             </tr>
             <tr>
-                <td style="padding: 15px;"><strong>Notice dismissal flag</strong></td>
-                <td style="padding: 15px;">When you select OK on the cookie notice, a flag is saved in your browser's local storage (not a cookie) so the notice stays hidden. It is never sent to us.</td>
+                <td style="padding: 15px;"><strong>Cookie choice flag</strong></td>
+                <td style="padding: 15px;">When you select Accept or Reject on the cookie banner, your choice is saved in your browser's local storage (not a cookie) so we remember it. It is never sent to us.</td>
             </tr>
         </table>
     </div>
 
     <h2 id="control">3. Managing cookies</h2>
-    <p>Most web browsers let you block or delete cookies and local storage through their settings. Blocking strictly necessary cookies may stop the booking calendar from working. For how we handle personal data, see our <a href="privacy.html">Privacy Policy</a>.</p>
+    <p>You can change or withdraw your choice at any time: <a href="#" data-cookie-settings>Cookie settings</a> (also in the footer of every page) clears your choice and shows the banner again. Withdrawing stops Google Analytics loading from then on. To delete cookies already set, clear them in your browser. Most web browsers let you block or delete cookies and local storage through their settings. Blocking strictly necessary cookies may stop the booking calendar from working. For how we handle personal data, see our <a href="privacy.html">Privacy Policy</a>.</p>
 </article>
             </div>
         </section>
@@ -85,25 +89,6 @@
 
   <div id="footer"></div>
   <script src="nav.js"></script>
-<div id="cookie-banner" role="region" aria-label="Cookie notice" style="position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); width: 90%; max-width: 600px; background: #fff; border: 1px solid #d0e6f0; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); padding: 16px 20px; display: flex; align-items: center; justify-content: space-between; z-index: 10000; gap: 20px;">
-  <div style="font-family: 'Poppins', sans-serif; font-size: 13px; color: #3a4a5a; line-height: 1.5;">
-    This site uses no tracking cookies. Our analytics is cookie-free. Read our <a href="privacy.html" style="color: #2c6f90; text-decoration: underline;">Privacy Policy</a>.
-  </div>
-  <div style="display: flex; gap: 10px;">
-    <button onclick="dismissCookieBanner()" style="background: #2c6f90; border: none; color: #fff; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-size: 12px; font-weight: 600;">OK</button>
-  </div>
-</div>
-
-<script>
-  function dismissCookieBanner() {
-    document.getElementById('cookie-banner').style.display = 'none';
-    localStorage.setItem('cookiesAccepted', 'true');
-  }
-  // Check if already accepted
-  if(localStorage.getItem('cookiesAccepted')) {
-    document.getElementById('cookie-banner').style.display = 'none';
-  }
-</script>
 
 <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "903b300fd7564a74a16041c5b19b96ee"}'></script>
 </body>

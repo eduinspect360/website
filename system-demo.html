@@ -684,26 +684,8 @@ document.querySelectorAll('.lang-btn-login').forEach(function(b){
   });
 });
 </script>
-<div id="cookie-banner" role="region" aria-label="Cookie notice" style="position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); width: 90%; max-width: 600px; background: #fff; border: 1px solid #d0e6f0; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); padding: 16px 20px; display: flex; align-items: center; justify-content: space-between; z-index: 10000; gap: 20px;">
-  <div style="font-family: 'Poppins', sans-serif; font-size: 13px; color: #3a4a5a; line-height: 1.5;">
-    This site uses no tracking cookies. Our analytics is cookie-free. Read our <a href="privacy.html" style="color: #2c6f90; text-decoration: underline;">Privacy Policy</a>.
-  </div>
-  <div style="display: flex; gap: 10px;">
-    <button onclick="dismissCookieBanner()" style="background: #2c6f90; border: none; color: #fff; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-size: 12px; font-weight: 600;">OK</button>
-  </div>
-</div>
 
-<script>
-  function dismissCookieBanner() {
-    document.getElementById('cookie-banner').style.display = 'none';
-    localStorage.setItem('cookiesAccepted', 'true');
-  }
-  // Check if already accepted
-  if(localStorage.getItem('cookiesAccepted')) {
-    document.getElementById('cookie-banner').style.display = 'none';
-  }
-</script>
-
+<script src="nav.js"></script>
 <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "903b300fd7564a74a16041c5b19b96ee"}'></script>
 </body>
 </html>
