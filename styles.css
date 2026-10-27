@@ -1135,3 +1135,8 @@ dialog.film-dialog[open] { animation: filmDialogIn 0.22s ease-out; }
 
 /* superscript footnote links */
 sup a { color: var(--blue); font-weight: 600; text-decoration: underline; text-underline-offset: 2px; padding: 0 2px; }
+
+/* Legal pages: stop wide children (tables) forcing the grid column wider than the viewport */
+.legal-grid > * { min-width: 0; }
+.legal-content { overflow-wrap: anywhere; }
+@media (max-width: 640px) { .legal-grid { padding: 40px 0; } }
