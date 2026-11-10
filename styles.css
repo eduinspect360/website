@@ -1118,3 +1118,6 @@ sup a { color: var(--blue); font-weight: 600; text-decoration: underline; text-u
   .legal-table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
   .legal-table th, .legal-table td { min-width: 150px; word-break: normal; overflow-wrap: normal; hyphens: none; }
 }
+
+/* ai-card headings promoted h4 to h3 for heading order; keep the light-on-dark treatment */
+.ai-card h3 { color: var(--white); font-size: 13px; margin-bottom: 6px; }
