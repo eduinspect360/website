@@ -601,6 +601,56 @@ p  { font-size: 12px; line-height: 1.8; color: var(--text-body); }
 .dash-bar-fill { height: 100%; border-radius: 3px; background: var(--green); }
 .dash-pct { font-size: 10px; color: rgba(255,255,255,0.4); font-family: var(--font-body); width: 28px; text-align: right; }
 
+/* ── RESOURCES external links ── */
+.resource-link-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 20px 22px;
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  transition: box-shadow 0.2s;
+  text-decoration: none;
+}
+.resource-link-card:hover { box-shadow: var(--shadow-md); border-color: var(--blue-mid); }
+.resource-link-icon {
+  width: 36px; height: 36px; border-radius: var(--radius-sm);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.rli-blue  { background: var(--blue-light); }
+.rli-green { background: var(--green-light); }
+.resource-link-icon svg { width: 16px; height: 16px; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; fill: none; }
+.rli-blue  svg { stroke: var(--blue); }
+.rli-green svg { stroke: var(--green); }
+.resource-link-body h4 { font-size: 12px; font-weight: 700; color: var(--text-dark); margin-bottom: 4px; }
+.resource-link-body p  { font-size: 11px; color: var(--text-muted); line-height: 1.55; margin: 0; }
+.resource-link-body .source-tag { font-size: 10px; color: var(--blue); font-weight: 600; font-family: var(--font-body); margin-top: 6px; display: block; }
+.resource-link-arrow { margin-left: auto; color: var(--blue); font-size: 16px; flex-shrink: 0; align-self: center; }
+
+/* ── DATA SOVEREIGNTY NOTE ── */
+.data-sov-card {
+  background: var(--white);
+  border: 1px solid var(--blue-mid);
+  border-top: 3px solid var(--blue);
+  border-radius: var(--radius-md);
+  padding: 20px 22px;
+}
+.data-sov-card .ds-badge {
+  display: inline-block;
+  background: var(--blue-light);
+  color: var(--blue-dark);
+  font-size: 10px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-family: var(--font-body);
+  margin-bottom: 10px;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+}
+
 /* ── OUR TEAM ── */
 .team-grid { display: grid; grid-template-columns: 1fr 340px; gap: 56px; align-items: start; }
 .team-cred-strip {
@@ -1062,3 +1112,9 @@ sup a { color: var(--blue); font-weight: 600; text-decoration: underline; text-u
 .legal-grid > * { min-width: 0; }
 .legal-content { overflow-wrap: anywhere; }
 @media (max-width: 640px) { .legal-grid { padding: 40px 0; } }
+
+/* ── LEGAL TABLES (privacy, cookies): scroll inside the card on phones instead of crushing words ── */
+@media (max-width: 640px) {
+  .legal-table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .legal-table th, .legal-table td { min-width: 150px; word-break: normal; overflow-wrap: normal; hyphens: none; }
+}
