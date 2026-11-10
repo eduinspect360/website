@@ -1,0 +1,47 @@
+# EDUINSPECT360
+
+> EDUINSPECT360 is inspection management software for national education inspectorates and education bodies. Inspectors capture evidence once, AI drafts and checks the report while inspectors decide, and every judgement traces to its evidence. It is configurable to national, regional, district or institution level, and frameworks change by configuration, not redevelopment.
+
+EDUINSPECT360 Limited is a UK-registered company (Company No. 15126870) based in Birmingham, established in 2023. Contact: enquiries@eduinspect360.com.
+
+## What it does
+
+- Runs the complete inspection process in one system, from pre-inspection preparation and scheduling to evidence capture, report drafting, QA and approval, publication and improvement tracking.
+- AI drafts and checks. Humans decide. Every AI action is written to an audit log, and AI output needs named human approval before it affects any published outcome.
+- Runs your own inspection framework. Includes a preset for the November 2025 Ofsted Education Inspection Framework, but is not locked to the Ofsted model.
+
+## Who it is for
+
+- National inspectorates and education ministries (primary audience)
+- Regional and district education bodies
+- Institution groups
+
+## Key pages
+
+- [Home](https://www.eduinspect360.com/): overview of the platform
+- [Platform features](https://www.eduinspect360.com/platform.html): the six modules, from planning and scheduling to automated reporting
+- [For inspectorates](https://www.eduinspect360.com/inspectorates.html): the inspection lifecycle for national and jurisdiction-level inspectorates
+- [Use cases](https://www.eduinspect360.com/use-cases.html): national, regional, district and institution level
+- [Ofsted EIF 2025 alignment](https://www.eduinspect360.com/compliance.html): the November 2025 framework preset
+- [Trust, data and AI](https://www.eduinspect360.com/trust.html): data residency, tenant segregation, AI governance and security
+- [Data governance](https://www.eduinspect360.com/governance.html): security alignment, data residency and AI ethics
+- [Capability statement](https://www.eduinspect360.com/capability-statement.html): company and capability summary
+- [What an inspection platform must get right](https://www.eduinspect360.com/inspection-readiness.html): a short note for inspectorates
+- [The inspection publication gap](https://www.eduinspect360.com/publication-gap.html): published report timeliness targets from 8 inspectorates, with sources
+- [Days Back for Inspection calculator](https://www.eduinspect360.com/roi.html): estimate inspector days freed by AI-assisted report drafting
+- [Business case in a page](https://www.eduinspect360.com/business-case.html): a 2 page business case template
+- [Interactive product tour](https://www.eduinspect360.com/system-demo.html): the inspection cycle end to end
+- [Resources](https://www.eduinspect360.com/resources.html): curated official resources for inspection leaders
+- [About us](https://www.eduinspect360.com/about.html): who builds EDUINSPECT360 and why
+
+## Contact
+
+- [Request a briefing](https://www.eduinspect360.com/contact.html)
+- [Book a 45-minute briefing](https://www.eduinspect360.com/book.html)
+- Email: enquiries@eduinspect360.com
+
+## Policies
+
+- [Privacy policy](https://www.eduinspect360.com/privacy.html)
+- [Cookie policy](https://www.eduinspect360.com/cookies.html)
+- [Terms of use](https://www.eduinspect360.com/terms.html)
