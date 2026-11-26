@@ -151,7 +151,7 @@ if (footerContainer) {
             </div>
           </div>
           <p style="margin-top:20px; color: var(--blue-mid);">
-            Inspection management software for national inspectorates and education bodies, configurable to regional, district or institution level.
+            Inspection, review and accreditation software for national inspectorates, accreditation bodies and education bodies, configurable to regional, district or institution level.
           </p>
         </div>
         
@@ -162,6 +162,7 @@ if (footerContainer) {
           <a href="use-cases.html" style="color: var(--blue-mid);">For regional and district bodies</a>
           <a href="use-cases.html" style="color: var(--blue-mid);">For institution groups</a>
           <a href="inspectorates.html" style="color: var(--blue-mid);">For national inspectorates</a>
+          <a href="accreditation.html" style="color: var(--blue-mid);">For accreditation bodies</a>
         </div>
 
         <div class="footer-col">
