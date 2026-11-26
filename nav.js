@@ -94,6 +94,7 @@ const pages = [
   { href: 'index.html',      label: 'Home' },
   { href: 'platform.html',   label: 'Platform' },
   { href: 'inspectorates.html', label: 'Inspectorates' },
+  { href: 'accreditation.html', label: 'Accreditation bodies' },
   { href: 'use-cases.html',  label: 'Use cases' },
   { href: 'compliance.html', label: 'Compliance' },
   { href: 'about.html',      label: 'About us' },
@@ -162,6 +163,7 @@ if (footerContainer) {
           <a href="use-cases.html" style="color: var(--blue-mid);">For regional and district bodies</a>
           <a href="use-cases.html" style="color: var(--blue-mid);">For institution groups</a>
           <a href="inspectorates.html" style="color: var(--blue-mid);">For national inspectorates</a>
+          <a href="accreditation.html" style="color: var(--blue-mid);">For accreditation bodies</a>
         </div>
 
         <div class="footer-col">
