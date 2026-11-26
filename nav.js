@@ -94,7 +94,6 @@ const pages = [
   { href: 'index.html',      label: 'Home' },
   { href: 'platform.html',   label: 'Platform' },
   { href: 'inspectorates.html', label: 'Inspectorates' },
-  { href: 'accreditation.html', label: 'Accreditation bodies' },
   { href: 'use-cases.html',  label: 'Use cases' },
   { href: 'compliance.html', label: 'Compliance' },
   { href: 'about.html',      label: 'About us' },
@@ -152,7 +151,7 @@ if (footerContainer) {
             </div>
           </div>
           <p style="margin-top:20px; color: var(--blue-mid);">
-            Inspection management software for national inspectorates and education bodies, configurable to regional, district or institution level.
+            Inspection, review and accreditation software for national inspectorates, accreditation bodies and education bodies, configurable to regional, district or institution level.
           </p>
         </div>
         
